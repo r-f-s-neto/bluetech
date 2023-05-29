@@ -1,0 +1,119 @@
+@import url("../../styles/global-styles.css");
+*{
+  box-sizing: border-box;
+}
+footer {
+  background-color: #0288D1;
+}
+.footer__container {
+  font-family: 'Public Sans', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 80rem;
+  margin: 0 auto;
+  background-color: #0288D1;
+  margin: 0 auto;
+  color: #FFFFFF;
+  padding: 2.8125rem 9.0625rem;
+
+}
+
+.container__item {
+  h3 {
+    font-weight: 600;
+    font-size: 2.25rem;
+    line-height: 1.22;
+    letter-spacing: -0.09375rem;
+    padding-bottom: 0.625rem;
+  }
+  span {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.14;
+    letter-spacing: -0.01875rem;
+    padding-bottom: 1.4375rem;
+  }
+  li:not(:last-of-type) {
+    padding-bottom: 1.4375rem;
+  }
+  a:hover {
+    color: #B3E5FC ;
+  }
+}
+
+.footerOptions {
+  padding-bottom: 1.4375rem;
+}
+
+.newsletterForm {
+  display: flex;
+  align-items: center;
+  &__input {
+    height: 1.625rem;
+    outline: none;
+    border: 1px solid black;
+    border-right: none;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+  }
+  &__button {
+    display: inline-block;
+    border: 1px solid black;
+    border-left: none;
+    background-color: #FFFFFF;
+    height: 1.625rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    padding-right: 0.250rem;
+    padding-left: 0.250rem;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    transition: 0.2s ease-in;
+    &:hover {
+      background-color: #B3E5FC;
+    }
+  }
+}
+
+@media (max-width:70.625rem) {
+  .footer__container {
+    padding: 2.8125rem 4.5rem;
+  }
+}
+@media (max-width:59.375rem) {
+  .footer__container {
+    padding: 2.8125rem 2.25rem;
+  }
+}
+
+@media (max-width:56rem) {
+  .footer__container {
+    padding: 2.8125rem 1rem;
+  }
+}
+
+@media (max-width:52rem) {
+  .footer__container {
+    padding: 2.8125rem 0.5rem;
+  }
+}
+
+@media (max-width:47rem) {
+  .footer__container {
+    flex-wrap: wrap;
+    padding: 2.8125rem 0.7rem;
+    text-align: center;
+  }
+  .newsletterForm {
+    display: flex;
+    justify-content: center;
+  }
+
+  .container__item {
+    h3 {
+      font-size: 1.8rem;
+    }
+  }
+}

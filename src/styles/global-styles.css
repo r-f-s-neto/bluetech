@@ -1,0 +1,45 @@
+
+body {
+  margin: 0rem;
+}
+a {
+  text-decoration: none;
+  color: unset;
+}
+button {
+  margin: 0rem;
+  padding: 0rem;
+  border: none;
+}
+ul {
+  margin: 0rem;
+  padding: 0rem;
+}
+li {
+  list-style: none;
+}
+span {
+  display: inline-block;
+}
+
+h1, h2, h3 {
+  margin: 0rem;
+}
+
+/*reset*/
+
+
+body {
+  font-family: "Public Sans", sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/*# sourceMappingURL=global-styles.css.map */
