@@ -14,7 +14,11 @@ const Header = () => {
     <header>
       <div className="topo">
         <div className="topo__item">
-          <div className="logo">BlueTech</div>
+          <div className="logo">
+            <NavLink to="/" end>
+              BlueTech
+            </NavLink>
+          </div>
           <nav>
             <ul className="menu">
               <li>
@@ -53,7 +57,9 @@ const Header = () => {
         <ul className="topo__item userMenu">
           <li className="userMenu__item">
             <div>
-              <Bag />
+              <NavLink>
+                <Bag />
+              </NavLink>
             </div>
             <span>3</span>
           </li>

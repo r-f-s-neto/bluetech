@@ -70,6 +70,9 @@ header {
   line-height: 1.2;
   letter-spacing: -0.0375rem;
 }
+.topo .logo a:hover {
+  color: #FFFFFF;
+}
 
 .menu {
   display: flex;
