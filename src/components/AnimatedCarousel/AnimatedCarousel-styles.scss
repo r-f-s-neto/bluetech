@@ -1,0 +1,34 @@
+.imgCarousel {
+  height: 31.25rem;
+  object-fit: cover;
+  border-radius: 0.09375rem;
+}
+
+.carouselText {
+  color: #B3E5FC;
+}
+
+@media (max-width: 37.5rem) {
+.imgCarousel {
+  height: 20rem;
+}
+}
+
+@media (max-width: 37.5rem) {
+  .imgCarousel {
+    height: 17rem;
+  }
+  }
+
+  @media (max-width: 27.75rem) {
+    .imgCarousel {
+      height: 15rem;
+    }
+    }
+
+    @media (max-width: 22.25rem) {
+      .imgCarousel {
+        height: 11rem;
+      }
+      }
+  
