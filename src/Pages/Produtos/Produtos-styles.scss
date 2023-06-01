@@ -1,0 +1,33 @@
+@import url("../../styles/global-styles.css");
+
+.produtos {
+  &__header{
+    background-color: #0288D1;
+  }
+  &__filtros {
+    padding: 2.875rem 9.0625rem 3.375rem 9.0625rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.headerContainner {
+  padding: 2.9375rem 9.0625rem;
+  &__title {
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 600;
+    font-size: 2.25rem;
+    line-height: 1.22;
+    letter-spacing: -0.09375rem;
+
+color: #FFFFFF;
+  }
+  &__text {
+    font-family: 'Public Sans', sans-serif;
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.44;
+    letter-spacing: -0.01875rem
+  }
+}

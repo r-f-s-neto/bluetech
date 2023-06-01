@@ -5,7 +5,7 @@ import logoAsus from '../../assets/Home-assets/logo-asus.png';
 import logoLogi from '../../assets/Home-assets/logo-logitech.png';
 import logoSamsung from '../../assets/Home-assets/logo-samsung.png';
 //import logoRazer from '../../assets/Home-assets/logo-razer.png';
-import './Home-styles.scss';
+import './Home-styles.css';
 
 const Home = () => {
   const [data, setData] = React.useState('[]');
@@ -55,7 +55,7 @@ const Home = () => {
   return (
     <div className="homeContainner">
       <article className="homeContainner__text">
-        <h1 className='text__title'>Confira Todas As Nossas Promoções</h1>
+        <h1 className="text__title">Confira Todas As Nossas Promoções</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
           aspernatur ipsam distinctio, asperiores recusandae, voluptates odio

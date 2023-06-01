@@ -11,7 +11,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 const Header = () => {
   const [search, setSearch] = React.useState('');
   return (
-    <header>
+    <header className="headerMenu">
       <div className="topo">
         <div className="topo__item">
           <div className="logo">
