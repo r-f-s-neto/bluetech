@@ -2,6 +2,8 @@ import React from 'react';
 import './Produtos-styles.scss';
 import Categorias from '../../components/Categorias';
 import Select from '../../components/Select';
+import { filtroCat, filtroPrecificacao } from '../../helper/filtros';
+import Card from '../../components/Card';
 
 const options = ['Mais Relevantes', 'Maior Preço', 'Menor Preço'];
 const produtos = [
@@ -41,6 +43,15 @@ const produtos = [
     categoria: 'Monitores',
     preco: 5000,
   },
+  {
+    id: 5,
+    src: 'https://www.pichauarena.com.br/wp-content/uploads/2022/04/dddd.png',
+    alt: 'alt da imagem',
+    name: 'produto 5',
+    shortDescription: 'Descrição curta 5',
+    categoria: 'Gabinetes',
+    preco: 900,
+  },
 ];
 
 const Produtos = () => {
@@ -53,35 +64,14 @@ const Produtos = () => {
     // Simula o recebimento de dados da categoria pela API
     setDataCat(['Tudo', 'Monitores', 'Cadeiras', 'Componentes', 'Gabinetes']);
   }, []);
-  React.useEffect(() => {
-    //simula a filtragem
-
-    if (categoria === 'Tudo') {
-      setDataProd(produtos);
-    } else {
-      const filteredProd = produtos.filter((produto) => {
-        return produto.categoria === categoria;
-      });
-      setDataProd(filteredProd);
-    }
-  }, [categoria]);
 
   React.useEffect(() => {
-    const verify = (filtro) => {
-      switch (filtro) {
-        case 'Mais Relevantes':
-          return dataProd.sort((a, b) => a.id - b.id);
-        case 'Menor Preço':
-          return dataProd.sort((a, b) => a.preco - b.preco);
-        case 'Maior Preço':
-          return dataProd.sort((a, b) => a.preco - b.preco).reverse();
-        default:
-          return dataProd;
-      }
-    };
-    const priceFilteredProd = verify(filtroPreco);
-    setDataProd(priceFilteredProd);
-  }, [filtroPreco, dataProd]);
+    const filterdProd = produtos.filter((produto) => {
+      return filtroCat(produto, categoria);
+    });
+
+    setDataProd(filtroPrecificacao(filterdProd, filtroPreco));
+  }, [categoria, filtroPreco]);
 
   console.log(dataProd);
 
@@ -107,6 +97,9 @@ const Produtos = () => {
           setValue={setFiltroPreco}
           options={options}
         />
+      </div>
+      <div className="produtos__card">
+        <Card produtos={JSON.stringify(dataProd)} />
       </div>
     </main>
   );
