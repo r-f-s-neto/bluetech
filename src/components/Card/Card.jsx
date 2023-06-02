@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Card-styles.scss';
 
 const Card = ({ produtos }) => {
@@ -6,20 +7,33 @@ const Card = ({ produtos }) => {
     <article className="cardContainner">
       {JSON.parse(produtos).map((produto) => {
         return (
-          <div className="productCard" key={produto.id + produto.name + 'card'}>
-            <img
-              className="productCard__image"
-              src={produto.src}
-              alt={produto.alt}
-            />
-            <div className="productCard__description">
-              <div className="containnerText">
-                <h3 className="containnerText__title">{produto.name}</h3>
-                <span className="containnerText__cat">{produto.categoria}</span>
+          <Link
+            to={`/produtos/${encodeURIComponent(produto.id)}`}
+            end
+            key={produto.id + produto.name + 'card'}
+          >
+            <div className="productCard">
+              <img
+                className="productCard__image"
+                src={produto.src}
+                alt={produto.alt}
+              />
+              <div className="productCard__description">
+                <div className="containnerText">
+                  <h3 className="containnerText__title">{produto.name}</h3>
+                  <span className="containnerText__cat">
+                    {produto.categoria}
+                  </span>
+                </div>
+                <h3 className="containnerPrice">
+                  {produto.preco.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
+                </h3>
               </div>
-              <h3 className="containnerPrice">{produto.preco}</h3>
             </div>
-          </div>
+          </Link>
         );
       })}
     </article>

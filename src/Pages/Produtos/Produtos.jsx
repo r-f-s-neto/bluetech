@@ -87,11 +87,13 @@ const Produtos = () => {
         </div>
       </header>
       <div className="produtos__filtros">
-        <Categorias
-          value={categoria}
-          setValue={setCategoria}
-          categorias={dataCat}
-        />
+        <div className="filtros__categorias">
+          <Categorias
+            value={categoria}
+            setValue={setCategoria}
+            categorias={dataCat}
+          />
+        </div>
         <Select
           value={filtroPreco}
           setValue={setFiltroPreco}

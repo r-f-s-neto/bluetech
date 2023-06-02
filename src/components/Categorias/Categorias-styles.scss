@@ -20,9 +20,21 @@
         background-color: #0288D1;
         color: white;
       }
+      &:hover {
+        background-color: #B3E5FC;
+        color: #FFFFFF;
+        border: 0.0625rem solid #B3E5FC;
+      }
     }
     input {
       display: none;
     }
+  }
+}
+
+@media (max-width:33.5rem) {
+  .formCat {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }

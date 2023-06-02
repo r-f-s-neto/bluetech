@@ -6,6 +6,9 @@ a {
   text-decoration: none;
   color: unset;
 }
+a:hover{
+  color: unset;
+}
 button {
   margin: 0rem;
   padding: 0rem;
