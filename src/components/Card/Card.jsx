@@ -9,7 +9,6 @@ const Card = ({ produtos }) => {
         return (
           <Link
             to={`/produtos/${encodeURIComponent(produto.id)}`}
-            end
             key={produto.id + produto.name + 'card'}
           >
             <div className="productCard">
