@@ -7,9 +7,21 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   const [search, setSearch] = React.useState('');
+  const [cart, setCart] = React.useState(0);
+  const state = useSelector((state) => {
+    return state?.reduce((acc, curr) => {
+      return acc + curr.quantidade;
+    }, 0);
+  });
+
+  React.useEffect(() => {
+    setCart(state);
+  }, [state]);
+
   return (
     <header className="headerMenu">
       <div className="topo">
@@ -61,7 +73,7 @@ const Header = () => {
                 <Bag />
               </NavLink>
             </div>
-            <span>3</span>
+            <span>{cart}</span>
           </li>
           <li>
             <NavLink className="login" to="/login">

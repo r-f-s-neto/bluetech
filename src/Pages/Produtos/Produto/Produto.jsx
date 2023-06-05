@@ -1,6 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import './Produto-styles.scss';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../../../redux/cart';
 
 const produtos = [
   {
@@ -54,6 +56,8 @@ const Produto = () => {
   const param = useParams();
   const [prodData, setProdData] = React.useState(null);
   const [quantidade, setQuantidade] = React.useState(1);
+  const dispatch = useDispatch();
+
   React.useEffect(() => {
     // filtrando os dados do id correspondente
     setProdData(
@@ -62,7 +66,12 @@ const Produto = () => {
       }),
     );
   }, [param]);
-  console.log(prodData);
+
+  function handleClickCart(event) {
+    event.preventDefault();
+    dispatch(addItem({ id: +param.id, quantidade: +quantidade }));
+  }
+
   return (
     <main className="productContainner">
       <div className="productCarrousel">
@@ -93,7 +102,12 @@ const Produto = () => {
           />
           <span className="ProductForm__estoque">estoque</span>
           <div className="ProductForm__button buttonForm">
-            <button className="buttonForm__cart buttonForm--active">
+            <button
+              className="buttonForm__cart buttonForm--active"
+              onClick={(event) => {
+                handleClickCart(event);
+              }}
+            >
               add ao carrinho
             </button>
             <button className="buttonForm__buy buttonForm--active">

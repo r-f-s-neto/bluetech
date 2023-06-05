@@ -13,6 +13,7 @@
 .productCarrousel {
   &__img {
     height: 34.25rem;
+    object-fit: cover;
   }
 }
 
@@ -108,3 +109,93 @@
     }
   }
 }
+
+@media (max-width:70.625rem) {
+  .productContainner {
+    padding: 5.5rem 4.5rem 12.75rem 4.5rem;
+  }
+}
+
+@media (max-width:59.375rem) {
+  .productContainner {
+    padding: 5.5rem 2.25rem 12.75rem 2.25rem;
+  }
+
+  .productCarrousel {
+    &__img {
+      height: 31.25rem;
+    }
+  }
+}
+
+@media (max-width:56rem) {
+  .productContainner {
+    padding: 5.5rem 1rem 12.75rem 1rem;
+  }
+
+  .productCarrousel {
+    &__img {
+      height: 30.25rem;
+    }
+  }
+}
+
+@media (max-width:52rem) {
+  .productContainner {
+    padding: 5.5rem 0.5rem 12.75rem 0.5rem;
+  }
+
+  .productCarrousel {
+    &__img {
+      height: 28.25rem;
+    }
+  }
+}
+
+@media (max-width:47rem) {
+  .productContainner {
+    padding: 5.5rem 0.7rem 12.75rem 0.7rem;
+  }
+
+  .productCarrousel {
+    &__img {
+      height: 24.25rem;
+    }
+  }
+}
+
+@media (max-width:45.25rem) {
+  .productContainner {
+    padding: 2.5rem 0.7rem 9.75rem 0.7rem;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .productCarrousel {
+    &__img {
+      height: 20.25rem;
+    }
+  }
+}
+
+@media (max-width:30rem) {
+  .productCarrousel {
+    &__img {
+      height: 17.25rem;
+    }
+  }
+}
+
+@media (max-width: 21.25rem) {
+  .productCarrousel {
+    &__img {
+      height: 15.25rem;
+    }
+  }
+
+  .ProductForm {
+    &__button {
+      flex-wrap: wrap;
+    }
+  }
+ }

@@ -4,14 +4,17 @@ import Header from './components/Header/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/global-styles.css';
 import Footer from './components/Footer/Footer';
-
+import { Provider } from 'react-redux';
+import store from './redux/store';
 function App() {
   return (
-    <BrowserRouter>
-      <Header />
-      <Router />
-      <Footer />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Header />
+        <Router />
+        <Footer />
+      </BrowserRouter>
+    </Provider>
   );
 }
 
