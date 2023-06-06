@@ -6,6 +6,7 @@ const Produtos = lazy(() => import('../Pages/Produtos'));
 const Promocoes = lazy(() => import('../Pages/Promocoes'));
 const Login = lazy(() => import('../Pages/Login'));
 const Produto = lazy(() => import('../Pages/Produtos/Produto'));
+const Carrinho = lazy(() => import('../Pages/Carrinho'));
 
 const Router = () => {
   return (
@@ -47,6 +48,14 @@ const Router = () => {
         element={
           <Suspense fallback={<Loading />}>
             <Login />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/carrinho"
+        element={
+          <Suspense fallback={<Loading />}>
+            <Carrinho />
           </Suspense>
         }
       />

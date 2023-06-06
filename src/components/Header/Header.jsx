@@ -13,7 +13,7 @@ const Header = () => {
   const [search, setSearch] = React.useState('');
   const [cart, setCart] = React.useState(0);
   const state = useSelector((state) => {
-    return state?.reduce((acc, curr) => {
+    return state.data?.reduce((acc, curr) => {
       return acc + curr.quantidade;
     }, 0);
   });

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import './Produto-styles.scss';
-import { useDispatch } from 'react-redux';
-import { addItem } from '../../../redux/cart';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItemDois } from '../../../redux/cart';
 
 const produtos = [
   {
@@ -57,6 +57,7 @@ const Produto = () => {
   const [prodData, setProdData] = React.useState(null);
   const [quantidade, setQuantidade] = React.useState(1);
   const dispatch = useDispatch();
+  const state = useSelector((state) => state);
 
   React.useEffect(() => {
     // filtrando os dados do id correspondente
@@ -69,9 +70,38 @@ const Produto = () => {
 
   function handleClickCart(event) {
     event.preventDefault();
-    dispatch(addItem({ id: +param.id, quantidade: +quantidade }));
-  }
 
+    function getNewState(state, id, quantidade) {
+      if (state.data) {
+        const verify = state.data.filter((item) => {
+          if (item.id === id) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        console.log(verify.length);
+        if (verify.length) {
+          return state.data.map((element) => {
+            if (element.id === +id) {
+              const quant = element.quantidade + +quantidade;
+              return { id: +id, quantidade: quant };
+            } else {
+              return element;
+            }
+          });
+        } else {
+          return [...state.data, { id: +id, quantidade: +quantidade }];
+        }
+      } else {
+        return [{ id: +id, quantidade: +quantidade }];
+      }
+    }
+
+    const newState = getNewState(state, +param.id, +quantidade);
+    dispatch(addItemDois(newState));
+  }
+  console.log(state);
   return (
     <main className="productContainner">
       <div className="productCarrousel">
