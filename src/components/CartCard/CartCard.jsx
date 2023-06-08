@@ -1,5 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { addItemDois } from '../../redux/cart';
+import './CartCard-styles.scss';
 
 const produtos = [
   {
@@ -50,25 +52,52 @@ const produtos = [
 ];
 
 const CartCard = () => {
-  const products = useSelector((state) => state.data);
-
+  const products = useSelector((state) => state.cart.data);
+  const dispatch = useDispatch();
+  function handleClickRemove(event, productId) {
+    event.preventDefault();
+    const filteredProducts = products?.filter((product) => {
+      return product.id !== productId;
+    });
+    dispatch(addItemDois(filteredProducts));
+  }
   return (
-    <section>
+    <ul className="CartCard">
       {products?.map((product) => {
         const produto = produtos.find((produto) => produto.id === product.id);
         return (
-          <div className="CartCardContainner" key={product.id + 'CartCard'}>
-            <img src={produto.src} alt={produto.alt} />
-            <div>
-              <h2>{produto.name}</h2>
-              <span>{product.quantidade}</span>
-              <h2>{produto.preco}</h2>
+          <li className="CartCardContainner" key={product.id + 'CartCard'}>
+            <div className="CartCardContainner__aux">
+              <img
+                className="CartCardContainner__img"
+                src={produto.src}
+                alt={produto.alt}
+              />
+              <div className="CartCardContainner__info info">
+                <h2 className="info__title">{produto.name}</h2>
+                <span className="info__qnt">
+                  {'Quantidade: ' + product.quantidade}
+                </span>
+                <h2 className="info__price">
+                  {produto.preco.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
+                </h2>
+              </div>
             </div>
-            <button>Remover</button>
-          </div>
+            <button
+              className="CartCardContainner__btn"
+              onClick={(event) => {
+                handleClickRemove(event, product.id);
+              }}
+            >
+              Remover
+            </button>
+          </li>
         );
       })}
-    </section>
+    </ul>
   );
 };
 

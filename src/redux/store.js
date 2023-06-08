@@ -1,8 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import cart from './cart';
+import cupom from './cupom';
+
+const reducer = combineReducers({ cart, cupom });
 
 const store = configureStore({
-  reducer: cart,
+  reducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 

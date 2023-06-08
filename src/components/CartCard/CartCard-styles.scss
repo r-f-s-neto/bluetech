@@ -1,5 +1,61 @@
 @import url('../../styles/global-styles.css');
 
+.CartCard {
+  padding-left: 9.0625rem;
+  width: max-content;
+}
+
 .CartCardContainner {
   display: flex;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 0.0625rem solid #BDBDBD;
+  &__aux {
+    display: flex;
+  }
+  &__img {
+    object-fit: cover;
+    width: 8.0625rem;
+    height: 8.3125rem;
+    padding-right: 0.75rem;
+  }
+  &__info {
+    padding-right: 11.25rem;
+  }
+  &__btn {
+    align-self: flex-end;
+  }
+}
+
+.CartCardContainner:last-of-type {
+  border: none;
+}
+
+.info {
+  &__title {
+    font-family: 'Public Sans', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.375rem;
+    line-height: 1.36;
+    letter-spacing: -0.034375rem;
+  }
+  &__qnt {
+    font-family: 'Public Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.43;
+    letter-spacing: -0.025rem;
+  }
+  &__price {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.375rem;
+    line-height: 1.36;
+    letter-spacing: -0.034375rem;
+
+  }
 }

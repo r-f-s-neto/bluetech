@@ -13,7 +13,7 @@ const Header = () => {
   const [search, setSearch] = React.useState('');
   const [cart, setCart] = React.useState(0);
   const state = useSelector((state) => {
-    return state.data?.reduce((acc, curr) => {
+    return state.cart.data?.reduce((acc, curr) => {
       return acc + curr.quantidade;
     }, 0);
   });
@@ -69,7 +69,7 @@ const Header = () => {
         <ul className="topo__item userMenu">
           <li className="userMenu__item">
             <div>
-              <NavLink>
+              <NavLink to="/carrinho" end>
                 <Bag />
               </NavLink>
             </div>

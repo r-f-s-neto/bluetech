@@ -1,0 +1,116 @@
+@import url('../../styles/global-styles.css');
+
+.CarrinhoContainner {
+  display: flex;
+  gap: 5.4375rem;
+  justify-content: center;
+  padding-bottom: 6.625rem;;
+  &__title {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 3.1875rem 9.0625rem 0rem 9.0625rem;
+    font-family: 'Public Sans', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.25rem;
+    line-height: 1.22;
+    letter-spacing: -0.09375rem;
+
+    color: #0288D1;
+  }
+}
+
+.orderInfo {
+  padding-top: 6.625rem;
+  padding-right: 9.0625rem;
+  &__title{
+    padding-bottom: 1.8125rem;
+  }
+
+  &__cupom {
+    margin-bottom: 1.6875rem;
+    width: 100%;
+    height: 2.5rem;
+    &--error{
+      outline-color: red;
+      border-color: red;
+    }
+  }
+
+  &__subtotal {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    font-family: 'Public Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.14;
+    letter-spacing: -0.01875rem;
+
+  }
+
+  &__ship {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+
+    font-family: 'Public Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.14;
+    letter-spacing: -0.01875rem;
+  }
+
+  &__cupomValue {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 0.0625rem solid #BDBDBD;
+
+    font-family: 'Public Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.14;
+    letter-spacing: -0.01875rem;
+  }
+
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-bottom: 2.25rem;
+
+    font-family: 'Public Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.14;
+    letter-spacing: -0.01875rem;
+  }
+
+  &__btn {
+    padding: 0.875rem 5.65625rem;
+    font-family: 'Public Sans', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.375;
+    text-align: center;
+    letter-spacing: -0.025rem;
+    background-color: #0288D1;
+    color: #FFFFFF;
+    width: max-content;
+    transition: all 0.3s;
+    &:hover {
+      background-color: #03A9F4;
+    }
+  }
+}
+
+.cartError {
+  padding-bottom: 1.6875rem;
+  color: red;
+}

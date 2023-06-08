@@ -57,7 +57,7 @@ const Produto = () => {
   const [prodData, setProdData] = React.useState(null);
   const [quantidade, setQuantidade] = React.useState(1);
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.cart);
 
   React.useEffect(() => {
     // filtrando os dados do id correspondente
@@ -80,7 +80,6 @@ const Produto = () => {
             return false;
           }
         });
-        console.log(verify.length);
         if (verify.length) {
           return state.data.map((element) => {
             if (element.id === +id) {
@@ -101,7 +100,7 @@ const Produto = () => {
     const newState = getNewState(state, +param.id, +quantidade);
     dispatch(addItemDois(newState));
   }
-  console.log(state);
+
   return (
     <main className="productContainner">
       <div className="productCarrousel">

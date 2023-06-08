@@ -66,14 +66,12 @@ const Produtos = () => {
   }, []);
 
   React.useEffect(() => {
-    const filterdProd = produtos.filter((produto) => {
+    const filterdProd = produtos?.filter((produto) => {
       return filtroCat(produto, categoria);
     });
 
     setDataProd(filtroPrecificacao(filterdProd, filtroPreco));
   }, [categoria, filtroPreco]);
-
-  console.log(dataProd);
 
   return (
     <main className="produtos">
@@ -88,11 +86,13 @@ const Produtos = () => {
       </header>
       <div className="produtos__filtros">
         <div className="filtros__categorias">
-          <Categorias
-            value={categoria}
-            setValue={setCategoria}
-            categorias={dataCat}
-          />
+          {categoria && (
+            <Categorias
+              value={categoria}
+              setValue={setCategoria}
+              categorias={dataCat}
+            />
+          )}
         </div>
         <Select
           value={filtroPreco}
@@ -101,7 +101,7 @@ const Produtos = () => {
         />
       </div>
       <div className="produtos__card">
-        <Card produtos={JSON.stringify(dataProd)} />
+        {dataProd && <Card produtos={JSON.stringify(dataProd)} />}
       </div>
     </main>
   );
