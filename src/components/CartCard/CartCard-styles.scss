@@ -59,3 +59,90 @@
 
   }
 }
+
+@media(max-width:78.5rem) {
+  .CartCard {
+    padding-left: 7.0625rem;
+  }
+
+  .CartCardContainner {
+    &__info {
+      padding-right: 9.25rem;
+    }
+  }
+}
+
+@media(max-width:72.375rem) {
+  .CartCardContainner {
+    &__info{
+      padding-right: 7.25rem;
+    }
+  }
+}
+
+@media (max-width:70.625rem) {
+  .CartCard {
+    padding-left: 4.5rem;
+  }
+}
+
+@media(max-width:63.75rem) {
+  .CartCardContainner {
+    &__info{
+      padding-right: 5.25rem;
+    }
+  }
+  .CartCard {
+    padding-left: 3.5rem;
+  }
+}
+
+@media(max-width:61.5rem) {
+  .CartCard {
+    padding-left: 2.5rem;
+  }
+}
+
+@media (max-width:59.375rem) {
+  .CartCardContainner {
+    &__info{
+      padding-right: 4.25rem;
+    }
+  }
+  .CartCard {
+    padding-left: 2.25rem;
+  }
+}
+
+@media (max-width:56.75rem) {
+  .CartCardContainner {
+    &__info{
+      padding-right: 2.25rem;
+    }
+  }
+}
+
+@media (max-width:56rem) {
+  .CartCard {
+    padding-left: 1rem;
+  }
+}
+
+@media (max-width:50rem) {
+  .CartCardContainner {
+    &__info{
+      padding-right: 0rem;
+    }
+    justify-content: space-between;
+  }
+}
+
+@media (max-width:25rem) {
+  .CartCard {
+    padding-left: 0rem;
+  }
+
+  .CartCardContainner {
+    flex-wrap: wrap;
+  }
+}

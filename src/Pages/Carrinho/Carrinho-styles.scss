@@ -4,11 +4,15 @@
   display: flex;
   gap: 5.4375rem;
   justify-content: center;
-  padding-bottom: 6.625rem;;
+  align-items: center;
+  padding-bottom: 6.625rem;
+  padding: 0rem 9.0625rem 3.1875rem 9.0625rem;
+  max-width: 80rem;
+  margin: 0 auto;
   &__title {
     max-width: 80rem;
     margin: 0 auto;
-    padding: 3.1875rem 9.0625rem 0rem 9.0625rem;
+    padding-left: 9.0625rem;
     font-family: 'Public Sans', sans-serif;
     font-style: normal;
     font-weight: 600;
@@ -113,4 +117,107 @@
 .cartError {
   padding-bottom: 1.6875rem;
   color: red;
+}
+
+@media(max-width:78.5rem) {
+  .CarrinhoContainner {
+    padding: 3.1875rem 7.0625rem 0rem 7.0625rem;
+    &__title {
+      padding-left: 7.0625rem;
+    }
+  }
+
+  .orderInfo {
+    padding-right: 7.0625rem;
+  }
+}
+
+@media(max-width:70.625rem) {
+  .CarrinhoContainner {
+    padding: 3.1875rem 4.5rem 0rem 4.5rem;
+    &__title {
+      padding-left: 4.5rem;
+    }
+  }
+
+  .orderInfo {
+    padding-right: 4.5rem;
+  }
+}
+
+@media(max-width:63.75rem) {
+  .CarrinhoContainner {
+    padding: 3.1875rem 3.5rem 0rem 3.5rem;
+    &__title {
+      padding-left: 3.5rem;
+    }
+  }
+
+  .orderInfo {
+    padding-right: 3.5rem;
+  }
+}
+
+@media(max-width:61.5rem) {
+  .CarrinhoContainner {
+    padding: 3.1875rem 2.5rem 0rem 2.5rem;
+    &__title {
+      padding-left: 2.5rem;
+    }
+  }
+
+  .orderInfo {
+    padding-right: 2.5rem;
+  }
+}
+
+@media (max-width:59.375rem) {
+  .CarrinhoContainner {
+    padding: 3.1875rem 2.25rem 0rem 2.25rem;
+    &__title {
+      padding-left: 2.25rem;
+    }
+  }
+
+  .orderInfo {
+    padding-right: 2.25rem;
+  }
+ }
+
+ @media (max-width:56rem) {
+  .CarrinhoContainner {
+    padding: 3.1875rem 1rem 0rem 1rem;
+    &__title {
+      padding-left: 1rem;
+    }
+  }
+
+  .orderInfo {
+    padding-right: 1rem;
+  }
+ }
+
+ @media (max-width:52rem) {
+  .CarrinhoContainner {
+    gap: 2.5rem;
+  }
+ }
+
+ @media (max-width:50rem) {
+  .CarrinhoContainner {
+    flex-wrap: wrap;
+  }
+ }
+
+ @media (max-width:25rem) {
+  .CarrinhoContainner {
+    padding: 3.1875rem 0rem 0rem 0rem;
+    &__title {
+      padding-left: 0rem;
+    }
+  }
+
+  .orderInfo {
+    padding-right: 0rem;
+  }
 }

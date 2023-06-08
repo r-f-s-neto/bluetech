@@ -118,51 +118,49 @@ const Carrinho = () => {
   }
 
   return (
-    <>
-      <article className="CarrinhoContainner">
-        <div>
-          <h1 className="CarrinhoContainner__title">Meu carrinho</h1>
-          {cartList && <CartCard />}
+    <article className="CarrinhoContainner">
+      <div>
+        <h1 className="CarrinhoContainner__title">Meu carrinho</h1>
+        {cartList && <CartCard />}
+      </div>
+      <div className="orderInfo">
+        <h2 className="orderInfo__title">Resumo do Pedido</h2>
+        <input
+          className={
+            !error
+              ? 'orderInfo__cupom'
+              : 'orderInfo__cupom orderInfo__cupom--error'
+          }
+          id="cupom"
+          name="cupom"
+          type="text"
+          placeholder="insira seu cupom"
+          value={cupom}
+          onChange={({ target }) => {
+            setCupom(target.value);
+          }}
+          onBlur={handleBlur}
+        />
+        {error && <p className="cartError">{error}</p>}
+        <div className="orderInfo__subtotal">
+          <p>Subtotal dos produtos</p>
+          <p>{subtotal}</p>
         </div>
-        <div className="orderInfo">
-          <h2 className="orderInfo__title">Resumo do Pedido</h2>
-          <input
-            className={
-              !error
-                ? 'orderInfo__cupom'
-                : 'orderInfo__cupom orderInfo__cupom--error'
-            }
-            id="cupom"
-            name="cupom"
-            type="text"
-            placeholder="insira seu cupom"
-            value={cupom}
-            onChange={({ target }) => {
-              setCupom(target.value);
-            }}
-            onBlur={handleBlur}
-          />
-          {error && <p className="cartError">{error}</p>}
-          <div className="orderInfo__subtotal">
-            <p>Subtotal dos produtos</p>
-            <p>{subtotal}</p>
-          </div>
-          <div className="orderInfo__ship">
-            <p>Frete</p>
-            <p>será calculado no próximo passo</p>
-          </div>
-          <div className="orderInfo__cupomValue">
-            <p>Cupom</p>
-            <p>{`-${discount}`}</p>
-          </div>
-          <div className="orderInfo__total">
-            <p>Total</p>
-            <p>{subtotal - discount}</p>
-          </div>
-          <button className="orderInfo__btn">Continue Para o Checkout</button>
+        <div className="orderInfo__ship">
+          <p>Frete</p>
+          <p>será calculado no próximo passo</p>
         </div>
-      </article>
-    </>
+        <div className="orderInfo__cupomValue">
+          <p>Cupom</p>
+          <p>{`-${discount}`}</p>
+        </div>
+        <div className="orderInfo__total">
+          <p>Total</p>
+          <p>{subtotal - discount}</p>
+        </div>
+        <button className="orderInfo__btn">Continue Para o Checkout</button>
+      </div>
+    </article>
   );
 };
 
