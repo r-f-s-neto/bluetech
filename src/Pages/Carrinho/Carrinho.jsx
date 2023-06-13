@@ -1,7 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CartCard from '../../components/CartCard';
 import './Carrinho-styles.scss';
+import { useNavigate } from 'react-router-dom';
+import { addCktValue, addCktList } from '../../redux/checkoutValue';
 
 const produtos = [
   {
@@ -58,6 +60,8 @@ const Carrinho = () => {
   const cupomList = useSelector((state) => state.cupom.data);
   const [discount, setDiscount] = React.useState(0);
   const [error, setError] = React.useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // const [listProd, setListProd] = React.useState(null);
   // const cartProducts = useSelector((state) => state);
@@ -117,6 +121,13 @@ const Carrinho = () => {
     }
   }
 
+  function handleClick(event) {
+    event.preventDefault();
+    dispatch(addCktValue(subtotal - discount));
+    dispatch(addCktList(cartList));
+    navigate('/checkout/endereco');
+  }
+
   return (
     <article className="CarrinhoContainner">
       <div>
@@ -158,7 +169,9 @@ const Carrinho = () => {
           <p>Total</p>
           <p>{subtotal - discount}</p>
         </div>
-        <button className="orderInfo__btn">Continue Para o Checkout</button>
+        <button className="orderInfo__btn" onClick={handleClick}>
+          Continue Para o Checkout
+        </button>
       </div>
     </article>
   );

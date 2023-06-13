@@ -1,0 +1,25 @@
+.checkoutForm{
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+  &__item {
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid #BDBDBD;
+    box-shadow: -0.0625rem 0.25rem 0.3125rem -0.3125rem #000000;
+    label {
+      width: 100%;
+      //padding: 0.7378rem 9.8125rem 0.7378rem 2rem;
+      padding: 0.7378rem 0rem 0.7378rem 2rem;
+      cursor: pointer;
+    }
+    input {
+      display: none;
+      pointer-events: none;
+    }
+
+    &--active {
+      background-color: #B3E5FC;
+    }
+  }
+}

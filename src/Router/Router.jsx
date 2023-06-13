@@ -7,6 +7,9 @@ const Promocoes = lazy(() => import('../Pages/Promocoes'));
 const Login = lazy(() => import('../Pages/Login'));
 const Produto = lazy(() => import('../Pages/Produtos/Produto'));
 const Carrinho = lazy(() => import('../Pages/Carrinho'));
+const Checkout = lazy(() => import('../Pages/Checkout'));
+const Frete = lazy(() => import('../Pages/Checkout/Frete'));
+const Endereco = lazy(() => import('../Pages/Checkout/Endereco'));
 
 const Router = () => {
   return (
@@ -59,6 +62,32 @@ const Router = () => {
           </Suspense>
         }
       />
+      <Route
+        path="/checkout"
+        element={
+          <Suspense fallback={<Loading />}>
+            <Checkout />
+          </Suspense>
+        }
+      >
+        <Route
+          path="endereco"
+          element={
+            <Suspense fallback={<Loading />}>
+              <Endereco />
+            </Suspense>
+          }
+        />
+        <Route
+          path="frete"
+          element={
+            <Suspense fallback={<Loading />}>
+              <Frete />
+            </Suspense>
+          }
+        />
+        <Route path="pagamento" />
+      </Route>
     </Routes>
   );
 };

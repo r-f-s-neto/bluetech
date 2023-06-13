@@ -1,0 +1,9 @@
+.formText {
+  &__label {
+    display: block;
+  }
+  &__input{
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
