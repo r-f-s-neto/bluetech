@@ -123,8 +123,8 @@ const Carrinho = () => {
 
   function handleClick(event) {
     event.preventDefault();
-    dispatch(addCktValue(subtotal - discount));
-    dispatch(addCktList(cartList));
+    dispatch(addCktValue(discount / subtotal));
+    //dispatch(addCktList(cartList));
     navigate('/checkout/endereco');
   }
 

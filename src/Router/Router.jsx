@@ -10,6 +10,7 @@ const Carrinho = lazy(() => import('../Pages/Carrinho'));
 const Checkout = lazy(() => import('../Pages/Checkout'));
 const Frete = lazy(() => import('../Pages/Checkout/Frete'));
 const Endereco = lazy(() => import('../Pages/Checkout/Endereco'));
+const Pagamento = lazy(() => import('../Pages/Checkout/Pagamento'));
 
 const Router = () => {
   return (
@@ -86,7 +87,14 @@ const Router = () => {
             </Suspense>
           }
         />
-        <Route path="pagamento" />
+        <Route
+          path="pagamento"
+          element={
+            <Suspense fallback={<Loading />}>
+              <Pagamento />
+            </Suspense>
+          }
+        />
       </Route>
     </Routes>
   );

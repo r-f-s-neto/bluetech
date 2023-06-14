@@ -1,22 +1,7 @@
 import React from 'react';
-import './Frete-styles.scss';
 import ButtonCheckout from '../../../components/ButtonCheckout';
-import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { addCktFrete } from '../../../redux/checkoutValue';
-
-const freteOptions = [
-  {
-    name: 'Frete Express',
-    time: '5-10 dias úteis',
-    price: 50,
-  },
-  {
-    name: 'Frete Padrão',
-    time: '7-15 dias úteis',
-    price: 30,
-  },
-];
+import { useDispatch, useSelector } from 'react-redux';
+import pedidoFinalizado from '../../../helper/pedidoFinalizado';
 
 const produtos = [
   {
@@ -66,22 +51,14 @@ const produtos = [
   },
 ];
 
-const Frete = () => {
-  const [freteOpt, setFreteOpt] = React.useState('Frete Padrão');
-  const navigate = useNavigate();
+const Pagamento = () => {
+  const [ativar, setAtivar] = React.useState(true);
   const [subtotal, setSubtotal] = React.useState(0);
-  const cartList = useSelector((state) => state.cart.data);
+  const [total, setTotal] = React.useState(0);
   const discount = useSelector((state) => state.checkoutValue.value);
-  const [freteValue, setFreteValue] = React.useState(0);
+  const frete = useSelector((state) => state.checkoutValue.frete);
+  const cartList = useSelector((state) => state.cart.data);
   const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    setFreteValue(
-      freteOptions?.find((frete) => {
-        return frete.name === freteOpt;
-      }).price,
-    );
-  }, [freteOpt]);
 
   React.useEffect(() => {
     setSubtotal(
@@ -102,49 +79,22 @@ const Frete = () => {
     );
   }, [cartList]);
 
-  function handleClick(event) {
-    event.preventDefault();
-    dispatch(
-      addCktFrete(
-        freteOptions?.find((frete) => {
-          return frete.name === freteOpt;
-        }).price,
-      ),
-    );
-    navigate('/checkout/pagamento');
+  React.useEffect(() => {
+    setTotal((1 - discount) * subtotal + frete);
+  }, [subtotal, discount, frete]);
+  function handleClick() {
+    dispatch(pedidoFinalizado(total));
+    setAtivar(false);
   }
   return (
-    <form className="checkoutForm">
-      {freteOptions.map((frete) => {
-        return (
-          <div
-            className={
-              freteOpt === frete.name
-                ? 'checkoutForm__item checkoutForm__item--active'
-                : 'checkoutForm__item'
-            }
-            key={frete.name + frete.time}
-          >
-            <input
-              id={frete.name}
-              type="radio"
-              value={frete.name}
-              checked={freteOpt === frete.name}
-              onChange={({ target }) => {
-                setFreteOpt(target.value);
-              }}
-            />
-            <label htmlFor={frete.name}>
-              <h2>{frete.name}</h2>
-              <span>{frete.time}</span>
-            </label>
-          </div>
-        );
-      })}
-      <span>{`Total: ${(1 - discount) * subtotal + freteValue}`}</span>
-      <ButtonCheckout text="Próximo" handleClick={handleClick} />
-    </form>
+    <>
+      {ativar && (
+        <ButtonCheckout text="Simular pagamento" handleClick={handleClick} />
+      )}
+      {ativar && <span>{`Valor total: ${total}`}</span>}
+      {!ativar && <h1>Pagamento efetuado com sucesso</h1>}
+    </>
   );
 };
 
-export default Frete;
+export default Pagamento;
