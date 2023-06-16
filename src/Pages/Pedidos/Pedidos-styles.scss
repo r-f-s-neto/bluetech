@@ -1,10 +1,10 @@
 @import url("../../styles/global-styles.css");
 
-.produtos {
+.pedidos {
   &__header{
     background-color: #0288D1;
   }
-  &__filtros {
+  &__list{
     max-width: 80rem;
     margin: 0 auto;
     padding: 2.875rem 9.0625rem 3.375rem 9.0625rem;
@@ -12,13 +12,9 @@
     justify-content: space-between;
     align-items: center;
   }
-  &__card {
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 0rem 9.0625rem ;
-  }
 }
-.headerContainner {
+
+.headerContainnerPedidos {
   max-width: 80rem;
   margin: 0 auto;
   padding: 2.9375rem 9.0625rem;
@@ -54,73 +50,49 @@ color: #FFFFFF;
 }
 
 @media (max-width:70.625rem) {
-  .produtos{
-    &__filtros{
-      padding: 2.875rem 4.5rem 3.375rem 4.5rem;
-    }
-    &__card {
-      padding: 0rem 4.5rem ;
-    }
-  }
-  .headerContainner {
+  .headerContainnerPedidos {
     padding: 2.9375rem 4.5rem;
+  }
+  .pedidos{
+    &__list {
+      padding-left: 4.5rem;
+      padding-right: 4.5rem;
+    }
   }
 }
 
 @media (max-width:59.375rem) {
-  .produtos{
-    &__filtros{
-      padding: 2.875rem 2.25rem 3.375rem 2.25rem;
-    }
-    &__card {
-      padding: 0rem 2.25rem ;
-    }
-  }
-  .headerContainner {
+  .headerContainnerPedidos {
     padding: 2.9375rem 2.25rem;
+  }
+  .pedidos{
+    &__list {
+      padding-left: 2.25rem;
+      padding-right: 2.25rem;
+    }
   }
 }
 
 @media (max-width:56rem) {
-  .produtos{
-    &__filtros{
-      padding: 2.875rem 1rem 3.375rem 1rem;
-    }
-    &__card {
-      padding: 0rem 1rem ;
-    }
-  }
-  .headerContainner {
+  .headerContainnerPedidos {
     padding: 2.9375rem 1rem;
   }
-}
-
-@media (max-width:53.25rem) {
-  .produtos {
-    &__filtros {
-      display: grid;
-      grid-template-columns: 1fr;
-      justify-items: center;
+  .pedidos{
+    &__list {
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
   }
-  .filtros__categorias {
-    padding-bottom: 1rem;
-  }
 }
-
 
 @media (max-width:52rem) {
-  .produtos{
-    &__filtros{
-      padding: 2.875rem 0.5rem 3.375rem 0.5rem;
-    }
-    &__card {
-      padding: 0rem 0.5rem ;
-    }
-  }
-  .headerContainner {
+  .headerContainnerPedidos {
     padding: 2.9375rem 0.5rem;
   }
+  .pedidos{
+    &__list {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+  }
 }
-
-

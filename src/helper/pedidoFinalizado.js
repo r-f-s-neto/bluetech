@@ -8,9 +8,9 @@ import {
 
 const pedidoFinalizado = (total) => (dispatch, getState) => {
   const state = getState();
-  console.log(state);
+  const produtos = state.cart.data;
   const pedido = {
-    produtos: state.checkoutValue.data,
+    produtos,
     valor: total,
   };
   dispatch(addCktPedidos(pedido));
@@ -18,7 +18,6 @@ const pedidoFinalizado = (total) => (dispatch, getState) => {
   dispatch(addCktValue(0));
   dispatch(addCktList(null));
   dispatch(addItemDois(null));
-  console.log(state);
 };
 
 export default pedidoFinalizado;

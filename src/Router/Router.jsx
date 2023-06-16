@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Loading from '../Pages/Loading';
 const Home = lazy(() => import('../Pages/Home'));
 const Produtos = lazy(() => import('../Pages/Produtos'));
-const Promocoes = lazy(() => import('../Pages/Promocoes'));
+const Pedidos = lazy(() => import('../Pages/Pedidos'));
 const Login = lazy(() => import('../Pages/Login'));
 const Produto = lazy(() => import('../Pages/Produtos/Produto'));
 const Carrinho = lazy(() => import('../Pages/Carrinho'));
@@ -40,10 +40,10 @@ const Router = () => {
         }
       />
       <Route
-        path="/promocoes"
+        path="/pedidos"
         element={
           <Suspense fallback={<Loading />}>
-            <Promocoes />
+            <Pedidos />
           </Suspense>
         }
       />

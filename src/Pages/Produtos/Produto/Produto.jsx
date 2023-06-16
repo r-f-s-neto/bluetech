@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './Produto-styles.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemDois } from '../../../redux/cart';
@@ -58,6 +58,7 @@ const Produto = () => {
   const [quantidade, setQuantidade] = React.useState(1);
   const dispatch = useDispatch();
   const state = useSelector((state) => state.cart);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     // filtrando os dados do id correspondente
@@ -101,6 +102,39 @@ const Produto = () => {
     dispatch(addItemDois(newState));
   }
 
+  function handleClickPurshase() {
+    function getNewState(state, id, quantidade) {
+      if (state.data) {
+        const verify = state.data.filter((item) => {
+          if (item.id === id) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        if (verify.length) {
+          return state.data.map((element) => {
+            if (element.id === +id) {
+              const quant = element.quantidade + +quantidade;
+              return { id: +id, quantidade: quant };
+            } else {
+              return element;
+            }
+          });
+        } else {
+          return [...state.data, { id: +id, quantidade: +quantidade }];
+        }
+      } else {
+        return [{ id: +id, quantidade: +quantidade }];
+      }
+    }
+
+    const newState = getNewState(state, +param.id, +quantidade);
+    dispatch(addItemDois(newState));
+
+    navigate('/carrinho');
+  }
+
   return (
     <main className="productContainner">
       <div className="productCarrousel">
@@ -139,7 +173,10 @@ const Produto = () => {
             >
               add ao carrinho
             </button>
-            <button className="buttonForm__buy buttonForm--active">
+            <button
+              className="buttonForm__buy buttonForm--active"
+              onClick={handleClickPurshase}
+            >
               comprar
             </button>
           </div>
