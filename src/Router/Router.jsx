@@ -11,6 +11,7 @@ const Checkout = lazy(() => import('../Pages/Checkout'));
 const Frete = lazy(() => import('../Pages/Checkout/Frete'));
 const Endereco = lazy(() => import('../Pages/Checkout/Endereco'));
 const Pagamento = lazy(() => import('../Pages/Checkout/Pagamento'));
+const Adm = lazy(() => import('../Pages/Adm'));
 
 const Router = () => {
   return (
@@ -96,6 +97,14 @@ const Router = () => {
           }
         />
       </Route>
+      <Route
+        path="/adm"
+        element={
+          <Suspense fallback={<Loading />}>
+            <Adm />
+          </Suspense>
+        }
+      />
     </Routes>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import './Header-styles.css';
 import { ReactComponent as Lupa } from '../../assets/Header-assets/Search.svg';
 import { ReactComponent as Bag } from '../../assets/Header-assets/Vector.svg';
@@ -12,11 +12,19 @@ import { useSelector } from 'react-redux';
 const Header = () => {
   const [search, setSearch] = React.useState('');
   const [cart, setCart] = React.useState(0);
+  const { pathname } = useLocation();
+  const [adm, setAdm] = React.useState(false);
   const state = useSelector((state) => {
     return state.cart.data?.reduce((acc, curr) => {
       return acc + curr.quantidade;
     }, 0);
   });
+
+  React.useEffect(() => {
+    if (pathname.includes('adm')) {
+      setAdm(true);
+    }
+  }, [pathname]);
 
   React.useEffect(() => {
     setCart(state);
@@ -31,54 +39,66 @@ const Header = () => {
               BlueTech
             </NavLink>
           </div>
-          <nav>
-            <ul className="menu">
-              <li>
-                <NavLink className="menu__item" to="/" end>
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="menu__item" to="/produtos" end>
-                  Produtos
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="menu__item" to="/pedidos" end>
-                  Pedidos
-                </NavLink>
-              </li>
-            </ul>
-          </nav>
-          <form>
-            <input
-              className="searchInput"
-              type="text"
-              value={search}
-              onChange={({ target }) => {
-                setSearch(target.value);
-              }}
-              placeholder="Procurar"
-            />
-            <button>
-              <Lupa />
-            </button>
-          </form>
+          {!adm && (
+            <nav>
+              <ul className="menu">
+                <li>
+                  <NavLink className="menu__item" to="/" end>
+                    Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className="menu__item" to="/produtos" end>
+                    Produtos
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className="menu__item" to="/pedidos" end>
+                    Pedidos
+                  </NavLink>
+                </li>
+              </ul>
+            </nav>
+          )}
+          {!adm && (
+            <form>
+              <input
+                className="searchInput"
+                type="text"
+                value={search}
+                onChange={({ target }) => {
+                  setSearch(target.value);
+                }}
+                placeholder="Procurar"
+              />
+              <button>
+                <Lupa />
+              </button>
+            </form>
+          )}
         </div>
 
         <ul className="topo__item userMenu">
-          <li className="userMenu__item">
-            <div>
-              <NavLink to="/carrinho" end>
-                <Bag />
-              </NavLink>
-            </div>
-            <span>{cart}</span>
-          </li>
+          {!adm && (
+            <li className="userMenu__item">
+              <div>
+                <NavLink to="/carrinho" end>
+                  <Bag />
+                </NavLink>
+              </div>
+              <span>{cart}</span>
+            </li>
+          )}
           <li>
-            <NavLink className="login" to="/login">
-              Login
-            </NavLink>
+            {adm ? (
+              <NavLink className="login" to="/">
+                Logout
+              </NavLink>
+            ) : (
+              <NavLink className="login" to="/login">
+                Login
+              </NavLink>
+            )}
           </li>
         </ul>
         <div className="mobileMenu">
