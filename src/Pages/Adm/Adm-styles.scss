@@ -1,0 +1,67 @@
+@import url('../../styles/global-styles.css');
+
+.admHeader{
+  color: #FFFFFF;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2.9375rem 9.0625rem;
+  &__title {
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 600;
+    font-size: 2.25rem;
+    line-height: 1.22;
+    letter-spacing: -0.09375rem;
+  }
+  &__span {
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.44;
+    letter-spacing: -0.01875rem
+  }
+}
+
+.admMenu {
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 2rem;
+  &__item {
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 400;
+    font-size: 0.8125rem;
+    line-height: 2.15;
+    letter-spacing: -0.025rem;
+    width: 5.9375rem;
+    height: 1.9375rem;
+    text-align: center;
+    border: 0.0625rem solid #0288D1;
+    color: #0288D1;
+    cursor: pointer;
+    &.active{
+      background-color: #0288D1;
+      color: white;
+    }
+    &:hover {
+      background-color: #B3E5FC;
+      color: #FFFFFF;
+      border: 0.0625rem solid #B3E5FC;
+    }
+  }
+}
+
+.admContainner {
+  &__main {
+    padding: 2.9375rem 9.0625rem;
+    max-width: 80rem;
+    margin: 0 auto;
+  }
+}
+
+.admContent {
+  &__addNew {
+    margin-bottom: 2rem;
+    padding: 0.3rem 2rem;
+    background-color: #00BCD4;
+    color: #FFFFFF;
+  }
+}
