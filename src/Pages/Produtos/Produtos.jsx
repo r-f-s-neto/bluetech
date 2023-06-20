@@ -86,7 +86,7 @@ const Produtos = () => {
       </header>
       <div className="produtos__filtros">
         <div className="filtros__categorias">
-          {categoria && (
+          {dataCat && (
             <Categorias
               value={categoria}
               setValue={setCategoria}
@@ -98,6 +98,7 @@ const Produtos = () => {
           value={filtroPreco}
           setValue={setFiltroPreco}
           options={options}
+          text="Ordenar por"
         />
       </div>
       <div className="produtos__card">

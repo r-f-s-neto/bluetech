@@ -1,11 +1,11 @@
 import React from 'react';
 import './Select-styles.scss';
 
-const Select = ({ value, setValue, options }) => {
+const Select = ({ value, setValue, options, text }) => {
   return (
-    <form className="SelectForm">
+    <div className="SelectForm">
       <div className="SelectForm__sortBy">
-        <p>Ordenar por</p>
+        <p>{text}</p>
       </div>
       <select
         className="SelectForm__select"
@@ -22,7 +22,7 @@ const Select = ({ value, setValue, options }) => {
           );
         })}
       </select>
-    </form>
+    </div>
   );
 };
 
