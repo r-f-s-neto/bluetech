@@ -23,6 +23,8 @@ const Header = () => {
   React.useEffect(() => {
     if (pathname.includes('adm')) {
       setAdm(true);
+    } else {
+      setAdm(false);
     }
   }, [pathname]);
 

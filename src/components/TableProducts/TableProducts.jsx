@@ -1,5 +1,6 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
+import { useNavigate } from 'react-router-dom';
 import './TableProducts-styles.scss';
 
 const produtos = [
@@ -51,6 +52,7 @@ const produtos = [
 ];
 
 const TableProducts = () => {
+  const navigate = useNavigate();
   return (
     <Table responsive>
       <thead>
@@ -77,7 +79,13 @@ const TableProducts = () => {
                 })}
               </td>
               <td className="TableProducts__Buttons">
-                <button>ver detalhes</button>
+                <button
+                  onClick={() => {
+                    navigate(`/adm/produtos/${encodeURIComponent(produto.id)}`);
+                  }}
+                >
+                  ver detalhes
+                </button>
                 <button>excluir</button>
               </td>
             </tr>

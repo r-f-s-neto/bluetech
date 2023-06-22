@@ -16,6 +16,7 @@ const AdmProdutos = lazy(() => import('../Pages/Adm/AdmProdutos'));
 const AdmUsuarios = lazy(() => import('../Pages/Adm/AdmUsuarios'));
 const AdmPedidos = lazy(() => import('../Pages/Adm/AdmPedidos'));
 const NovoProduto = lazy(() => import('../Pages/Adm/AdmProdutos/NovoProduto'));
+const AdmProduto = lazy(() => import('../Pages/Adm/AdmProdutos/AdmProduto'));
 
 const Router = () => {
   return (
@@ -139,6 +140,14 @@ const Router = () => {
         element={
           <Suspense fallback={<Loading />}>
             <NovoProduto />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/adm/produtos/:id"
+        element={
+          <Suspense fallback={<Loading />}>
+            <AdmProduto />
           </Suspense>
         }
       />
