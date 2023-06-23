@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { addData } from '../../redux/userData';
 import { useDispatch } from 'react-redux';
+import Cookies from 'js-cookie';
 import './Login-styles.scss';
 
 const Login = () => {
@@ -90,17 +91,21 @@ const Login = () => {
 
                 try {
                   const response = await fetch(url, options);
-                  console.log('a response é: ', response);
+                  const data = await response.json();
+                  console.log('o json é: ', data);
                   if (response.ok) {
+                    console.log('response.ok', response.ok);
                     setErro(false);
                     try {
-                      const responseUserData = await fetch(
+                      console.log(
+                        'A url é: ',
                         'https://e-commerce-api-bluetech-production.up.railway.app/user/' +
                           emailAtClick,
                       );
-                      const userData = await responseUserData.json();
-                      dispatch(addData(userData));
-                      if (userData.role === 'admin') {
+                      const token = data.token;
+                      console.log('o token é: ', token);
+                      dispatch(addData(data));
+                      if (data.role === 'admin') {
                         navigate('/adm');
                       } else {
                         navigate('/');

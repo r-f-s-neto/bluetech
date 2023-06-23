@@ -9,6 +9,7 @@ const Cadastro = () => {
   const [senha, setSenha] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [erro, setErro] = React.useState(false);
+  const [errorMensage, setErrorMensage] = React.useState(null);
 
   return (
     <div className="NovoProduto">
@@ -25,7 +26,7 @@ const Cadastro = () => {
           type="text"
           id="productName"
           name="productName"
-          placeholder="Nome do produto"
+          placeholder="Nome completo"
           required
         />
         <input
@@ -36,7 +37,7 @@ const Cadastro = () => {
           type="email"
           id="productPrice"
           name="productPrice"
-          placeholder="Preço"
+          placeholder="Email"
           required
         />
         <input
@@ -47,7 +48,7 @@ const Cadastro = () => {
           type="password"
           id="productPhoto"
           name="productPhoto"
-          placeholder="Foto"
+          placeholder="Senha"
           required
         />
         <button
@@ -62,19 +63,28 @@ const Cadastro = () => {
             };
             console.log(data);
             setLoading(true);
+            const url =
+              'https://e-commerce-api-bluetech-production.up.railway.app/user';
+            const options = {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+            };
             try {
-              const response = await fetch(
-                'https://e-commerce-api-bluetech-production.up.railway.app/user',
-              );
+              const response = await fetch(url, options);
               const data = await response.json();
-
-              if (data) {
+              console.log('response.ok', response.ok);
+              if (response.ok) {
                 setErro(false);
-                navigate('/sucess?mensagem=Cadastro-Efetuado-Com-Sucesso');
+                navigate('/sucess?mensagem=cadastro-efetuado-com-sucesso');
               } else {
-                setErro(true);
+                setErrorMensage(data);
+                setErro(false);
               }
-            } catch {
+            } catch (error) {
+              console.log(error);
               setErro(true);
             } finally {
               setLoading(false);
@@ -85,6 +95,7 @@ const Cadastro = () => {
         </button>
       </form>
       {erro && <span>O cadastro não foi efetuado</span>}
+      {errorMensage}
     </div>
   );
 };
