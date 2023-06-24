@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { addData } from '../../redux/userData';
-import { useDispatch } from 'react-redux';
-import Cookies from 'js-cookie';
+import { useDispatch, useSelector } from 'react-redux';
+//import Cookies from 'js-cookie';
 import './Login-styles.scss';
 
 const Login = () => {
@@ -13,6 +13,23 @@ const Login = () => {
   const [senha, setSenha] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [erro, setErro] = React.useState(false);
+  const [errorMensage, setErrorMensage] = React.useState(null);
+  const userData = useSelector((state) => state.userData.data);
+  const [logado, setLogado] = React.useState(false);
+
+  React.useEffect(() => {
+    if (userData) {
+      setLogado(true);
+    } else {
+      setLogado(false);
+    }
+  }, [userData]);
+
+  React.useEffect(() => {
+    if (logado) {
+      navigate('/');
+    }
+  }, [logado, navigate]);
 
   React.useEffect(() => {
     if (window.localStorage.getItem('blueTechLogin')) {
@@ -96,25 +113,26 @@ const Login = () => {
                   if (response.ok) {
                     console.log('response.ok', response.ok);
                     setErro(false);
-                    try {
-                      console.log(
-                        'A url é: ',
-                        'https://e-commerce-api-bluetech-production.up.railway.app/user/' +
-                          emailAtClick,
-                      );
-                      const token = data.token;
-                      console.log('o token é: ', token);
-                      dispatch(addData(data));
-                      if (data.role === 'admin') {
-                        navigate('/adm');
-                      } else {
-                        navigate('/');
-                      }
-                    } catch {
-                      setErro(true);
+                    window.localStorage.setItem(
+                      'blueDataUser',
+                      JSON.stringify(data),
+                    );
+                    console.log(
+                      'A url é: ',
+                      'https://e-commerce-api-bluetech-production.up.railway.app/user/' +
+                        emailAtClick,
+                    );
+                    const token = data.token;
+                    console.log('o token é: ', token);
+                    dispatch(addData(data));
+                    if (data.role === 'admin') {
+                      navigate('/adm');
+                    } else {
+                      navigate('/');
                     }
                   } else {
                     setErro(true);
+                    setErrorMensage(data);
                   }
                 } catch (error) {
                   console.log('erro: ', error);
@@ -130,7 +148,8 @@ const Login = () => {
           </div>
         </form>
       </div>
-      {erro && <span>insira email e senha válidos</span>}
+      {erro && <span>Ocorreu um erro ao tentar conectar ao servidor</span>}
+      {errorMensage && <span>{errorMensage}</span>}
       <Link to="/cadastro">criar conta</Link>
     </section>
   );

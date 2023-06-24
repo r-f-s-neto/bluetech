@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Select from '../../../../components/Select';
 import './AdmProduto-styles.scss';
+import { useSelector } from 'react-redux';
 
 const produtos = [
   {
@@ -61,6 +62,25 @@ const AdmProduto = () => {
 
   const [product, setProduct] = React.useState(null);
   const params = useParams();
+  const navigate = useNavigate();
+  const userData = useSelector((state) => state.userData.data);
+  const [logadoAsAdm, setLogadoAsAdm] = React.useState(false);
+
+  React.useEffect(() => {
+    if (userData) {
+      if (userData.role === 'admin') {
+        setLogadoAsAdm(true);
+      }
+    } else {
+      setLogadoAsAdm(false);
+    }
+  }, [userData]);
+
+  React.useEffect(() => {
+    if (!logadoAsAdm) {
+      navigate('/login');
+    }
+  }, [logadoAsAdm, navigate]);
 
   React.useEffect(() => {
     setProduct(

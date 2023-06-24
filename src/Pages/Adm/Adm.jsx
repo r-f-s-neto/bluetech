@@ -1,10 +1,29 @@
 import React from 'react';
 import './Adm-styles.scss';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Adm = () => {
   const navigate = useNavigate();
   const param = useLocation();
+  const userData = useSelector((state) => state.userData.data);
+  const [logadoAsAdm, setLogadoAsAdm] = React.useState(false);
+
+  React.useEffect(() => {
+    if (userData) {
+      if (userData.role === 'admin') {
+        setLogadoAsAdm(true);
+      }
+    } else {
+      setLogadoAsAdm(false);
+    }
+  }, [userData]);
+
+  React.useEffect(() => {
+    if (!logadoAsAdm) {
+      navigate('/login');
+    }
+  }, [logadoAsAdm, navigate]);
 
   return (
     <div className="admContainner">

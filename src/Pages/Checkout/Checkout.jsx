@@ -1,7 +1,8 @@
 import React from 'react';
 import CartCard from '../../components/CartCard';
 import './Checkout-styles.scss';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 /*const freteOptions = [
   {
@@ -18,6 +19,23 @@ import { Outlet, useLocation } from 'react-router-dom';
 const Checkout = () => {
   // const [freteOpt, setFreteOpt] = React.useState('Frete Padrão');
   const path = useLocation();
+  const navigate = useNavigate();
+  const userData = useSelector((state) => state.userData.data);
+  const [logado, setLogado] = React.useState(false);
+
+  React.useEffect(() => {
+    if (userData) {
+      setLogado(true);
+    } else {
+      setLogado(false);
+    }
+  }, [userData]);
+
+  React.useEffect(() => {
+    if (!logado) {
+      navigate('/login');
+    }
+  }, [logado, navigate]);
 
   return (
     <article className="checkoutContainner">

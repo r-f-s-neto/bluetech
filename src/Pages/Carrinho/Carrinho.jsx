@@ -62,6 +62,22 @@ const Carrinho = () => {
   const [error, setError] = React.useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userData = useSelector((state) => state.userData.data);
+  const [logado, setLogado] = React.useState(false);
+
+  React.useEffect(() => {
+    if (userData) {
+      setLogado(true);
+    } else {
+      setLogado(false);
+    }
+  }, [userData]);
+
+  React.useEffect(() => {
+    if (!logado) {
+      navigate('/login');
+    }
+  }, [logado, navigate]);
 
   // const [listProd, setListProd] = React.useState(null);
   // const cartProducts = useSelector((state) => state);

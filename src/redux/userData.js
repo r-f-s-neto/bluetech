@@ -1,9 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+function dataLocalStorage(key, def) {
+  if (window.localStorage.getItem(key)) {
+    return JSON.parse(window.localStorage.getItem(key));
+  } else {
+    return def;
+  }
+}
+
 const slice = createSlice({
   name: 'userData',
   initialState: {
-    data: null,
+    data: dataLocalStorage('blueDataUser', null),
   },
   reducers: {
     addData(state, action) {

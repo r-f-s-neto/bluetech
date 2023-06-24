@@ -1,8 +1,9 @@
 import React from 'react';
 import './NovoProduto-styles.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Select from '../../../../components/Select';
 import './NovoProduto-styles.scss';
+import { useSelector } from 'react-redux';
 
 const NovoProduto = () => {
   const [name, setName] = React.useState('');
@@ -11,6 +12,25 @@ const NovoProduto = () => {
   const [desc, setDesc] = React.useState('');
   const [categoria, setCategoria] = React.useState('Componentes');
   const [dataCat, setDataCat] = React.useState([]);
+  const navigate = useNavigate();
+  const userData = useSelector((state) => state.userData.data);
+  const [logadoAsAdm, setLogadoAsAdm] = React.useState(false);
+
+  React.useEffect(() => {
+    if (userData) {
+      if (userData.role === 'admin') {
+        setLogadoAsAdm(true);
+      }
+    } else {
+      setLogadoAsAdm(false);
+    }
+  }, [userData]);
+
+  React.useEffect(() => {
+    if (!logadoAsAdm) {
+      navigate('/login');
+    }
+  }, [logadoAsAdm, navigate]);
 
   React.useEffect(() => {
     // Simula o recebimento de dados da categoria pela API

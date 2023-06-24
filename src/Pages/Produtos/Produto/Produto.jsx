@@ -59,6 +59,16 @@ const Produto = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.cart);
   const navigate = useNavigate();
+  const userData = useSelector((state) => state.userData.data);
+  const [logado, setLogado] = React.useState(false);
+
+  React.useEffect(() => {
+    if (userData) {
+      setLogado(true);
+    } else {
+      setLogado(false);
+    }
+  }, [userData]);
 
   React.useEffect(() => {
     // filtrando os dados do id correspondente
@@ -72,67 +82,75 @@ const Produto = () => {
   function handleClickCart(event) {
     event.preventDefault();
 
-    function getNewState(state, id, quantidade) {
-      if (state.data) {
-        const verify = state.data.filter((item) => {
-          if (item.id === id) {
-            return true;
-          } else {
-            return false;
-          }
-        });
-        if (verify.length) {
-          return state.data.map((element) => {
-            if (element.id === +id) {
-              const quant = element.quantidade + +quantidade;
-              return { id: +id, quantidade: quant };
+    if (logado) {
+      function getNewState(state, id, quantidade) {
+        if (state.data) {
+          const verify = state.data.filter((item) => {
+            if (item.id === id) {
+              return true;
             } else {
-              return element;
+              return false;
             }
           });
+          if (verify.length) {
+            return state.data.map((element) => {
+              if (element.id === +id) {
+                const quant = element.quantidade + +quantidade;
+                return { id: +id, quantidade: quant };
+              } else {
+                return element;
+              }
+            });
+          } else {
+            return [...state.data, { id: +id, quantidade: +quantidade }];
+          }
         } else {
-          return [...state.data, { id: +id, quantidade: +quantidade }];
+          return [{ id: +id, quantidade: +quantidade }];
         }
-      } else {
-        return [{ id: +id, quantidade: +quantidade }];
       }
-    }
 
-    const newState = getNewState(state, +param.id, +quantidade);
-    dispatch(addItemDois(newState));
+      const newState = getNewState(state, +param.id, +quantidade);
+      dispatch(addItemDois(newState));
+    } else {
+      navigate('/login');
+    }
   }
 
   function handleClickPurshase() {
-    function getNewState(state, id, quantidade) {
-      if (state.data) {
-        const verify = state.data.filter((item) => {
-          if (item.id === id) {
-            return true;
-          } else {
-            return false;
-          }
-        });
-        if (verify.length) {
-          return state.data.map((element) => {
-            if (element.id === +id) {
-              const quant = element.quantidade + +quantidade;
-              return { id: +id, quantidade: quant };
+    if (logado) {
+      function getNewState(state, id, quantidade) {
+        if (state.data) {
+          const verify = state.data.filter((item) => {
+            if (item.id === id) {
+              return true;
             } else {
-              return element;
+              return false;
             }
           });
+          if (verify.length) {
+            return state.data.map((element) => {
+              if (element.id === +id) {
+                const quant = element.quantidade + +quantidade;
+                return { id: +id, quantidade: quant };
+              } else {
+                return element;
+              }
+            });
+          } else {
+            return [...state.data, { id: +id, quantidade: +quantidade }];
+          }
         } else {
-          return [...state.data, { id: +id, quantidade: +quantidade }];
+          return [{ id: +id, quantidade: +quantidade }];
         }
-      } else {
-        return [{ id: +id, quantidade: +quantidade }];
       }
+
+      const newState = getNewState(state, +param.id, +quantidade);
+      dispatch(addItemDois(newState));
+
+      navigate('/carrinho');
+    } else {
+      navigate('/login');
     }
-
-    const newState = getNewState(state, +param.id, +quantidade);
-    dispatch(addItemDois(newState));
-
-    navigate('/carrinho');
   }
 
   return (

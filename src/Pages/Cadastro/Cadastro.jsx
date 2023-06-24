@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Cadastro-styles.scss';
+import { useSelector } from 'react-redux';
 
 const Cadastro = () => {
   const navigate = useNavigate();
@@ -10,6 +11,22 @@ const Cadastro = () => {
   const [loading, setLoading] = React.useState(false);
   const [erro, setErro] = React.useState(false);
   const [errorMensage, setErrorMensage] = React.useState(null);
+  const userData = useSelector((state) => state.userData.data);
+  const [logado, setLogado] = React.useState(false);
+
+  React.useEffect(() => {
+    if (userData) {
+      setLogado(true);
+    } else {
+      setLogado(false);
+    }
+  }, [userData]);
+
+  React.useEffect(() => {
+    if (logado) {
+      navigate('/');
+    }
+  }, [logado, navigate]);
 
   return (
     <div className="NovoProduto">
@@ -72,6 +89,7 @@ const Cadastro = () => {
               },
               body: JSON.stringify(data),
             };
+
             try {
               const response = await fetch(url, options);
               const data = await response.json();
