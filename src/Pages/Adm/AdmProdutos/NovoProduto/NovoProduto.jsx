@@ -172,7 +172,7 @@ const NovoProduto = () => {
             data.append('price', price);
             data.append('inventory', inventory);
             data.append('categories', categoria);
-            data.append('files', photo);
+           // data.append('files', photo);
 
             try{
             const response = await fetch(
@@ -181,8 +181,8 @@ const NovoProduto = () => {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'multipart/form-data',
-                  Authorization: 'Bearer ' + userData.token,
                 },
+                credentials:'include',
                 body: data,
               },
             );
