@@ -7,7 +7,7 @@ const Adm = () => {
   const navigate = useNavigate();
   const param = useLocation();
   const userData = useSelector((state) => state.userData.data);
-  const [logadoAsAdm, setLogadoAsAdm] = React.useState(false);
+  const [logadoAsAdm, setLogadoAsAdm] = React.useState(true);
 
   React.useEffect(() => {
     if (userData) {

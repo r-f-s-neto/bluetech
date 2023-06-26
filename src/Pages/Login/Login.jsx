@@ -2,8 +2,10 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { addData } from '../../redux/userData';
 import { useDispatch, useSelector } from 'react-redux';
-//import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'
 import './Login-styles.scss';
+
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -96,6 +98,7 @@ const Login = () => {
                   headers: {
                     'Content-Type': 'application/json',
                   },
+                  credentials: 'include',
                   body: JSON.stringify({
                     email: emailAtClick,
                     password: senhaAtClick,
@@ -110,6 +113,7 @@ const Login = () => {
                   const response = await fetch(url, options);
                   const data = await response.json();
                   console.log('o json é: ', data);
+                  console.log('o valor do cookie é: ', Cookies.get('jsonwebtoken'))
                   if (response.ok) {
                     console.log('response.ok', response.ok);
                     setErro(false);

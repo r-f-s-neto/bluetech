@@ -2,19 +2,57 @@ import React from 'react';
 import './NovoProduto-styles.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import Select from '../../../../components/Select';
+import Alert from 'react-bootstrap/Alert';
 import './NovoProduto-styles.scss';
 import { useSelector } from 'react-redux';
 
 const NovoProduto = () => {
   const [name, setName] = React.useState('');
-  const [price, setPrice] = React.useState();
+  const [price, setPrice] = React.useState('');
   const [photo, setPhoto] = React.useState('');
   const [desc, setDesc] = React.useState('');
   const [categoria, setCategoria] = React.useState('Componentes');
   const [dataCat, setDataCat] = React.useState([]);
   const navigate = useNavigate();
   const userData = useSelector((state) => state.userData.data);
-  const [logadoAsAdm, setLogadoAsAdm] = React.useState(false);
+  const [logadoAsAdm, setLogadoAsAdm] = React.useState(true);
+  const [inventory, setInventory] = React.useState('');
+  const [error, setError] = React.useState(null)
+  const [sucess, setSucess] = React.useState(null)
+
+  console.log('os cookies são: ', document.cookie)
+
+ /* async function handleSubmit(event) {
+    event.preventDefault();
+
+    const data = new FormData();
+    data.append('name', name);
+    data.append('description', desc);
+    data.append('price', price);
+    data.append('inventory', inventory);
+    data.append('categories', categoria);
+    data.append('files', photo);
+
+    const response = await fetch(
+      'https://e-commerce-api-bluetech-production.up.railway.app/products',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        credentials: 'include',
+        body: data,
+      },
+    );
+
+    console.log('o response é: ', response);
+
+    const dataJson = await response.json();
+
+    console.log('o json retornado é: ', dataJson);
+
+    console.log(response.ok);
+  } */
 
   React.useEffect(() => {
     if (userData) {
@@ -34,7 +72,23 @@ const NovoProduto = () => {
 
   React.useEffect(() => {
     // Simula o recebimento de dados da categoria pela API
-    setDataCat(['Monitores', 'Cadeiras', 'Componentes', 'Gabinetes']);
+    async function fetchCat () {
+      try {
+      const response = await fetch('https://e-commerce-api-bluetech-production.up.railway.app/category')
+      if (response.ok) {
+        const data = await response.json()
+        const dataArray = data.map((e)=>{return e.name})
+        dataArray.unshift('Tudo')
+        setDataCat(dataArray)
+      } else {
+        const data = await response.json()
+        setError(data)
+      }
+    } catch (error) {
+      setError(error)
+    }
+    }
+    fetchCat();
   }, []);
 
   return (
@@ -55,6 +109,17 @@ const NovoProduto = () => {
           placeholder="Nome do produto"
           required
         />
+        <textarea
+          value={desc}
+          onChange={({ target }) => {
+            setDesc(target.value);
+          }}
+          name="descricao"
+          id="descricao"
+          rows="10"
+          placeholder="Descrição"
+          required
+        />
         <input
           value={price}
           onChange={({ target }) => {
@@ -67,14 +132,14 @@ const NovoProduto = () => {
           required
         />
         <input
-          value={photo}
+          value={inventory}
           onChange={({ target }) => {
-            setPhoto(target.value);
+            setInventory(target.value);
           }}
-          type="text"
-          id="productPhoto"
-          name="productPhoto"
-          placeholder="Foto"
+          type="number"
+          id="productInventory"
+          name="inventory"
+          placeholder="Estoque"
           required
         />
         {dataCat && (
@@ -85,32 +150,62 @@ const NovoProduto = () => {
             text="Categoria"
           />
         )}
-        <textarea
-          value={desc}
+
+        <input
+          value={photo}
           onChange={({ target }) => {
-            setDesc(target.value);
+            setPhoto(target.value);
           }}
-          name="descricao"
-          id="descricao"
-          rows="10"
-          placeholder="Descrição"
+          type="file"
+          id="productPhoto"
+          name="productPhoto"
+          placeholder="Foto"
           required
         />
         <button
-          onClick={(event) => {
+          onClick={async (event) => {
             event.preventDefault();
-            const data = {
-              name: { name },
-              preco: { price },
-              src: { photo },
-              categoria: { categoria },
-              shortDescription: { desc },
-            };
-            console.log(data);
+
+            const data = new FormData();
+            data.append('name', name);
+            data.append('description', desc);
+            data.append('price', price);
+            data.append('inventory', inventory);
+            data.append('categories', categoria);
+            data.append('files', photo);
+
+            try{
+            const response = await fetch(
+              'https://e-commerce-api-bluetech-production.up.railway.app/products',
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                  Authorization: 'Bearer ' + userData.token,
+                },
+                body: data,
+              },
+            );
+
+            console.log('o response é: ', response);
+
+            if (response.ok){
+              setSucess('Produto cadastrado com sucesso')
+            } else {
+              const dataJson = await response.json();
+              setError(dataJson);
+            }
+
+
+          } catch (error){
+            setError(error)
+          }
           }}
         >
           Salvar
         </button>
+        {error && <Alert variant='danger'>{error}</Alert>}
+        {sucess&&<Alert variant = 'success'>{sucess}</Alert>}
       </form>
     </div>
   );

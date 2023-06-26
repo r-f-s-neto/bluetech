@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './Cadastro-styles.scss';
+import Alert from 'react-bootstrap/Alert';
 import { useSelector } from 'react-redux';
+import './Cadastro-styles.scss';
 
 const Cadastro = () => {
   const navigate = useNavigate();
@@ -112,8 +113,12 @@ const Cadastro = () => {
           Salvar
         </button>
       </form>
-      {erro && <span>O cadastro não foi efetuado</span>}
-      {errorMensage}
+      {erro && (
+        <Alert variant="danger">
+          O cadastro não foi efetuado, tente novamente mais tarde
+        </Alert>
+      )}
+      {errorMensage && <Alert variant="danger">{errorMensage}</Alert>}
     </div>
   );
 };

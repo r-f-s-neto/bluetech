@@ -1,5 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import Alert from 'react-bootstrap/Alert';
+import './Sucess-styles.css';
 
 const Sucess = () => {
   const location = useLocation();
@@ -9,7 +11,15 @@ const Sucess = () => {
     setQuery(new URLSearchParams(location.search));
   }, [location]);
 
-  return <>{query && <h1>{query.get('mensagem').split('-').join(' ')}</h1>}</>;
+  return (
+    <div className="sucessBg">
+      {query && (
+        <Alert variant="success">
+          {query.get('mensagem').split('-').join(' ')}
+        </Alert>
+      )}
+    </div>
+  );
 };
 
 export default Sucess;

@@ -4,6 +4,7 @@ import Categorias from '../../components/Categorias';
 import Select from '../../components/Select';
 import { filtroCat, filtroPrecificacao } from '../../helper/filtros';
 import Card from '../../components/Card';
+import Alert from 'react-bootstrap/Alert';
 
 const options = ['Mais Relevantes', 'Maior Preço', 'Menor Preço'];
 const produtos = [
@@ -59,11 +60,29 @@ const Produtos = () => {
   const [filtroPreco, setFiltroPreco] = React.useState('Mais Relevantes');
   const [dataCat, setDataCat] = React.useState([]);
   const [dataProd, setDataProd] = React.useState(produtos);
-
-  React.useEffect(() => {
+  const [error, setError] = React.useState(null);
+  React.useEffect( () => {
     // Simula o recebimento de dados da categoria pela API
-    setDataCat(['Tudo', 'Monitores', 'Cadeiras', 'Componentes', 'Gabinetes']);
+    async function fetchCat () {
+      try {
+      const response = await fetch('https://e-commerce-api-bluetech-production.up.railway.app/category')
+      if (response.ok) {
+        const data = await response.json()
+        const dataArray = data.map((e)=>{return e.name})
+        dataArray.unshift('Tudo')
+        setDataCat(dataArray)
+      } else {
+        const data = await response.json()
+        setError(data)
+      }
+    } catch (error) {
+      setError(error)
+    }
+    }
+    fetchCat();
+
   }, []);
+
 
   React.useEffect(() => {
     const filterdProd = produtos?.filter((produto) => {
@@ -84,6 +103,7 @@ const Produtos = () => {
           </p>
         </div>
       </header>
+      {error&&<Alert variant="danger">{error}</Alert>}
       <div className="produtos__filtros">
         <div className="filtros__categorias">
           {dataCat && (
