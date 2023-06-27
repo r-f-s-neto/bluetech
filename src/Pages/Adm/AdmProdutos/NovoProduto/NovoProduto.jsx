@@ -19,6 +19,7 @@ const NovoProduto = () => {
   const [inventory, setInventory] = React.useState('');
   const [error, setError] = React.useState(null)
   const [sucess, setSucess] = React.useState(null)
+  const [errorCat, setErrorCat] = React.useState(false)
 
   console.log('os cookies são: ', document.cookie)
 
@@ -78,14 +79,15 @@ const NovoProduto = () => {
       if (response.ok) {
         const data = await response.json()
         const dataArray = data.map((e)=>{return e.name})
-        dataArray.unshift('Tudo')
         setDataCat(dataArray)
       } else {
         const data = await response.json()
         setError(data)
+        setErrorCat(true)
       }
     } catch (error) {
       setError(error)
+      setErrorCat(true)
     }
     }
     fetchCat();
@@ -142,7 +144,7 @@ const NovoProduto = () => {
           placeholder="Estoque"
           required
         />
-        {dataCat && (
+        {dataCat && !errorCat && (
           <Select
             value={categoria}
             setValue={setCategoria}
@@ -154,26 +156,31 @@ const NovoProduto = () => {
         <input
           value={photo}
           onChange={({ target }) => {
-            setPhoto(target.value);
+            setPhoto(null);
           }}
           type="file"
           id="productPhoto"
           name="productPhoto"
+          accept="image/*"
           placeholder="Foto"
           required
         />
         <button
           onClick={async (event) => {
             event.preventDefault();
-
+            const dataJson = JSON.stringify({
+              name: name,
+              description: desc,
+              price: +price,
+              inventory: +inventory,
+              categories: [categoria]
+            })
+            console.log(dataJson);
+            const dataBlob = new Blob ([dataJson], {type: 'application/json'})
             const data = new FormData();
-            data.append('name', name);
-            data.append('description', desc);
-            data.append('price', price);
-            data.append('inventory', inventory);
-            data.append('categories', categoria);
-           // data.append('files', photo);
-
+            data.append('data', dataBlob);
+            //data.append('images', photo);
+  
             try{
             const response = await fetch(
               'https://e-commerce-api-bluetech-production.up.railway.app/products',

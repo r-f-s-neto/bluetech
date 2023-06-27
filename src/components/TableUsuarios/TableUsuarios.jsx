@@ -1,33 +1,36 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
+import { useDispatch, useSelector } from 'react-redux';
+import {listUsers} from '../../redux/users.js'
 import './TableUsuarios-styles.scss';
 
-const usuarios = [
-  {
-    id: 1,
-    name: 'usuário 1',
-  },
-  {
-    id: 2,
-    name: 'usuario 2',
-  },
-];
-
 const TableUsuarios = () => {
+  const {data, loading, error} = useSelector(state=>state.users);
+  const dispatch = useDispatch()
+
+  React.useEffect(()=>{
+    dispatch(listUsers())
+  }, [dispatch])
+ // console.log('data: ',data)
+
   return (
     <Table responsive>
       <thead>
         <tr className="tableHead">
-          <th>Id</th>
           <th>Nome</th>
+          <th>Email</th>
+          <th>Função</th>
         </tr>
       </thead>
       <tbody>
-        {usuarios?.map((usuario) => {
+        {loading && <div>Loading...</div>}
+        {error && <div>{error}</div>}
+        {data?.map((usuario) => {
           return (
             <tr className="tableBody" key={usuario.id + usuario.name}>
-              <td>{usuario.id}</td>
               <td>{usuario.name}</td>
+              <td>{usuario.email}</td>
+              <td>{usuario.role}</td>
             </tr>
           );
         })}

@@ -1,70 +1,31 @@
 import React from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Select from '../../../../components/Select';
 import './AdmProduto-styles.scss';
 import { useSelector } from 'react-redux';
 
-const produtos = [
-  {
-    id: 1,
-    src: 'https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg',
-    alt: 'alt da imagem',
-    name: 'produto 1',
-    shortDescription: 'Descrição curta 1',
-    categoria: 'Componentes',
-    preco: 1000,
-  },
-  {
-    id: 2,
-    src: 'https://staticmobly.akamaized.net/p/Mobly-Cadeira-Gamer-Legends-Preta-e-Vermelha-1468-858274-12-zoom.jpg',
-    alt: 'alt da imagem',
-    name: 'produto 2',
-    shortDescription: 'Descrição curta 2',
-    categoria: 'Cadeiras',
-    preco: 2000,
-  },
-  {
-    id: 3,
-    src: 'https://www.pichauarena.com.br/wp-content/uploads/2022/04/dddd.png',
-    alt: 'alt da imagem',
-    name: 'produto 3',
-    shortDescription: 'Descrição curta 3',
-    categoria: 'Gabinetes',
-    preco: 500,
-  },
-  {
-    id: 4,
-    src: 'https://images.samsung.com/is/image/samsung/br-c49hg90-lc49hg90dmlxzd-black-308057473?$650_519_PNG$',
-    alt: 'alt da imagem',
-    name: 'produto 4',
-    shortDescription: 'Descrição curta 4',
-    categoria: 'Monitores',
-    preco: 5000,
-  },
-  {
-    id: 5,
-    src: 'https://www.pichauarena.com.br/wp-content/uploads/2022/04/dddd.png',
-    alt: 'alt da imagem',
-    name: 'produto 5',
-    shortDescription: 'Descrição curta 5',
-    categoria: 'Gabinetes',
-    preco: 900,
-  },
-];
+
 
 const AdmProduto = () => {
   const [name, setName] = React.useState('');
-  const [price, setPrice] = React.useState();
-  const [photo, setPhoto] = React.useState('');
+  const [price, setPrice] = React.useState('');
+  //const [photo, setPhoto] = React.useState('');
   const [desc, setDesc] = React.useState('');
   const [categoria, setCategoria] = React.useState('Componentes');
   const [dataCat, setDataCat] = React.useState([]);
 
-  const [product, setProduct] = React.useState(null);
-  const params = useParams();
+  const [product, setProduct] = React.useState('');
+  //const params = useParams();
   const navigate = useNavigate();
   const userData = useSelector((state) => state.userData.data);
-  const [logadoAsAdm, setLogadoAsAdm] = React.useState(false);
+  const [logadoAsAdm, setLogadoAsAdm] = React.useState(true);
+  const [inventory, setInventory] = React.useState('');
+
+  React.useEffect(() => {
+    setProduct(JSON.parse(window.localStorage.getItem('admClickedProduct')) || "");
+
+  }, [])
+
 
   React.useEffect(() => {
     if (userData) {
@@ -82,7 +43,7 @@ const AdmProduto = () => {
     }
   }, [logadoAsAdm, navigate]);
 
-  React.useEffect(() => {
+  /*React.useEffect(() => {
     setProduct(
       produtos?.find((produto) => {
         return produto.id === Number(params.id);
@@ -90,14 +51,15 @@ const AdmProduto = () => {
     );
   }, [params]);
 
-  console.log(typeof product);
+  console.log(typeof product); */
 
   React.useEffect(() => {
     setName(product && product.name);
-    setPrice(product && product.preco);
-    setPhoto(product && product.src);
-    setDesc(product && product.shortDescription);
-    setCategoria(product && product.categoria);
+    setPrice(product && product.price);
+    //setPhoto(product&&product.images.length && product.images[0]);
+    setDesc(product && product.description);
+    setCategoria(product && product.categories[0].name);
+    setInventory(product && product.inventory)
   }, [product]);
 
   React.useEffect(() => {
@@ -134,17 +96,7 @@ const AdmProduto = () => {
           placeholder="Preço"
           required
         />
-        <input
-          value={photo}
-          onChange={({ target }) => {
-            setPhoto(target.value);
-          }}
-          type="text"
-          id="productPhoto"
-          name="productPhoto"
-          placeholder="Foto"
-          required
-        />
+        
         {dataCat && (
           <Select
             value={categoria}
@@ -164,19 +116,17 @@ const AdmProduto = () => {
           placeholder="Descrição"
           required
         />
-        <button
-          onClick={(event) => {
-            event.preventDefault();
-            const data = {
-              name: { name },
-              preco: { price },
-              src: { photo },
-              categoria: { categoria },
-              shortDescription: { desc },
-            };
-            console.log(data);
+        <input 
+          value={inventory} 
+          onChange={({target}) => {
+            setInventory(target.value)
           }}
-        >
+          name='estoque'
+          id='estoque'
+          placeholder='estoque'
+          required
+         />
+        <button>
           Salvar
         </button>
       </form>

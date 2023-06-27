@@ -2,78 +2,42 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { useNavigate } from 'react-router-dom';
 import './TableProducts-styles.scss';
-
-const produtos = [
-  {
-    id: 1,
-    src: 'https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg',
-    alt: 'alt da imagem',
-    name: 'produto 1',
-    shortDescription: 'Descrição curta 1',
-    categoria: 'Componentes',
-    preco: 1000,
-  },
-  {
-    id: 2,
-    src: 'https://staticmobly.akamaized.net/p/Mobly-Cadeira-Gamer-Legends-Preta-e-Vermelha-1468-858274-12-zoom.jpg',
-    alt: 'alt da imagem',
-    name: 'produto 2',
-    shortDescription: 'Descrição curta 2',
-    categoria: 'Cadeiras',
-    preco: 2000,
-  },
-  {
-    id: 3,
-    src: 'https://www.pichauarena.com.br/wp-content/uploads/2022/04/dddd.png',
-    alt: 'alt da imagem',
-    name: 'produto 3',
-    shortDescription: 'Descrição curta 3',
-    categoria: 'Gabinetes',
-    preco: 500,
-  },
-  {
-    id: 4,
-    src: 'https://images.samsung.com/is/image/samsung/br-c49hg90-lc49hg90dmlxzd-black-308057473?$650_519_PNG$',
-    alt: 'alt da imagem',
-    name: 'produto 4',
-    shortDescription: 'Descrição curta 4',
-    categoria: 'Monitores',
-    preco: 5000,
-  },
-  {
-    id: 5,
-    src: 'https://www.pichauarena.com.br/wp-content/uploads/2022/04/dddd.png',
-    alt: 'alt da imagem',
-    name: 'produto 5',
-    shortDescription: 'Descrição curta 5',
-    categoria: 'Gabinetes',
-    preco: 900,
-  },
-];
+import { useDispatch, useSelector } from 'react-redux';
+import { listProducts } from '../../redux/products';
+import Alert from 'react-bootstrap/Alert';
 
 const TableProducts = () => {
+  const {data, loading, error} = useSelector(state=>state.products);
+  const dispatch = useDispatch()
+
+  React.useEffect(()=>{
+    dispatch(listProducts())
+  }, [dispatch])
+
   const navigate = useNavigate();
   return (
     <Table responsive>
       <thead>
         <tr className="tableHead">
           <th>Nome</th>
-          <th>Categoria</th>
+          <th>Estoque</th>
           <th>Preço</th>
           <th>Ações</th>
         </tr>
       </thead>
       <tbody>
-        {produtos?.map((produto) => {
+        {loading && <div>Loading...</div>}
+        {error && <Alert variant='danger'>{error}</Alert>}
+        {data?.map((produto) => {
           return (
             <tr
               className="tableBody"
-              key={produto.id + produto.categoria + produto.name}
+              key={produto.id + produto.name}
             >
               <td>{produto.name}</td>
-              <td>{produto.categoria}</td>
+              <td>{produto.inventory}</td>
               <td>
-                {produto.preco.toLocaleString('pt-BR', {
+                {produto.price.toLocaleString('pt-BR', {
                   style: 'currency',
                   currency: 'BRL',
                 })}
@@ -81,7 +45,9 @@ const TableProducts = () => {
               <td className="TableProducts__Buttons">
                 <button
                   onClick={() => {
+                    window.localStorage.setItem('admClickedProduct', JSON.stringify(produto));
                     navigate(`/adm/produtos/${encodeURIComponent(produto.id)}`);
+                    
                   }}
                 >
                   ver detalhes
