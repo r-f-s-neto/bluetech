@@ -9,6 +9,32 @@ import Alert from 'react-bootstrap/Alert';
 const TableProducts = () => {
   const {data, loading, error} = useSelector(state=>state.products);
   const dispatch = useDispatch()
+  const [loadingDelete, setLoadingDelete] = React.useState(null)
+  const [errorDelete, setErrorDelete] = React.useState(false)
+  const [errorDeleteMensage, setErrorDeleteMensage] = React.useState(null);
+  const [sucessDelete, setSucessDelete] = React.useState(false)
+
+  async function handleClickDelete (event, produto) {
+    setLoadingDelete(true)
+    try{
+      const response = await fetch('https://e-commerce-api-bluetech-production.up.railway.app/products/'+produto.id, {
+        method:"DELETE",
+        credentials: "include"
+      })
+      if(response.ok) {
+        setSucessDelete(true);
+        setErrorDelete(false);
+        dispatch(listProducts())
+      }
+    } catch (erro) {
+      setErrorDelete(true);
+      setSucessDelete(false);
+      setErrorDeleteMensage(erro);
+    } finally {
+      setLoadingDelete(false)
+    }
+   
+  }
 
   React.useEffect(()=>{
     dispatch(listProducts())
@@ -16,6 +42,9 @@ const TableProducts = () => {
 
   const navigate = useNavigate();
   return (
+    <>
+    {errorDelete&&<Alert variant='danger'>{errorDeleteMensage}</Alert>}
+    {sucessDelete&&<Alert variant='success'>Produto deletado com sucesso</Alert>}
     <Table responsive>
       <thead>
         <tr className="tableHead">
@@ -26,8 +55,6 @@ const TableProducts = () => {
         </tr>
       </thead>
       <tbody>
-        {loading && <div>Loading...</div>}
-        {error && <Alert variant='danger'>{error}</Alert>}
         {data?.map((produto) => {
           return (
             <tr
@@ -52,13 +79,16 @@ const TableProducts = () => {
                 >
                   ver detalhes
                 </button>
-                <button>excluir</button>
+                <button className={loadingDelete?"admProductDelete-active":""} onClick={(event) => {handleClickDelete(event, produto)}}>excluir</button>
               </td>
             </tr>
           );
         })}
       </tbody>
     </Table>
+    {loading && <div>Loading...</div>}
+    {error && <Alert variant='danger'>{error}</Alert>}
+  </>
   );
 };
 
