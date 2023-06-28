@@ -5,8 +5,9 @@ import checkoutValue from './checkoutValue';
 import userData from './userData';
 import users from './users'
 import products from './products'
+import categories from './categories'
 
-const reducer = combineReducers({ cart, cupom, checkoutValue, userData, users, products });
+const reducer = combineReducers({ cart, cupom, checkoutValue, userData, users, products, categories });
 
 const store = configureStore({
   reducer,

@@ -73,6 +73,18 @@ const Adm = () => {
             >
               Pedidos
             </li>
+            <li
+              className={
+                param.pathname.includes('categorias')
+                  ? 'admMenu__item active'
+                  : 'admMenu__item'
+              }
+              onClick={() => {
+                navigate('/adm/categorias');
+              }}
+              >
+              Categorias
+            </li>
           </ul>
         </nav>
         <Outlet />

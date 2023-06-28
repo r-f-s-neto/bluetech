@@ -15,10 +15,12 @@ const Adm = lazy(() => import('../Pages/Adm'));
 const AdmProdutos = lazy(() => import('../Pages/Adm/AdmProdutos'));
 const AdmUsuarios = lazy(() => import('../Pages/Adm/AdmUsuarios'));
 const AdmPedidos = lazy(() => import('../Pages/Adm/AdmPedidos'));
+const AdmCategorias = lazy(()=>import('../Pages/Adm/AdmCategorias'))
 const NovoProduto = lazy(() => import('../Pages/Adm/AdmProdutos/NovoProduto'));
 const AdmProduto = lazy(() => import('../Pages/Adm/AdmProdutos/AdmProduto'));
 const Cadastro = lazy(() => import('../Pages/Cadastro'));
 const Sucess = lazy(() => import('../Pages/Sucess'));
+const NovaCategoria = lazy(()=> import('../Pages/Adm/AdmCategorias/NovaCategoria'));
 
 const Router = () => {
   return (
@@ -136,6 +138,7 @@ const Router = () => {
             </Suspense>
           }
         />
+        <Route path='categorias' element={<Suspense fallback={<Loading />}><AdmCategorias /></Suspense>} />
       </Route>
       <Route
         path="/adm/produtos/add"
@@ -169,6 +172,7 @@ const Router = () => {
           </Suspense>
         }
       />
+      <Route path='/adm/categorias/add' element={<Suspense fallback={<Loading />}><NovaCategoria /></Suspense>}/>
     </Routes>
   );
 };

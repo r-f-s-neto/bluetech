@@ -1,5 +1,4 @@
 import React from 'react';
-import './NovoProduto-styles.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import Select from '../../../../components/Select';
 import Alert from 'react-bootstrap/Alert';
@@ -21,7 +20,7 @@ const NovoProduto = () => {
   const [sucess, setSucess] = React.useState(null)
   const [errorCat, setErrorCat] = React.useState(false)
 
-  console.log('os cookies são: ', document.cookie)
+ // console.log('os cookies são: ', document.cookie)
 
  /* async function handleSubmit(event) {
     event.preventDefault();
@@ -163,23 +162,21 @@ const NovoProduto = () => {
           name="productPhoto"
           accept="image/*"
           placeholder="Foto"
-          required
         />
         <button
           onClick={async (event) => {
             event.preventDefault();
-            const dataJson = JSON.stringify({
+            const dataJson =JSON.stringify( {
               name: name,
               description: desc,
               price: +price,
               inventory: +inventory,
               categories: [categoria]
-            })
-            console.log(dataJson);
-            const dataBlob = new Blob ([dataJson], {type: 'application/json'})
+            } )
+            
             const data = new FormData();
-            data.append('data', dataBlob);
-            //data.append('images', photo);
+            data.append("data", dataJson);
+            console.log(Object.fromEntries(data));
   
             try{
             const response = await fetch(
@@ -187,7 +184,7 @@ const NovoProduto = () => {
               {
                 method: 'POST',
                 headers: {
-                  'Content-Type': 'multipart/form-data',
+                  "Content-Type": "multipart/form-data",
                 },
                 credentials:'include',
                 body: data,
