@@ -67,7 +67,7 @@ const TableCategorias = () => {
                 <button
                   onClick={() => {
                     window.localStorage.setItem('admClickedCategorie', JSON.stringify(categoria));
-                    navigate(`/adm/produtos/${encodeURIComponent(categoria.id)}`);
+                    navigate(`/adm/categorias/${encodeURIComponent(categoria.id)}`);
                     
                   }}
                 >
