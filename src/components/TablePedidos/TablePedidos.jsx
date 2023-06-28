@@ -1,25 +1,39 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Alert from 'react-bootstrap/Alert';
+import {listProductAdm} from '../../redux/pedidosAdm'
 import './TablePedidos-styles.scss';
+import LoadingComp from '../../components/LoadingComp'
 
 const TablePedidos = () => {
-  const pedidos = useSelector((state) => state.checkoutValue.pedidos);
+  const dispatch = useDispatch();
+  const {data, loading, error} = useSelector((state) => state.pedidosAdm);
+
+  React.useEffect(() => {
+    dispatch(listProductAdm())
+  }, [dispatch])
+
   return (
+    <>
+    {error && <Alert variant='danger'>{error}</Alert>}
     <Table responsive>
       <thead>
         <tr className="tableHead">
-          <th>id</th>
+          <th>id do pedido</th>
+          <th>id do usuario</th>
           <th>Valor</th>
+          <th>Ações</th>
         </tr>
       </thead>
       <tbody>
-        {pedidos?.map((pedido, index) => {
+        {data?.map((pedido) => {
           return (
-            <tr className="tableBody" key={index + 'tablePedidos'}>
-              <td>{index}</td>
+            <tr className="tableBody" key={pedido.id + 'tablePedidos'}>
+              <td>{pedido.id}</td>
+              <td>{pedido.userId}</td>
               <td>
-                {pedido.valor.toLocaleString('pt-BR', {
+                {Number(pedido.total).toLocaleString('pt-BR', {
                   style: 'currency',
                   currency: 'BRL',
                 })}
@@ -32,6 +46,8 @@ const TablePedidos = () => {
         })}
       </tbody>
     </Table>
+    {loading&& <LoadingComp />}
+    </>
   );
 };
 

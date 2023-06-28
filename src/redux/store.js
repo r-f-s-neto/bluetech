@@ -3,11 +3,12 @@ import cart from './cart';
 import cupom from './cupom';
 import checkoutValue from './checkoutValue';
 import userData from './userData';
-import users from './users'
-import products from './products'
-import categories from './categories'
+import users from './users';
+import products from './products';
+import categories from './categories';
+import pedidosAdm from './pedidosAdm';
 
-const reducer = combineReducers({ cart, cupom, checkoutValue, userData, users, products, categories });
+const reducer = combineReducers({ cart, cupom, checkoutValue, userData, users, products, categories, pedidosAdm });
 
 const store = configureStore({
   reducer,
