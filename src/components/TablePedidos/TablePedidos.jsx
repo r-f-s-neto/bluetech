@@ -5,9 +5,11 @@ import Alert from 'react-bootstrap/Alert';
 import {listProductAdm} from '../../redux/pedidosAdm'
 import './TablePedidos-styles.scss';
 import LoadingComp from '../../components/LoadingComp'
+import { useNavigate } from 'react-router-dom';
 
 const TablePedidos = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {data, loading, error} = useSelector((state) => state.pedidosAdm);
 
   React.useEffect(() => {
@@ -39,7 +41,10 @@ const TablePedidos = () => {
                 })}
               </td>
               <td className="TableProducts__Buttons">
-                <button>ver detalhes</button>
+                <button onClick={()=>{
+                  window.localStorage.setItem('admClickedPedido', JSON.stringify(pedido));
+                  navigate(`/adm/pedidos/${encodeURIComponent(pedido.id)}`);
+                  }}>ver detalhes</button>
               </td>
             </tr>
           );

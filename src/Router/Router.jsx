@@ -22,6 +22,7 @@ const Cadastro = lazy(() => import('../Pages/Cadastro'));
 const Sucess = lazy(() => import('../Pages/Sucess'));
 const NovaCategoria = lazy(()=> import('../Pages/Adm/AdmCategorias/NovaCategoria'));
 const AdmCategoria = lazy(()=>import('../Pages/Adm/AdmCategorias/AdmCategoria'))
+const AdmPedido = lazy(() => import('../Pages/Adm/AdmPedidos/AdmPedido'))
 
 const Router = () => {
   return (
@@ -175,6 +176,7 @@ const Router = () => {
       />
       <Route path='/adm/categorias/add' element={<Suspense fallback={<Loading />}><NovaCategoria /></Suspense>}/>
       <Route path='/adm/categorias/:id' element={<Suspense fallback={<Loading />}><AdmCategoria /></Suspense>} />
+      <Route path='/adm/pedidos/:id' element={<Suspense fallback={<Loading />}><AdmPedido /></Suspense>}/>
     </Routes>
   );
 };

@@ -133,7 +133,20 @@ const Header = () => {
                   if (window.localStorage.getItem('blueDataUser')) {
                     window.localStorage.removeItem('blueDataUser');
                   }
+                  if (window.localStorage.getItem('admClickedPedido')) {
+                    window.localStorage.removeItem('admClickedPedido');
+                  }
+                  if (window.localStorage.getItem('admClickedCategorie')) {
+                    window.localStorage.removeItem('admClickedCategorie');
+                  }
+                  if (window.localStorage.getItem('admClickedProduct')) {
+                    window.localStorage.removeItem('admClickedProduct');
+                  }
+
                   dispatch(addData(null));
+                  if(adm) {
+                    navigate('/');
+                  }
                 }}
               >
                 Logout

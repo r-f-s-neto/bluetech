@@ -1,0 +1,43 @@
+.AdmPedido {
+  min-height: 100vh;
+  padding: 0rem 9.0625rem;
+  max-width: 80rem;
+  margin: 0 auto;
+
+  &__header {
+    width: 55.35%;
+    padding: 2.875rem 9.0625rem 3.375rem 0rem;
+
+    a {
+      padding-bottom: 1.5625rem;
+    }
+
+    h1 {
+      color: #0288D1;
+    }
+  }
+}
+
+
+
+.TableProducts__Buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  button {
+    background-color: #BDBDBD;
+    color: #FFFFFF;
+    padding: 0rem 1rem;
+  }
+}
+
+.tableHead {
+  background-color: #00BCD4;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.tableBody {
+  text-align: center;
+}

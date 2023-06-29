@@ -177,7 +177,6 @@ const NovoProduto = () => {
             const data = new FormData();
             data.append("data", dataJson);
             console.log(Object.fromEntries(data));
-  
             try{
             const response = await fetch(
               'https://e-commerce-api-bluetech-production.up.railway.app/products',
