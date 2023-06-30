@@ -4,6 +4,7 @@ import Select from '../../../../components/Select';
 import Alert from 'react-bootstrap/Alert';
 import './NovoProduto-styles.scss';
 import { useSelector } from 'react-redux';
+import LoadingComp from '../../../../components/LoadingComp';
 
 const NovoProduto = () => {
   const [name, setName] = React.useState('');
@@ -16,13 +17,14 @@ const NovoProduto = () => {
   const userData = useSelector((state) => state.userData.data);
   const [logadoAsAdm, setLogadoAsAdm] = React.useState(true);
   const [inventory, setInventory] = React.useState('');
-  const [error, setError] = React.useState(null)
-  const [sucess, setSucess] = React.useState(null)
-  const [errorCat, setErrorCat] = React.useState(false)
+  const [errorCat, setErrorCat] = React.useState(false);
+  const [error, setError] = React.useState(null);
+  const [sucess, setSucess] = React.useState(false);
+  const [loadingPostProduct, setLoadingProduct] = React.useState(false);
 
- // console.log('os cookies são: ', document.cookie)
+  // console.log('os cookies são: ', document.cookie)
 
- /* async function handleSubmit(event) {
+  /* async function handleSubmit(event) {
     event.preventDefault();
 
     const data = new FormData();
@@ -72,25 +74,67 @@ const NovoProduto = () => {
 
   React.useEffect(() => {
     // Simula o recebimento de dados da categoria pela API
-    async function fetchCat () {
+    async function fetchCat() {
       try {
-      const response = await fetch('https://e-commerce-api-bluetech-production.up.railway.app/category')
-      if (response.ok) {
-        const data = await response.json()
-        const dataArray = data.map((e)=>{return e.name})
-        setDataCat(dataArray)
-      } else {
-        const data = await response.json()
-        setError(data)
-        setErrorCat(true)
+        const response = await fetch(
+          'https://e-commerce-api-bluetech-production.up.railway.app/category',
+        );
+        if (response.ok) {
+          const data = await response.json();
+          const dataArray = data.map((e) => {
+            return e.name;
+          });
+          setDataCat(dataArray);
+        } else {
+          const data = await response.json();
+          setError(data);
+          setErrorCat(true);
+        }
+      } catch (error) {
+        setError(error);
+        setErrorCat(true);
       }
-    } catch (error) {
-      setError(error)
-      setErrorCat(true)
-    }
     }
     fetchCat();
   }, []);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const data = JSON.stringify({
+      name: name,
+      description: desc,
+      price: +price,
+      inventory: +inventory,
+      categories: [categoria],
+    });
+
+    setLoadingProduct(true);
+    setError(null);
+    setSucess(null);
+    try {
+      const response = await fetch(
+        'https://e-commerce-api-bluetech-production.up.railway.app/products',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+          },
+          credentials: 'include',
+          body: data,
+        },
+      );
+
+      if (response.ok) {
+        setSucess('Produto cadastrado com sucesso');
+        setError(null);
+      }
+    } catch (error) {
+      setError(error);
+      setSucess(null);
+    } finally {
+      setLoadingProduct(false);
+    }
+  }
 
   return (
     <div className="NovoProduto">
@@ -98,7 +142,12 @@ const NovoProduto = () => {
         <Link to="/adm/produtos">{'< voltar'}</Link>
         <h1>Cadastro de produto</h1>
       </div>
-      <form className="NovoProduto__form">
+      <form
+        className="NovoProduto__form"
+        onSubmit={(event) => {
+          handleSubmit(event);
+        }}
+      >
         <input
           value={name}
           onChange={({ target }) => {
@@ -164,51 +213,15 @@ const NovoProduto = () => {
           placeholder="Foto"
         />
         <button
-          onClick={async (event) => {
-            event.preventDefault();
-            const dataJson =JSON.stringify( {
-              name: name,
-              description: desc,
-              price: +price,
-              inventory: +inventory,
-              categories: [categoria]
-            } )
-            
-            const data = new FormData();
-            data.append("data", dataJson);
-            console.log(Object.fromEntries(data));
-            try{
-            const response = await fetch(
-              'https://e-commerce-api-bluetech-production.up.railway.app/products',
-              {
-                method: 'POST',
-                headers: {
-                  "Content-Type": "multipart/form-data",
-                },
-                credentials:'include',
-                body: data,
-              },
-            );
-
-            console.log('o response é: ', response);
-
-            if (response.ok){
-              setSucess('Produto cadastrado com sucesso')
-            } else {
-              const dataJson = await response.json();
-              setError(dataJson);
-            }
-
-
-          } catch (error){
-            setError(error)
+          className={
+            loadingPostProduct ? 'newProductBtn--disable' : 'newProductBtn'
           }
-          }}
         >
           Salvar
         </button>
-        {error && <Alert variant='danger'>{error}</Alert>}
-        {sucess&&<Alert variant = 'success'>{sucess}</Alert>}
+        {loadingPostProduct && <LoadingComp />}
+        {error && <Alert variant="danger">{error}</Alert>}
+        {sucess && <Alert variant="success">{sucess}</Alert>}
       </form>
     </div>
   );

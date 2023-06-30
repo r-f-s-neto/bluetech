@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import LoadingComp from '../../../components/LoadingComp';
 import Alert from 'react-bootstrap/Alert';
 import './EditarConta-styles.scss';
@@ -16,62 +16,74 @@ const EditarConta = () => {
 
   React.useEffect(() => {
     try {
-      const user =JSON.parse(window.localStorage.getItem('blueDataUser'));
-      console.log('oi')
-      //setUserData(user);
+      const user = JSON.parse(window.localStorage.getItem('blueDataUser'));
       setEmail(user.email);
-      setError(false)
+      setError(false);
     } catch {
-      setError(true)
+      setError(true);
     }
   }, []);
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const url = "https://e-commerce-api-bluetech-production.up.railway.app/user/" + email;
+    const url =
+      'https://e-commerce-api-bluetech-production.up.railway.app/user/' + email;
     const data = JSON.stringify({
       name: name,
-      password: password
+      password: password,
     });
     const options = {
       method: 'PUT',
       headers: {
-        'Content-Type':'application/json; charset=utf-8'
+        'Content-Type': 'application/json; charset=utf-8',
       },
       credentials: 'include',
-      body: data
+      body: data,
     };
     setLoadingUpdateUser(true);
     setSucessUpdateUser(false);
-    try{
+    setErrorUpdateUser(false);
+    setErrorUpdateMensage(null);
+    try {
       const response = await fetch(url, options);
       if (response.ok) {
         setSucessUpdateUser('Cadastro Atualizado');
         setErrorUpdateUser(false);
         setErrorUpdateMensage(null);
-        const newUserData = JSON.parse(window.localStorage.getItem('blueDataUser'));
-        newUserData.name = name?name:newUserData.name;
-        window.localStorage.setItem('blueDataUser', JSON.stringify(newUserData));
-        setTimeout(()=>{
+        const newUserData = JSON.parse(
+          window.localStorage.getItem('blueDataUser'),
+        );
+        newUserData.name = name ? name : newUserData.name;
+        window.localStorage.setItem(
+          'blueDataUser',
+          JSON.stringify(newUserData),
+        );
+        setTimeout(() => {
           window.location.reload(false);
-        },2000)
+        }, 2000);
       }
-    }catch (error){
+    } catch (error) {
       setErrorUpdateUser(true);
       setErrorUpdateMensage(error);
     } finally {
-      setLoadingUpdateUser(false)
+      setLoadingUpdateUser(false);
     }
   }
-
 
   return (
     <div className="NovoProduto">
       <div className="NovoProduto__header">
         <h1>Atualização Cadastral</h1>
       </div>
-      {error && <Alert variant='danger'>Não foi possível identificar o usuário, faça o login novamente</Alert>}
-      <form onSubmit={(event)=>handleSubmit(event)} className="NovoProduto__form">
+      {error && (
+        <Alert variant="danger">
+          Não foi possível identificar o usuário, faça o login novamente
+        </Alert>
+      )}
+      <form
+        onSubmit={(event) => handleSubmit(event)}
+        className="NovoProduto__form"
+      >
         <input
           value={name}
           onChange={({ target }) => {
@@ -88,22 +100,28 @@ const EditarConta = () => {
           onChange={({ target }) => {
             setPassword(target.value);
           }}
-          type='password'
+          type="password"
           name="descricao"
           id="descricao"
           rows="5"
           placeholder="Senha"
           required
         />
-        <button className={!email||loadingUpdateUser?'updateUserBtn-disable':''}>
+        <button
+          className={!email || loadingUpdateUser ? 'updateUserBtn-disable' : ''}
+        >
           Salvar
         </button>
         {loadingUpdateUser && <LoadingComp />}
-        {errorUpdateUser && <Alert variant='danger'>{errorUpdateMensage}</Alert>}
-        {sucessUpdateUser && <Alert variant = 'success'>Categoria criada com sucesso</Alert>}
+        {errorUpdateUser && (
+          <Alert variant="danger">{errorUpdateMensage}</Alert>
+        )}
+        {sucessUpdateUser && (
+          <Alert variant="success">Categoria criada com sucesso</Alert>
+        )}
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default EditarConta
+export default EditarConta;

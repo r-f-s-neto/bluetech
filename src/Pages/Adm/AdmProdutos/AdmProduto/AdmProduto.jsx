@@ -4,8 +4,6 @@ import Select from '../../../../components/Select';
 import './AdmProduto-styles.scss';
 import { useSelector } from 'react-redux';
 
-
-
 const AdmProduto = () => {
   const [name, setName] = React.useState('');
   const [price, setPrice] = React.useState('');
@@ -14,18 +12,21 @@ const AdmProduto = () => {
   const [categoria, setCategoria] = React.useState('Componentes');
   const [dataCat, setDataCat] = React.useState([]);
 
-  const [product, setProduct] = React.useState('');
+  const [product, setProduct] = React.useState(null);
   //const params = useParams();
   const navigate = useNavigate();
   const userData = useSelector((state) => state.userData.data);
   const [logadoAsAdm, setLogadoAsAdm] = React.useState(true);
   const [inventory, setInventory] = React.useState('');
+  const [errorLoadingData, setErrorLoadingData] = React.useState(false);
 
   React.useEffect(() => {
-    setProduct(JSON.parse(window.localStorage.getItem('admClickedProduct')) || "");
-
-  }, [])
-
+    try {
+      setProduct(JSON.parse(window.localStorage.getItem('admClickedProduct')));
+    } catch {
+      setErrorLoadingData(true);
+    }
+  }, []);
 
   React.useEffect(() => {
     if (userData) {
@@ -54,12 +55,12 @@ const AdmProduto = () => {
   console.log(typeof product); */
 
   React.useEffect(() => {
-    setName(product && product.name);
+    setName(product && product?.name);
     setPrice(product && product.price);
     //setPhoto(product&&product.images.length && product.images[0]);
     setDesc(product && product.description);
-    setCategoria(product && product.categories[0].name);
-    setInventory(product && product.inventory)
+    setCategoria(product && product.name);
+    setInventory(product && product.inventory);
   }, [product]);
 
   React.useEffect(() => {
@@ -96,7 +97,7 @@ const AdmProduto = () => {
           placeholder="Preço"
           required
         />
-        
+
         {dataCat && (
           <Select
             value={categoria}
@@ -116,19 +117,17 @@ const AdmProduto = () => {
           placeholder="Descrição"
           required
         />
-        <input 
-          value={inventory} 
-          onChange={({target}) => {
-            setInventory(target.value)
+        <input
+          value={inventory}
+          onChange={({ target }) => {
+            setInventory(target.value);
           }}
-          name='estoque'
-          id='estoque'
-          placeholder='estoque'
+          name="estoque"
+          id="estoque"
+          placeholder="estoque"
           required
-         />
-        <button>
-          Salvar
-        </button>
+        />
+        <button>Salvar</button>
       </form>
     </div>
   );

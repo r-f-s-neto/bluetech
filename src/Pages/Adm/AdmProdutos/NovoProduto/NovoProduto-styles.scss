@@ -28,6 +28,13 @@
   }
 }
 
+.newProductBtn {
+  &--disable{
+    pointer-events: none;
+    opacity: 0.7;
+  }
+}
+
 @media (max-width:70.625rem) {
   .NovoProduto{
     padding: 2.875rem 4.5rem 3.375rem 4.5rem;
