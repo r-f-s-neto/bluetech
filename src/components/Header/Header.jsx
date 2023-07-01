@@ -10,6 +10,9 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useDispatch, useSelector } from 'react-redux';
 import { addData } from '../../redux/userData';
 import { useDebounce } from '@uidotdev/usehooks';
+import { listSearch } from '../../redux/search';
+import SearchList from '../SearchList';
+
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,15 +27,17 @@ const Header = () => {
   const [searchSugestionActivator, setSearchSugestionActivator] =
     React.useState(false);
 
+  const { loading } = useSelector((state) => state.search);
+
   React.useEffect(() => {
     const searchProd = async () => {
-      if (debounceSearch) {
-        console.log('vai fazer um fetch com o seguinte estado: ', search);
+      if (debounceSearch && !loading) {
+        dispatch(listSearch(search));
       }
     };
 
     searchProd();
-  }, [debounceSearch, search]);
+  }, [debounceSearch, search, loading, dispatch]);
 
   const state = useSelector((state) => {
     return state.cart.data?.reduce((acc, curr) => {
@@ -127,9 +132,7 @@ const Header = () => {
                       : 'searchSugestions'
                   }
                 >
-                  <li>opt1</li>
-                  <li>opt2</li>
-                  <li>opt3</li>
+                  <SearchList />
                 </ul>
               </div>
               <button>

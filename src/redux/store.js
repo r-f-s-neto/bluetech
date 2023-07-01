@@ -7,8 +7,19 @@ import users from './users';
 import products from './products';
 import categories from './categories';
 import pedidosAdm from './pedidosAdm';
+import search from './search';
 
-const reducer = combineReducers({ cart, cupom, checkoutValue, userData, users, products, categories, pedidosAdm });
+const reducer = combineReducers({
+  cart,
+  cupom,
+  checkoutValue,
+  userData,
+  users,
+  products,
+  categories,
+  pedidosAdm,
+  search,
+});
 
 const store = configureStore({
   reducer,
