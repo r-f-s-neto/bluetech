@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import './Header-styles.css';
+import './Header-styles.scss';
 import { ReactComponent as Lupa } from '../../assets/Header-assets/Search.svg';
 import { ReactComponent as Bag } from '../../assets/Header-assets/Vector.svg';
 import Navbar from 'react-bootstrap/Navbar';
@@ -9,16 +9,31 @@ import Container from 'react-bootstrap/Container';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useDispatch, useSelector } from 'react-redux';
 import { addData } from '../../redux/userData';
-
+import { useDebounce } from '@uidotdev/usehooks';
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [search, setSearch] = React.useState('');
+  const debounceSearch = useDebounce(search, 2000);
+
   const [cart, setCart] = React.useState(0);
   const { pathname } = useLocation();
   const [adm, setAdm] = React.useState(false);
   const userData = useSelector((state) => state.userData.data);
   const [logado, setLogado] = React.useState(false);
+  const [searchSugestionActivator, setSearchSugestionActivator] =
+    React.useState(false);
+
+  React.useEffect(() => {
+    const searchProd = async () => {
+      if (debounceSearch) {
+        console.log('vai fazer um fetch com o seguinte estado: ', search);
+      }
+    };
+
+    searchProd();
+  }, [debounceSearch, search]);
+
   const state = useSelector((state) => {
     return state.cart.data?.reduce((acc, curr) => {
       return acc + curr.quantidade;
@@ -89,15 +104,34 @@ const Header = () => {
           )}
           {!adm && (
             <form>
-              <input
-                className="searchInput"
-                type="text"
-                value={search}
-                onChange={({ target }) => {
-                  setSearch(target.value);
-                }}
-                placeholder="Procurar"
-              />
+              <div className="searchContainner">
+                <input
+                  className="searchInput"
+                  type="text"
+                  value={search}
+                  onChange={({ target }) => {
+                    setSearch(target.value);
+                  }}
+                  onKeyDown={() => {
+                    setSearchSugestionActivator(true);
+                  }}
+                  onBlur={() => {
+                    setSearchSugestionActivator(false);
+                  }}
+                  placeholder="Procurar"
+                />
+                <ul
+                  className={
+                    searchSugestionActivator
+                      ? 'searchSugestions--active'
+                      : 'searchSugestions'
+                  }
+                >
+                  <li>opt1</li>
+                  <li>opt2</li>
+                  <li>opt3</li>
+                </ul>
+              </div>
               <button>
                 <Lupa />
               </button>
@@ -144,7 +178,7 @@ const Header = () => {
                   }
 
                   dispatch(addData(null));
-                  if(adm) {
+                  if (adm) {
                     navigate('/');
                   }
                 }}

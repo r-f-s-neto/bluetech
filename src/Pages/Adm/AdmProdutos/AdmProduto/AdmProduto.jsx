@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import Select from '../../../../components/Select';
 import './AdmProduto-styles.scss';
 import { useSelector } from 'react-redux';
+import Alert from 'react-bootstrap/Alert';
+import LoadingComp from '../../../../components/LoadingComp';
 
 const AdmProduto = () => {
   const [name, setName] = React.useState('');
@@ -19,6 +21,10 @@ const AdmProduto = () => {
   const [logadoAsAdm, setLogadoAsAdm] = React.useState(true);
   const [inventory, setInventory] = React.useState('');
   const [errorLoadingData, setErrorLoadingData] = React.useState(false);
+
+  const [loadingPutProduct, setLoadingPutProduct] = React.useState(false);
+  const [sucessPutProduct, setSucessPutProduct] = React.useState(false);
+  const [errorPutProduct, setErrorPutProduct] = React.useState(null);
 
   React.useEffect(() => {
     try {
@@ -68,13 +74,61 @@ const AdmProduto = () => {
     setDataCat(['Monitores', 'Cadeiras', 'Componentes', 'Gabinetes']);
   }, []);
 
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const data = JSON.stringify({
+      name: name,
+      description: desc,
+      price: price,
+      inventory: inventory,
+      categories: categoria,
+    });
+    const url =
+      'https://e-commerce-api-bluetech-production.up.railway.app/products/' +
+      product.id;
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      credentials: 'include',
+      body: data,
+    };
+
+    setLoadingPutProduct(true);
+    setErrorPutProduct(null);
+    setSucessPutProduct(false);
+    try {
+      const response = await fetch(url, options);
+      if (response.ok) {
+        setSucessPutProduct(true);
+        setErrorPutProduct(null);
+      }
+    } catch (error) {
+      setErrorPutProduct(error);
+      setSucessPutProduct(false);
+    } finally {
+      setLoadingPutProduct(false);
+    }
+  }
+
   return (
     <div className="NovoProduto">
       <div className="NovoProduto__header">
         <Link to="/adm/produtos">{'< voltar'}</Link>
         <h1>Detalhes do produto</h1>
       </div>
-      <form className="NovoProduto__form">
+      {errorLoadingData && (
+        <Alert variant="danger">
+          Não foi possível encontrar os dados, por favor tente mais tarde
+        </Alert>
+      )}
+      <form
+        className="NovoProduto__form"
+        onSubmit={(event) => {
+          handleSubmit(event);
+        }}
+      >
         <input
           value={name}
           onChange={({ target }) => {
@@ -129,6 +183,11 @@ const AdmProduto = () => {
         />
         <button>Salvar</button>
       </form>
+      {loadingPutProduct && <LoadingComp />}
+      {sucessPutProduct && (
+        <Alert variant="success">Produto atualizado com sucesso</Alert>
+      )}
+      {errorPutProduct && <Alert variant="danger">{errorPutProduct}</Alert>}
     </div>
   );
 };
