@@ -3,13 +3,23 @@ import { useSelector } from 'react-redux';
 import LoadingComp from '../LoadingComp';
 import Alert from 'react-bootstrap/Alert';
 
-const SearchList = () => {
+const SearchList = (keyword) => {
   const { data, loading, error } = useSelector((state) => state.search);
+  const [filteredData, setFilteredData] = React.useState(null);
+
+  React.useEffect(() => {
+    if (data) {
+      const newData = data.filter((product) => {
+        return product.includes(keyword);
+      });
+      setFilteredData(newData);
+    }
+  }, [data, keyword]);
 
   return (
     <>
-      {data &&
-        data.map((product) => {
+      {filteredData &&
+        filteredData.map((product) => {
           return <li>{product.name}</li>;
         })}
       {loading && <LoadingComp />}

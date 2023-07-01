@@ -8,6 +8,7 @@ import products from './products';
 import categories from './categories';
 import pedidosAdm from './pedidosAdm';
 import search from './search';
+import pedidosClient from './pedidosClient';
 
 const reducer = combineReducers({
   cart,
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   categories,
   pedidosAdm,
   search,
+  pedidosClient,
 });
 
 const store = configureStore({

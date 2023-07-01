@@ -1,9 +1,9 @@
 import React from 'react';
 import './Pedidos-styles.scss';
-import { useSelector } from 'react-redux';
+//import { useSelector } from 'react-redux';
 import PurshCard from '../../components/PurshCard';
 
-const produtos = [
+/** const produtos = [
   {
     id: 1,
     src: 'https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg',
@@ -49,10 +49,10 @@ const produtos = [
     categoria: 'Gabinetes',
     preco: 900,
   },
-];
+]; */
 
 const Pedidos = () => {
-  const compras = useSelector((state) => state.checkoutValue.pedidos);
+  // const compras = useSelector((state) => state.checkoutValue.pedidos);
   return (
     <main className="pedidos">
       <header className="pedidos__Header">
@@ -65,10 +65,7 @@ const Pedidos = () => {
         </div>
       </header>
       <div className="pedidos__list">
-        <PurshCard
-          compras={JSON.stringify(compras)}
-          produtos={JSON.stringify(produtos)}
-        />
+        <PurshCard />
       </div>
     </main>
   );
