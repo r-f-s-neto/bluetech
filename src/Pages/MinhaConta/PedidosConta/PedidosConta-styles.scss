@@ -1,0 +1,14 @@
+.PedidosConta {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  &__title{
+    padding-top: 2rem;
+    text-align: center;
+    color: #0288D1;
+  }
+  &__cards{
+    padding: 4rem 3rem;
+  }
+}

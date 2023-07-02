@@ -1,7 +1,12 @@
 @import url("../../styles/global-styles.css");
-
+.pedidosBackground{
+  background-color: #0288D1;
+  width:100%;
+  box-shadow: inset 0px 2px 0px 0px rgba(0,0,0,0.1);
+}
 .pedidos {
   &__header{
+    
     background-color: #0288D1;
   }
   &__list{
@@ -15,6 +20,8 @@
 }
 
 .headerContainnerPedidos {
+  box-shadow: inset 0px 2px 0px 0px rgba(0,0,0,0.1);
+
   max-width: 80rem;
   margin: 0 auto;
   padding: 2.9375rem 9.0625rem;

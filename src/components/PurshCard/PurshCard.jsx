@@ -3,6 +3,8 @@ import './PurshCard-styles.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../../redux/products';
 import { listClientOrders } from '../../redux/pedidosClient';
+import LoadingComp from '../LoadingComp';
+import Alert from 'react-bootstrap/Alert';
 
 const PurshCard = () => {
   const dispatch = useDispatch();
@@ -47,13 +49,16 @@ const PurshCard = () => {
       {comprasObj?.length
         ? comprasObj.map((compra, index) => {
             return (
-              <div className="PurshCard__item">
+              <div key={index + 'PurshCard'} className="PurshCard__item">
                 <h3>{`Pedido ${index + 1}`}</h3>
                 {console.log(compra)}
                 <ul className="purshCardList">
-                  {compra.products?.map((produto) => {
+                  {compra.products?.map((produto, index) => {
                     return (
-                      <li className="purshCardList__item">
+                      <li
+                        key={index + 'purshCardList'}
+                        className="purshCardList__item"
+                      >
                         <div>{`Produto: ${
                           produtosObj?.find((produtoObj) => {
                             return produtoObj.id === produto.productId;
@@ -72,6 +77,14 @@ const PurshCard = () => {
             );
           })
         : null}
+      {loadingCompras && loadingProdutos && <LoadingComp />}
+      {errorCompras && <Alert variant="danger">{errorCompras}</Alert>}
+      {errorProdutos && <Alert variant="danger">{errorProdutos}</Alert>}
+      {errorUserData && (
+        <Alert variant="danger">
+          Não foi possível acessar seus dados, por favor, refaça o login
+        </Alert>
+      )}
     </section>
   );
 };

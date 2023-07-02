@@ -27,10 +27,12 @@ const Adm = () => {
 
   return (
     <div className="admContainner">
-      <header className="admContainner__header">
-        <div className="admHeader">
-          <h1 className="admHeader__title">Painel Administrativo</h1>
-          <span className="admHeader__span">Bem vindo</span>
+      <header className="admBackground">
+        <div className="admContainner__header">
+          <div className="admHeader">
+            <h1 className="admHeader__title">Painel Administrativo</h1>
+            <span className="admHeader__span">Bem vindo</span>
+          </div>
         </div>
       </header>
 
@@ -82,7 +84,7 @@ const Adm = () => {
               onClick={() => {
                 navigate('/adm/categorias');
               }}
-              >
+            >
               Categorias
             </li>
           </ul>

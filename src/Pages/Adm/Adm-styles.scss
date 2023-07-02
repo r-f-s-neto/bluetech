@@ -1,5 +1,11 @@
 @import url('../../styles/global-styles.css');
 
+.admBackground{
+  background-color: #0288D1;
+  width:100%;
+  box-shadow: inset 0px 2px 0px 0px rgba(0,0,0,0.1);
+}
+
 .admHeader{
   color: #FFFFFF;
   max-width: 80rem;

@@ -1,11 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import LoadingComp from '../LoadingComp';
 import Alert from 'react-bootstrap/Alert';
 
 const SearchList = ({ keyword }) => {
-  const { data, loading, error } = useSelector((state) => state.search);
-  const [filteredData, setFilteredData] = React.useState(null);
+  const { data, error } = useSelector((state) => state.search);
 
   /**React.useEffect(() => {
     let newData = null;

@@ -54,20 +54,22 @@ import PurshCard from '../../components/PurshCard';
 const Pedidos = () => {
   // const compras = useSelector((state) => state.checkoutValue.pedidos);
   return (
-    <main className="pedidos">
-      <header className="pedidos__Header">
-        <div className="headerContainnerPedidos">
-          <h1 className="headerContainnerPedidos__title">Pedidos</h1>
-          <p className="headerContainnerPedidos__text">
-            Os melhores produtos, com as melhores marcas e os melhores <br />{' '}
-            preços você só encontra aqui na BlueTech
-          </p>
+    <div className="pedidos">
+      <header className="pedidosBackground">
+        <div className="pedidos__Header">
+          <div className="headerContainnerPedidos">
+            <h1 className="headerContainnerPedidos__title">Pedidos</h1>
+            <p className="headerContainnerPedidos__text">
+              Os melhores produtos, com as melhores marcas e os melhores <br />{' '}
+              preços você só encontra aqui na BlueTech
+            </p>
+          </div>
         </div>
       </header>
       <div className="pedidos__list">
         <PurshCard />
       </div>
-    </main>
+    </div>
   );
 };
 
