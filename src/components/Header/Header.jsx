@@ -30,7 +30,7 @@ const Header = () => {
   const { loading } = useSelector((state) => state.search);
 
   React.useEffect(() => {
-    const searchProd = async () => {
+    const searchProd = () => {
       if (debounceSearch && !loading) {
         dispatch(listSearch(search));
       }
@@ -132,7 +132,7 @@ const Header = () => {
                       : 'searchSugestions'
                   }
                 >
-                  <SearchList />
+                  <SearchList keyword={search} />
                 </ul>
               </div>
               <button>
