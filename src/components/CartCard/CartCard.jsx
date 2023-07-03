@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addItemDois } from '../../redux/cart';
 import './CartCard-styles.scss';
 
-const produtos = [
+/** const produtos = [
   {
     id: 1,
     src: 'https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg',
@@ -49,9 +49,14 @@ const produtos = [
     categoria: 'Gabinetes',
     preco: 900,
   },
-];
+]; */
 
 const CartCard = () => {
+  const {
+    data: produtos,
+    loading,
+    error: errorListProduct,
+  } = useSelector((state) => state.products);
   const products = useSelector((state) => state.cart.data);
   const dispatch = useDispatch();
   function handleClickRemove(event, productId) {
@@ -64,14 +69,14 @@ const CartCard = () => {
   return (
     <ul className="CartCard">
       {products?.map((product) => {
-        const produto = produtos.find((produto) => produto.id === product.id);
+        const produto = produtos?.find((produto) => produto.id === product.id);
         return (
           <li className="CartCardContainner" key={product.id + 'CartCard'}>
             <div className="CartCardContainner__aux">
               <img
                 className="CartCardContainner__img"
-                src={produto.src}
-                alt={produto.alt}
+                src="https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg"
+                alt={produto.name}
               />
               <div className="CartCardContainner__info info">
                 <h2 className="info__title">{produto.name}</h2>
@@ -79,7 +84,7 @@ const CartCard = () => {
                   {'Quantidade: ' + product.quantidade}
                 </span>
                 <h2 className="info__price">
-                  {produto.preco.toLocaleString('pt-BR', {
+                  {produto.price.toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL',
                   })}

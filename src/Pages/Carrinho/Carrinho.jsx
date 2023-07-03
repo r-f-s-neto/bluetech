@@ -63,7 +63,7 @@ const Carrinho = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userData.data);
-  const [logado, setLogado] = React.useState(false);
+  const [logado, setLogado] = React.useState(true);
 
   React.useEffect(() => {
     if (userData) {
