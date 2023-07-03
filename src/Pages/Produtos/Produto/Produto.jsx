@@ -3,8 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import './Produto-styles.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemDois } from '../../../redux/cart';
+import { listProducts } from '../../../redux/products';
+import LoadingComp from '../../../components/LoadingComp';
+import Alert from 'react-bootstrap/Alert';
 
-const produtos = [
+/**const produtos = [
   {
     id: 1,
     src: 'https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg',
@@ -50,7 +53,7 @@ const produtos = [
     categoria: 'Gabinetes',
     preco: 900,
   },
-];
+]; */
 
 const Produto = () => {
   const param = useParams();
@@ -59,8 +62,13 @@ const Produto = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.cart);
   const navigate = useNavigate();
+  const {
+    data: produtos,
+    loading,
+    error: errorListProduct,
+  } = useSelector((state) => state.products);
   const userData = useSelector((state) => state.userData.data);
-  const [logado, setLogado] = React.useState(false);
+  const [logado, setLogado] = React.useState(true);
 
   React.useEffect(() => {
     if (userData) {
@@ -71,13 +79,17 @@ const Produto = () => {
   }, [userData]);
 
   React.useEffect(() => {
+    dispatch(listProducts());
+  }, [dispatch]);
+
+  React.useEffect(() => {
     // filtrando os dados do id correspondente
     setProdData(
       produtos?.find((produto) => {
         return produto.id === +param.id;
       }),
     );
-  }, [param]);
+  }, [param, produtos]);
 
   function handleClickCart(event) {
     event.preventDefault();
@@ -158,19 +170,19 @@ const Produto = () => {
       <div className="productCarrousel">
         <img
           className="productCarrousel__img"
-          src={prodData?.src}
-          alt={prodData?.alt}
+          src="https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg"
+          alt={prodData?.name}
         />
       </div>
       <div className="information">
         <h1 className="information__title">{prodData?.name}</h1>
         <p className="information__price">
-          {prodData?.preco.toLocaleString('pt-BR', {
+          {Number(prodData?.price).toLocaleString('pt-BR', {
             style: 'currency',
             currency: 'BRL',
           })}
         </p>
-        <p className="information__description">{prodData?.shortDescription}</p>
+        <p className="information__description">{prodData?.description}</p>
         <form className="ProductForm">
           <input
             id="quantidade"
@@ -181,7 +193,7 @@ const Produto = () => {
             }}
             type="number"
           />
-          <span className="ProductForm__estoque">estoque</span>
+          <span className="ProductForm__estoque">{`estoque: ${prodData?.inventory}`}</span>
           <div className="ProductForm__button buttonForm">
             <button
               className="buttonForm__cart buttonForm--active"
@@ -200,6 +212,13 @@ const Produto = () => {
           </div>
         </form>
       </div>
+      {loading && <LoadingComp />}
+      {errorListProduct && (
+        <Alert>
+          Não foi possível carregar os dados do produto, tente novamente mais
+          tarde
+        </Alert>
+      )}
     </main>
   );
 };
