@@ -12,6 +12,7 @@ import { addData } from '../../redux/userData';
 import { useDebounce } from '@uidotdev/usehooks';
 import { listSearch } from '../../redux/search';
 import SearchList from '../SearchList';
+import userImg from '../../assets/Header-assets/icons8-usuário-30.png';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -194,6 +195,11 @@ const Header = () => {
               </NavLink>
             )}
           </li>
+          <li>
+            <NavLink to="/minha-conta/editar" end>
+              <img src={userImg} alt="imagem ilustrativa usuário" />
+            </NavLink>
+          </li>
         </ul>
         <div className="mobileMenu">
           <Navbar expand={false}>
@@ -231,6 +237,9 @@ const Header = () => {
                         Login
                       </NavLink>
                     )}
+                    <NavLink to="/minha-conta/editar" end>
+                      <img src={userImg} alt="imagem ilustrativa usuário" />
+                    </NavLink>
                   </Nav>
                 </Offcanvas.Body>
               </Navbar.Offcanvas>

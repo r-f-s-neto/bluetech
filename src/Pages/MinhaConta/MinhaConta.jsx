@@ -5,11 +5,29 @@ import './MinhaConta-styles.scss';
 import mainUserImg from '../../assets/MinhaConta-assets/icons8-usuário-100.png';
 import editUserImg from '../../assets/MinhaConta-assets/icons8-usuário-de-gênero-neutro-64.png';
 import truckImg from '../../assets/MinhaConta-assets/icons8-caminhão-100.png';
+import { useSelector } from 'react-redux';
 
 const MinhaConta = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = React.useState('');
   const [error, setError] = React.useState(false);
+  const [logado, setLogado] = React.useState(true);
+  const userData = useSelector((state) => state.userData.data);
+
+  React.useEffect(() => {
+    if (userData) {
+      setLogado(true);
+    } else {
+      setLogado(false);
+    }
+  }, [userData]);
+
+  React.useEffect(() => {
+    if (!logado) {
+      navigate('/login');
+    }
+  }, [logado, navigate]);
+
   React.useEffect(() => {
     try {
       setUserName(
