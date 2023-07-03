@@ -61,28 +61,30 @@ const Produtos = () => {
   const [dataCat, setDataCat] = React.useState([]);
   const [dataProd, setDataProd] = React.useState(produtos);
   const [error, setError] = React.useState(null);
-  React.useEffect( () => {
+  React.useEffect(() => {
     // Simula o recebimento de dados da categoria pela API
-    async function fetchCat () {
+    async function fetchCat() {
       try {
-      const response = await fetch('https://e-commerce-api-bluetech-production.up.railway.app/category')
-      if (response.ok) {
-        const data = await response.json()
-        const dataArray = data.map((e)=>{return e.name})
-        dataArray.unshift('Tudo')
-        setDataCat(dataArray)
-      } else {
-        const data = await response.json()
-        setError(data)
+        const response = await fetch(
+          'https://e-commerce-api-bluetech-production.up.railway.app/category',
+        );
+        if (response.ok) {
+          const data = await response.json();
+          const dataArray = data.map((e) => {
+            return e.name;
+          });
+          dataArray.unshift('Tudo');
+          setDataCat(dataArray);
+        } else {
+          const data = await response.json();
+          setError(data);
+        }
+      } catch (error) {
+        setError(error);
       }
-    } catch (error) {
-      setError(error)
-    }
     }
     fetchCat();
-
   }, []);
-
 
   React.useEffect(() => {
     const filterdProd = produtos?.filter((produto) => {
@@ -94,16 +96,18 @@ const Produtos = () => {
 
   return (
     <main className="produtos">
-      <header className="produtos__Header">
-        <div className="headerContainner">
-          <h1 className="headerContainner__title">Produtos</h1>
-          <p className="headerContainner__text">
-            Os melhores produtos, com as melhores marcas e os melhores <br />{' '}
-            preços você só encontra aqui na BlueTech
-          </p>
+      <header className="produtosBackground">
+        <div className="produtos__Header">
+          <div className="headerContainner">
+            <h1 className="headerContainner__title">Produtos</h1>
+            <p className="headerContainner__text">
+              Os melhores produtos, com as melhores marcas e os melhores <br />{' '}
+              preços você só encontra aqui na BlueTech
+            </p>
+          </div>
         </div>
       </header>
-      {error&&<Alert variant="danger">{error}</Alert>}
+      {error && <Alert variant="danger">{error}</Alert>}
       <div className="produtos__filtros">
         <div className="filtros__categorias">
           {dataCat && (
