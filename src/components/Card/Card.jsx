@@ -1,21 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Card-styles.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { listProducts } from '../../redux/products';
 
-const Card = () => {
-  const dispatch = useDispatch();
-  const { data: produtos } = useSelector((state) => state.products);
-
-  React.useEffect(() => {
-    dispatch(listProducts());
-  }, [dispatch]);
-
+const Card = ({ produtos }) => {
   return (
     <article className="cardContainner">
-      {produtos &&
-        produtos.map((produto) => {
+      {JSON.parse(produtos) &&
+        JSON.parse(produtos).map((produto) => {
           return (
             <Link
               to={`/produtos/${encodeURIComponent(produto.id)}`}

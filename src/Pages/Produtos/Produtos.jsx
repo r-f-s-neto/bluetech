@@ -5,9 +5,12 @@ import Select from '../../components/Select';
 import { filtroCat, filtroPrecificacao } from '../../helper/filtros';
 import Card from '../../components/Card';
 import Alert from 'react-bootstrap/Alert';
+import { useDispatch, useSelector } from 'react-redux';
+import LoadingComp from '../../components/LoadingComp';
+import { listProducts } from '../../redux/products';
 
 const options = ['Mais Relevantes', 'Maior Preço', 'Menor Preço'];
-const produtos = [
+/** const produtos = [
   {
     id: 1,
     src: 'https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg',
@@ -53,14 +56,26 @@ const produtos = [
     categoria: 'Gabinetes',
     preco: 900,
   },
-];
+]; */
 
 const Produtos = () => {
+  const dispatch = useDispatch();
   const [categoria, setCategoria] = React.useState('Tudo');
   const [filtroPreco, setFiltroPreco] = React.useState('Mais Relevantes');
   const [dataCat, setDataCat] = React.useState([]);
+  const {
+    data: produtos,
+    loading,
+    error: errorListProduct,
+  } = useSelector((state) => state.products);
+
   const [dataProd, setDataProd] = React.useState(produtos);
   const [error, setError] = React.useState(null);
+
+  React.useEffect(() => {
+    dispatch(listProducts());
+  }, [dispatch]);
+
   React.useEffect(() => {
     // Simula o recebimento de dados da categoria pela API
     async function fetchCat() {
@@ -92,7 +107,7 @@ const Produtos = () => {
     });
 
     setDataProd(filtroPrecificacao(filterdProd, filtroPreco));
-  }, [categoria, filtroPreco]);
+  }, [categoria, filtroPreco, produtos]);
 
   return (
     <main className="produtos">
@@ -128,6 +143,13 @@ const Produtos = () => {
       <div className="produtos__card">
         {dataProd && <Card produtos={JSON.stringify(dataProd)} />}
       </div>
+      {loading && <LoadingComp />}
+      {errorListProduct && (
+        <Alert variant="danger">
+          Ocorreu um erro ao tentar listar os produtos, tente mais tarde
+        </Alert>
+      )}
+      {}
     </main>
   );
 };
