@@ -6,13 +6,27 @@ import logoLogi from '../../assets/Home-assets/logo-logitech.png';
 import logoSamsung from '../../assets/Home-assets/logo-samsung.png';
 //import logoRazer from '../../assets/Home-assets/logo-razer.png';
 import './Home-styles.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { listProducts } from '../../redux/products';
+import LoadingComp from '../../components/LoadingComp';
+import Alert from 'react-bootstrap/Alert';
 
 const Home = () => {
+  const dispatch = useDispatch();
   const [data, setData] = React.useState('[]');
+  const {
+    data: produtos,
+    loading,
+    error: errorListProduct,
+  } = useSelector((state) => state.products);
+
+  React.useEffect(() => {
+    dispatch(listProducts());
+  }, [dispatch]);
 
   React.useEffect(() => {
     //simula o recebimento dos dados do fetch
-    const imagesInfo = [
+    /**  const imagesInfo = [
       {
         id: 1,
         src: 'https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg',
@@ -41,14 +55,14 @@ const Home = () => {
         name: 'produto 4',
         shortDescription: 'Descrição curta 4',
       },
-    ];
-    if (imagesInfo.length > 3) {
-      setData(JSON.stringify(imagesInfo.slice(0, 3)));
+    ];*/
+    if (produtos?.length > 3) {
+      setData(JSON.stringify(produtos.slice(0, 3)));
     } else {
-      setData(JSON.stringify(imagesInfo));
+      setData(JSON.stringify(produtos));
     }
     console.log(data);
-  }, [data]);
+  }, [data, produtos]);
 
   console.log(data);
 
@@ -65,6 +79,12 @@ const Home = () => {
         <ButtonOne to="/promocoes" text="Confira" />
       </article>
       <AnimatedCarousel transitionTime={10000} arrayImages={data} />
+      {loading && <LoadingComp />}
+      {errorListProduct && (
+        <Alert variant="danger">
+          Não foi possível carregar os produtos, tente mais tarde
+        </Alert>
+      )}
       <ul className="logos">
         <li>
           <img className="logos__img" src={logoAsus} alt="Logo da Asus" />

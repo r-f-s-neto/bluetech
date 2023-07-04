@@ -9,18 +9,21 @@ const AnimatedCarousel = ({ transitionTime, arrayImages }) => {
   console.log(images);
   return (
     <Carousel>
-      {images.map((image) => {
+      {images?.map((image) => {
         return (
           <Carousel.Item key={image.id} interval={transitionTime}>
             <Link to={`/produtos/${encodeURIComponent(image.id)}`}>
               <img
                 className="d-block w-100 imgCarousel"
-                src={image.src}
-                alt={image.alt}
+                src={
+                  image?.images.length
+                    ? image.images[0].filename
+                    : 'https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg'
+                }
+                alt={image.name}
               />
               <Carousel.Caption>
                 <p className="carouselText">{image.name}</p>
-                <p className="carouselText">{image.shortDescription}</p>
               </Carousel.Caption>
             </Link>
           </Carousel.Item>
