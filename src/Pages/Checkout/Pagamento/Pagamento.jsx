@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import pedidoFinalizado from '../../../helper/pedidoFinalizado';
 import { listProducts } from '../../../redux/products';
 import { createOrder } from '../../../redux/order';
+import Alert from 'react-bootstrap/Alert';
+import LoadingComp from '../../../components/LoadingComp';
 
 /** const produtos = [
   {
@@ -63,9 +65,11 @@ const Pagamento = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userData.data);
   const { data: produtos } = useSelector((state) => state.products);
-  const { loading: loadingCreateOrder, error: errorCreateOrder } = useSelector(
-    (state) => state.order,
-  );
+  const {
+    data: createdProd,
+    loading: loadingCreateOrder,
+    error: errorCreateOrder,
+  } = useSelector((state) => state.order);
 
   React.useEffect(() => {
     dispatch(listProducts());
@@ -119,7 +123,11 @@ const Pagamento = () => {
         <ButtonCheckout text="Simular pagamento" handleClick={handleClick} />
       )}
       {ativar && <span>{`Valor total: ${total}`}</span>}
-      {!ativar && <h1>Pagamento efetuado com sucesso</h1>}
+      {loadingCreateOrder && <LoadingComp />}
+      {!ativar && createdProd && <h1>Pagamento efetuado com sucesso</h1>}
+      {errorCreateOrder && (
+        <Alert variant="danger">Ocorreu um erro, tente mais tarde</Alert>
+      )}
     </>
   );
 };
