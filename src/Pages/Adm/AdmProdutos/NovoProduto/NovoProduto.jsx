@@ -125,8 +125,37 @@ const NovoProduto = () => {
       );
 
       if (response.ok) {
-        setSucess('Produto cadastrado com sucesso');
-        setError(null);
+        const data = await response.json();
+        const idProduct = data.id;
+        const urlImage =
+          'https://e-commerce-api-bluetech-production.up.railway.app/products/' +
+          idProduct +
+          '/images';
+        console.log(urlImage);
+        const formData = new FormData();
+        formData.append('images', photo);
+
+        const optionsImage = {
+          method: 'POST',
+          credentials: 'include',
+          body: formData,
+        };
+
+        try {
+          const responseImg = await fetch(urlImage, optionsImage);
+          console.log(responseImg);
+          if (responseImg.ok) {
+            setSucess('produto e imagem criados com sucesso');
+            setError(null);
+          }
+        } catch (error) {
+          setError(error);
+          setSucess(null);
+        } finally {
+          setLoadingProduct(false);
+        }
+        //setSucess('Produto cadastrado com sucesso');
+        //setError(null);
       }
     } catch (error) {
       setError(error);
@@ -202,15 +231,13 @@ const NovoProduto = () => {
         )}
 
         <input
-          value={photo}
           onChange={({ target }) => {
-            setPhoto(null);
+            setPhoto(target.files[0]);
           }}
           type="file"
           id="productPhoto"
           name="productPhoto"
           accept="image/*"
-          placeholder="Foto"
         />
         <button
           className={
