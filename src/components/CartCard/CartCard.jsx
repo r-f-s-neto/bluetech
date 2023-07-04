@@ -77,7 +77,11 @@ const CartCard = () => {
             <div className="CartCardContainner__aux">
               <img
                 className="CartCardContainner__img"
-                src="https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg"
+                src={
+                  produto?.images.length
+                    ? produto.images[0].filename
+                    : 'https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg'
+                }
                 alt={produto.name}
               />
               <div className="CartCardContainner__info info">

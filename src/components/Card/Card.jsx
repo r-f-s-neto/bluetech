@@ -15,7 +15,11 @@ const Card = ({ produtos }) => {
               <div className="productCard">
                 <img
                   className="productCard__image"
-                  src="https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg"
+                  src={
+                    produto?.images.length
+                      ? produto.images[0].filename
+                      : 'https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg'
+                  }
                   alt={produto.name}
                 />
                 <div className="productCard__description">

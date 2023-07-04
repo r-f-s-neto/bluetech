@@ -170,7 +170,11 @@ const Produto = () => {
       <div className="productCarrousel">
         <img
           className="productCarrousel__img"
-          src="https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg"
+          src={
+            prodData?.images.length
+              ? prodData.images[0].filename
+              : 'https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg'
+          }
           alt={prodData?.name}
         />
       </div>
