@@ -2,6 +2,8 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItemDois } from '../../redux/cart';
 import './CartCard-styles.scss';
+import LoadingComp from '../LoadingComp';
+import Alert from 'react-bootstrap/Alert';
 
 /** const produtos = [
   {
@@ -102,6 +104,13 @@ const CartCard = () => {
           </li>
         );
       })}
+      {loading && <LoadingComp />}
+      {errorListProduct && (
+        <Alert variant="danger">
+          Ocorreu um erro ao carregar os dados do prroduto, tente novamente mais
+          tarde
+        </Alert>
+      )}
     </ul>
   );
 };

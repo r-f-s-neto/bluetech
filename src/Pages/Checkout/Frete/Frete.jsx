@@ -4,6 +4,7 @@ import ButtonCheckout from '../../../components/ButtonCheckout';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addCktFrete } from '../../../redux/checkoutValue';
+import { listProducts } from '../../../redux/products';
 
 const freteOptions = [
   {
@@ -18,7 +19,7 @@ const freteOptions = [
   },
 ];
 
-const produtos = [
+/** const produtos = [
   {
     id: 1,
     src: 'https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg',
@@ -64,7 +65,7 @@ const produtos = [
     categoria: 'Gabinetes',
     preco: 900,
   },
-];
+];*/
 
 const Frete = () => {
   const [freteOpt, setFreteOpt] = React.useState('Frete Padrão');
@@ -74,6 +75,11 @@ const Frete = () => {
   const discount = useSelector((state) => state.checkoutValue.value);
   const [freteValue, setFreteValue] = React.useState(0);
   const dispatch = useDispatch();
+  const { data: produtos } = useSelector((state) => state.products);
+
+  React.useEffect(() => {
+    dispatch(listProducts());
+  }, [dispatch]);
 
   React.useEffect(() => {
     setFreteValue(
@@ -91,7 +97,7 @@ const Frete = () => {
               accCart +
               produtos?.reduce((accProd, currProd) => {
                 if (currProd.id === currCart.id) {
-                  return accProd + currProd.preco * currCart.quantidade;
+                  return accProd + currProd.price * currCart.quantidade;
                 } else {
                   return accProd + 0;
                 }
@@ -100,7 +106,7 @@ const Frete = () => {
           }, 0)
         : 0,
     );
-  }, [cartList]);
+  }, [cartList, produtos]);
 
   function handleClick(event) {
     event.preventDefault();

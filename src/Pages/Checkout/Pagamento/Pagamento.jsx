@@ -2,8 +2,9 @@ import React from 'react';
 import ButtonCheckout from '../../../components/ButtonCheckout';
 import { useDispatch, useSelector } from 'react-redux';
 import pedidoFinalizado from '../../../helper/pedidoFinalizado';
+import { listProducts } from '../../../redux/products';
 
-const produtos = [
+/** const produtos = [
   {
     id: 1,
     src: 'https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg',
@@ -49,7 +50,7 @@ const produtos = [
     categoria: 'Gabinetes',
     preco: 900,
   },
-];
+]; */
 
 const Pagamento = () => {
   const [ativar, setAtivar] = React.useState(true);
@@ -59,6 +60,12 @@ const Pagamento = () => {
   const frete = useSelector((state) => state.checkoutValue.frete);
   const cartList = useSelector((state) => state.cart.data);
   const dispatch = useDispatch();
+  const userData = useSelector((state) => state.userData.data);
+  const { data: produtos } = useSelector((state) => state.products);
+
+  React.useEffect(() => {
+    dispatch(listProducts());
+  }, [dispatch]);
 
   React.useEffect(() => {
     setSubtotal(
@@ -68,7 +75,7 @@ const Pagamento = () => {
               accCart +
               produtos?.reduce((accProd, currProd) => {
                 if (currProd.id === currCart.id) {
-                  return accProd + currProd.preco * currCart.quantidade;
+                  return accProd + currProd.price * currCart.quantidade;
                 } else {
                   return accProd + 0;
                 }
@@ -77,12 +84,15 @@ const Pagamento = () => {
           }, 0)
         : 0,
     );
-  }, [cartList]);
+  }, [cartList, produtos]);
 
   React.useEffect(() => {
     setTotal((1 - discount) * subtotal + frete);
   }, [subtotal, discount, frete]);
   function handleClick() {
+    const userEmail = userData.email;
+    console.log('o email é: ', userEmail);
+    console.log('o carrinho é: ', cartList);
     dispatch(pedidoFinalizado(total));
     setAtivar(false);
   }

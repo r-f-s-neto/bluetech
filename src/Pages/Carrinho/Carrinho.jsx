@@ -4,8 +4,9 @@ import CartCard from '../../components/CartCard';
 import './Carrinho-styles.scss';
 import { useNavigate } from 'react-router-dom';
 import { addCktValue, addCktList } from '../../redux/checkoutValue';
+import { listProducts } from '../../redux/products';
 
-const produtos = [
+/** const produtos = [
   {
     id: 1,
     src: 'https://www.hardware.com.br/wp-content/uploads/static/wp/2022/10/21/placa-mae.jpg',
@@ -51,7 +52,7 @@ const produtos = [
     categoria: 'Gabinetes',
     preco: 900,
   },
-];
+]; */
 
 const Carrinho = () => {
   const [cupom, setCupom] = React.useState('');
@@ -64,6 +65,15 @@ const Carrinho = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userData.data);
   const [logado, setLogado] = React.useState(true);
+  const {
+    data: produtos,
+    loading,
+    error: errorListProduct,
+  } = useSelector((state) => state.products);
+
+  React.useEffect(() => {
+    dispatch(listProducts());
+  }, [dispatch]);
 
   React.useEffect(() => {
     if (userData) {
@@ -105,9 +115,9 @@ const Carrinho = () => {
         ? cartList.reduce((accCart, currCart) => {
             return (
               accCart +
-              produtos.reduce((accProd, currProd) => {
+              produtos?.reduce((accProd, currProd) => {
                 if (currProd.id === currCart.id) {
-                  return accProd + currProd.preco * currCart.quantidade;
+                  return accProd + currProd.price * currCart.quantidade;
                 } else {
                   return accProd + 0;
                 }
@@ -116,7 +126,7 @@ const Carrinho = () => {
           }, 0)
         : 0,
     );
-  }, [cartList]);
+  }, [cartList, produtos]);
 
   function handleBlur({ target }) {
     const valor = target.value;
