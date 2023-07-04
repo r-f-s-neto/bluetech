@@ -1,12 +1,13 @@
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Loading from '../Pages/Loading';
+import Carrinho from '../Pages/Carrinho';
 const Home = lazy(() => import('../Pages/Home'));
 const Produtos = lazy(() => import('../Pages/Produtos'));
 const Pedidos = lazy(() => import('../Pages/Pedidos'));
 const Login = lazy(() => import('../Pages/Login'));
 const Produto = lazy(() => import('../Pages/Produtos/Produto'));
-const Carrinho = lazy(() => import('../Pages/Carrinho'));
+//const Carrinho = lazy(() => import('../Pages/Carrinho'));
 const Checkout = lazy(() => import('../Pages/Checkout'));
 const Frete = lazy(() => import('../Pages/Checkout/Frete'));
 const Endereco = lazy(() => import('../Pages/Checkout/Endereco'));
@@ -15,17 +16,21 @@ const Adm = lazy(() => import('../Pages/Adm'));
 const AdmProdutos = lazy(() => import('../Pages/Adm/AdmProdutos'));
 const AdmUsuarios = lazy(() => import('../Pages/Adm/AdmUsuarios'));
 const AdmPedidos = lazy(() => import('../Pages/Adm/AdmPedidos'));
-const AdmCategorias = lazy(()=>import('../Pages/Adm/AdmCategorias'))
+const AdmCategorias = lazy(() => import('../Pages/Adm/AdmCategorias'));
 const NovoProduto = lazy(() => import('../Pages/Adm/AdmProdutos/NovoProduto'));
 const AdmProduto = lazy(() => import('../Pages/Adm/AdmProdutos/AdmProduto'));
 const Cadastro = lazy(() => import('../Pages/Cadastro'));
 const Sucess = lazy(() => import('../Pages/Sucess'));
-const NovaCategoria = lazy(()=> import('../Pages/Adm/AdmCategorias/NovaCategoria'));
-const AdmCategoria = lazy(()=>import('../Pages/Adm/AdmCategorias/AdmCategoria'));
+const NovaCategoria = lazy(() =>
+  import('../Pages/Adm/AdmCategorias/NovaCategoria'),
+);
+const AdmCategoria = lazy(() =>
+  import('../Pages/Adm/AdmCategorias/AdmCategoria'),
+);
 const AdmPedido = lazy(() => import('../Pages/Adm/AdmPedidos/AdmPedido'));
-const MinhaConta = lazy(()=> import('../Pages/MinhaConta'));
-const EditarConta = lazy(()=> import('../Pages/MinhaConta/EditarConta'));
-const PedidosConta = lazy(()=> import('../Pages/MinhaConta/PedidosConta'));
+const MinhaConta = lazy(() => import('../Pages/MinhaConta'));
+const EditarConta = lazy(() => import('../Pages/MinhaConta/EditarConta'));
+const PedidosConta = lazy(() => import('../Pages/MinhaConta/PedidosConta'));
 
 const Router = () => {
   return (
@@ -143,7 +148,14 @@ const Router = () => {
             </Suspense>
           }
         />
-        <Route path='categorias' element={<Suspense fallback={<Loading />}><AdmCategorias /></Suspense>} />
+        <Route
+          path="categorias"
+          element={
+            <Suspense fallback={<Loading />}>
+              <AdmCategorias />
+            </Suspense>
+          }
+        />
       </Route>
       <Route
         path="/adm/produtos/add"
@@ -177,12 +189,54 @@ const Router = () => {
           </Suspense>
         }
       />
-      <Route path='/adm/categorias/add' element={<Suspense fallback={<Loading />}><NovaCategoria /></Suspense>}/>
-      <Route path='/adm/categorias/:id' element={<Suspense fallback={<Loading />}><AdmCategoria /></Suspense>} />
-      <Route path='/adm/pedidos/:id' element={<Suspense fallback={<Loading />}><AdmPedido /></Suspense>}/>
-      <Route path='/minha-conta' element={<Suspense fallback={<Loading />}><MinhaConta /></Suspense>}>
-        <Route path='editar' element={<Suspense fallback={<Loading />}><EditarConta /></Suspense>} />
-        <Route path='pedidos' element={<Suspense fallback={<Loading />}><PedidosConta /></Suspense>}/>
+      <Route
+        path="/adm/categorias/add"
+        element={
+          <Suspense fallback={<Loading />}>
+            <NovaCategoria />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/adm/categorias/:id"
+        element={
+          <Suspense fallback={<Loading />}>
+            <AdmCategoria />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/adm/pedidos/:id"
+        element={
+          <Suspense fallback={<Loading />}>
+            <AdmPedido />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/minha-conta"
+        element={
+          <Suspense fallback={<Loading />}>
+            <MinhaConta />
+          </Suspense>
+        }
+      >
+        <Route
+          path="editar"
+          element={
+            <Suspense fallback={<Loading />}>
+              <EditarConta />
+            </Suspense>
+          }
+        />
+        <Route
+          path="pedidos"
+          element={
+            <Suspense fallback={<Loading />}>
+              <PedidosConta />
+            </Suspense>
+          }
+        />
       </Route>
     </Routes>
   );

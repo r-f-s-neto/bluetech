@@ -6,6 +6,7 @@ import { listProducts } from '../../../redux/products';
 import { createOrder } from '../../../redux/order';
 import Alert from 'react-bootstrap/Alert';
 import LoadingComp from '../../../components/LoadingComp';
+import { useNavigate } from 'react-router-dom';
 
 /** const produtos = [
   {
@@ -56,6 +57,7 @@ import LoadingComp from '../../../components/LoadingComp';
 ]; */
 
 const Pagamento = () => {
+  const navigate = useNavigate();
   const [ativar, setAtivar] = React.useState(true);
   const [subtotal, setSubtotal] = React.useState(0);
   const [total, setTotal] = React.useState(0);
@@ -117,6 +119,7 @@ const Pagamento = () => {
     dispatch(pedidoFinalizado(total));
     setAtivar(false);
   }
+
   return (
     <>
       {ativar && (
@@ -124,7 +127,9 @@ const Pagamento = () => {
       )}
       {ativar && <span>{`Valor total: ${total}`}</span>}
       {loadingCreateOrder && <LoadingComp />}
-      {!ativar && createdProd && <h1>Pagamento efetuado com sucesso</h1>}
+      {!ativar && createdProd && (
+        <Alert variant="success">Pagamento efetuado com sucesso</Alert>
+      )}
       {errorCreateOrder && (
         <Alert variant="danger">Ocorreu um erro, tente mais tarde</Alert>
       )}

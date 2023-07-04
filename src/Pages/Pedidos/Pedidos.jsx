@@ -2,6 +2,8 @@ import React from 'react';
 import './Pedidos-styles.scss';
 //import { useSelector } from 'react-redux';
 import PurshCard from '../../components/PurshCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { listClientOrders } from '../../redux/pedidosClient';
 
 /** const produtos = [
   {
@@ -53,6 +55,12 @@ import PurshCard from '../../components/PurshCard';
 
 const Pedidos = () => {
   // const compras = useSelector((state) => state.checkoutValue.pedidos);
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.userData.data);
+
+  React.useEffect(() => {
+    dispatch(listClientOrders(userData.id));
+  }, [dispatch, userData]);
   return (
     <div className="pedidos">
       <header className="pedidosBackground">

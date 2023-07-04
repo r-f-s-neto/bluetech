@@ -10,12 +10,12 @@ const freteOptions = [
   {
     name: 'Frete Express',
     time: '5-10 dias úteis',
-    price: 50,
+    price: 0,
   },
   {
     name: 'Frete Padrão',
     time: '7-15 dias úteis',
-    price: 30,
+    price: 0,
   },
 ];
 
