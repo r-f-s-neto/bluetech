@@ -3,6 +3,7 @@ import ButtonCheckout from '../../../components/ButtonCheckout';
 import { useDispatch, useSelector } from 'react-redux';
 import pedidoFinalizado from '../../../helper/pedidoFinalizado';
 import { listProducts } from '../../../redux/products';
+import { createOrder } from '../../../redux/order';
 
 /** const produtos = [
   {
@@ -62,6 +63,9 @@ const Pagamento = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userData.data);
   const { data: produtos } = useSelector((state) => state.products);
+  const { loading: loadingCreateOrder, error: errorCreateOrder } = useSelector(
+    (state) => state.order,
+  );
 
   React.useEffect(() => {
     dispatch(listProducts());
@@ -93,6 +97,19 @@ const Pagamento = () => {
     const userEmail = userData.email;
     console.log('o email é: ', userEmail);
     console.log('o carrinho é: ', cartList);
+    const productsToFetch = cartList.map((prod) => {
+      return {
+        productId: prod.id,
+        quantity: prod.quantidade,
+      };
+    });
+    const toSend = {
+      userEmail,
+      products: productsToFetch,
+    };
+
+    console.log('este será o objeto enviado', toSend);
+    dispatch(createOrder(toSend));
     dispatch(pedidoFinalizado(total));
     setAtivar(false);
   }

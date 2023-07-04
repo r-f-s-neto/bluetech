@@ -65,11 +65,7 @@ const Carrinho = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userData.data);
   const [logado, setLogado] = React.useState(true);
-  const {
-    data: produtos,
-    loading,
-    error: errorListProduct,
-  } = useSelector((state) => state.products);
+  const { data: produtos } = useSelector((state) => state.products);
 
   React.useEffect(() => {
     dispatch(listProducts());
