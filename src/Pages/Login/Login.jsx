@@ -3,7 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { addData } from '../../redux/userData';
 import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
+import Alert from 'react-bootstrap/Alert';
 import './Login-styles.css';
+import LoadingComp from '../../components/LoadingComp';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -131,7 +133,7 @@ const Login = () => {
                     console.log('o token é: ', token);
                     dispatch(addData(data));
                     if (data.role === 'admin') {
-                      navigate('/adm');
+                      navigate('/adm/produtos');
                     } else {
                       navigate('/');
                     }
@@ -153,8 +155,13 @@ const Login = () => {
           </div>
         </form>
       </div>
-      {erro && <span>Ocorreu um erro ao tentar conectar ao servidor</span>}
-      {errorMensage && <span>{errorMensage}</span>}
+      {loading && <LoadingComp />}
+      {erro && (
+        <Alert variant="danger">
+          Ocorreu um erro ao tentar conectar ao servidor
+        </Alert>
+      )}
+      {errorMensage && <Alert variant="danger">{errorMensage}</Alert>}
       <Link to="/cadastro">criar conta</Link>
     </section>
   );
