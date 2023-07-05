@@ -25,10 +25,27 @@ const Header = () => {
   const [adm, setAdm] = React.useState(false);
   const userData = useSelector((state) => state.userData.data);
   const [logado, setLogado] = React.useState(false);
+  const refSearch = React.useRef(null);
   const [searchSugestionActivator, setSearchSugestionActivator] =
     React.useState(false);
 
   const { loading } = useSelector((state) => state.search);
+
+  React.useEffect(() => {
+    function handleClickOutside(event) {
+      if (refSearch.current && !refSearch.current.contains(event.target)) {
+        setSearchSugestionActivator(false);
+      }
+    }
+    window.document.addEventListener('click', handleClickOutside, {
+      capture: true,
+    });
+    return () => {
+      window.document.removeEventListener('click', handleClickOutside, {
+        capture: true,
+      });
+    };
+  }, []);
 
   React.useEffect(() => {
     const searchProd = () => {
@@ -121,12 +138,10 @@ const Header = () => {
                   onKeyDown={() => {
                     setSearchSugestionActivator(true);
                   }}
-                  onBlur={() => {
-                    setSearchSugestionActivator(false);
-                  }}
                   placeholder="Procurar"
                 />
                 <ul
+                  ref={refSearch}
                   className={
                     searchSugestionActivator
                       ? 'searchSugestions--active'
