@@ -181,7 +181,7 @@ const Header = () => {
               <NavLink
                 className="login"
                 to="/"
-                onClick={(event) => {
+                onClick={async (event) => {
                   event.preventDefault();
                   if (window.localStorage.getItem('blueDataUser')) {
                     window.localStorage.removeItem('blueDataUser');
@@ -197,6 +197,20 @@ const Header = () => {
                   }
 
                   dispatch(addData(null));
+
+                  try {
+                    await fetch(
+                      'https://e-commerce-api-bluetech-production.up.railway.app/user/logout',
+                      {
+                        method: 'GET',
+                        headers: {
+                          'Content-Type': 'application/json ; chartset=utf-8',
+                        },
+                        credentials: 'include',
+                      },
+                    );
+                  } catch (error) {}
+
                   if (adm) {
                     navigate('/');
                   }
