@@ -15,7 +15,24 @@ const TableProducts = () => {
   const [sucessDelete, setSucessDelete] = React.useState(false);
 
   async function handleClickDelete(event, produto) {
+    const idImg = produto?.images[0].id;
+
     setLoadingDelete(true);
+
+    try {
+      const responseImg = await fetch(
+        `https://e-commerce-api-bluetech-production.up.railway.app/products/images/${idImg}`,
+        {
+          method: 'DELETE',
+          credentials: 'include',
+        },
+      );
+    } catch (error) {
+      setErrorDelete(true);
+      setSucessDelete(false);
+      setErrorDeleteMensage(error);
+    }
+
     try {
       const response = await fetch(
         'https://e-commerce-api-bluetech-production.up.railway.app/products/' +
