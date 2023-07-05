@@ -60,47 +60,56 @@ const TableProducts = () => {
           </tr>
         </thead>
         <tbody>
-          {data?.map((produto) => {
-            return (
-              <tr className="tableBody" key={produto.id + produto.name}>
-                <td>{produto.name}</td>
-                <td>{produto.inventory}</td>
-                <td>
-                  {produto.price.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  })}
-                </td>
-                <td className="TableProducts__Buttons">
-                  <button
-                    onClick={() => {
-                      window.localStorage.setItem(
-                        'admClickedProduct',
-                        JSON.stringify(produto),
-                      );
-                      navigate(
-                        `/adm/produtos/${encodeURIComponent(produto.id)}`,
-                      );
-                    }}
-                  >
-                    ver detalhes
-                  </button>
-                  <button
-                    className={loadingDelete ? 'admProductDelete-active' : ''}
-                    onClick={(event) => {
-                      handleClickDelete(event, produto);
-                    }}
-                  >
-                    excluir
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+          {data && data.length
+            ? data.map((produto) => {
+                return (
+                  <tr className="tableBody" key={produto.id + produto.name}>
+                    <td>{produto.name}</td>
+                    <td>{produto.inventory}</td>
+                    <td>
+                      {produto.price.toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      })}
+                    </td>
+                    <td className="TableProducts__Buttons">
+                      <button
+                        onClick={() => {
+                          window.localStorage.setItem(
+                            'admClickedProduct',
+                            JSON.stringify(produto),
+                          );
+                          navigate(
+                            `/adm/produtos/${encodeURIComponent(produto.id)}`,
+                          );
+                        }}
+                      >
+                        ver detalhes
+                      </button>
+                      <button
+                        className={
+                          loadingDelete ? 'admProductDelete-active' : ''
+                        }
+                        onClick={(event) => {
+                          handleClickDelete(event, produto);
+                        }}
+                      >
+                        excluir
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+            : null}
         </tbody>
       </Table>
       {loading && <div>Loading...</div>}
       {error && <Alert variant="danger">{error}</Alert>}
+      {errorDelete && (
+        <Alert variant="danger">
+          Erro ao tentar excluir o produto, tente mais tarde
+        </Alert>
+      )}
     </>
   );
 };

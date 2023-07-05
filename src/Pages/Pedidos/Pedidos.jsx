@@ -4,6 +4,8 @@ import './Pedidos-styles.scss';
 import PurshCard from '../../components/PurshCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { listClientOrders } from '../../redux/pedidosClient';
+import LoadingComp from '../../components/LoadingComp';
+import Alert from 'react-bootstrap/Alert';
 
 /** const produtos = [
   {
@@ -57,6 +59,9 @@ const Pedidos = () => {
   // const compras = useSelector((state) => state.checkoutValue.pedidos);
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userData.data);
+  const { loading: loadingCompras, error: errorCompras } = useSelector(
+    (state) => state.pedidosClient,
+  );
 
   React.useEffect(() => {
     dispatch(listClientOrders(userData.id));
@@ -77,6 +82,12 @@ const Pedidos = () => {
       <div className="pedidos__list">
         <PurshCard />
       </div>
+      {loadingCompras && <LoadingComp />}
+      {errorCompras && (
+        <Alert variant="danger">
+          Não foi possível carregar os pedidos, tente mais tarde
+        </Alert>
+      )}
     </div>
   );
 };
