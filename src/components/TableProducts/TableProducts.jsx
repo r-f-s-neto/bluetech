@@ -20,7 +20,7 @@ const TableProducts = () => {
     setLoadingDelete(true);
 
     try {
-      const responseImg = await fetch(
+      await fetch(
         `https://e-commerce-api-bluetech-production.up.railway.app/products/images/${idImg}`,
         {
           method: 'DELETE',
