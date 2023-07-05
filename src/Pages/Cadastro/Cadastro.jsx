@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
 import { useSelector } from 'react-redux';
 import './Cadastro-styles.css';
+import LoadingComp from '../../components/LoadingComp';
 
 const Cadastro = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const Cadastro = () => {
   const [senha, setSenha] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [erro, setErro] = React.useState(false);
+  const [sucess, setSucess] = React.useState(false);
   const [errorMensage, setErrorMensage] = React.useState(null);
   const userData = useSelector((state) => state.userData.data);
   const [logado, setLogado] = React.useState(false);
@@ -97,7 +99,8 @@ const Cadastro = () => {
               console.log('response.ok', response.ok);
               if (response.ok) {
                 setErro(false);
-                navigate('/sucess?mensagem=cadastro-efetuado-com-sucesso');
+                setSucess(true);
+                navigate('/login');
               } else {
                 setErrorMensage(data);
                 setErro(false);
@@ -105,6 +108,7 @@ const Cadastro = () => {
             } catch (error) {
               console.log(error);
               setErro(true);
+              setSucess(false);
             } finally {
               setLoading(false);
             }
@@ -119,6 +123,8 @@ const Cadastro = () => {
         </Alert>
       )}
       {errorMensage && <Alert variant="danger">{errorMensage}</Alert>}
+      {sucess && <Alert variant="success">Cadastro efetuado com sucesso</Alert>}
+      {loading && <LoadingComp />}
     </div>
   );
 };
