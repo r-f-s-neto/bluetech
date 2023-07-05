@@ -1,0 +1,40 @@
+@import url("../../styles/global-styles.css");
+button {
+  background-color: inherit;
+}
+
+.MinhaConta {
+  display: flex;
+  min-height: 90vh;
+}
+.MinhaConta__aside {
+  flex: 1;
+  box-shadow: 6px 0px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.MinhaConta__content {
+  flex: 5;
+}
+
+.asideUsersData__name {
+  display: flex;
+  align-items: center;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+}
+.asideUsersData__name span {
+  opacity: 0.4;
+  font-size: 0.7rem;
+}
+
+.optionsUser__item {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+  gap: 0.5rem;
+  align-items: center;
+  padding-bottom: 1rem;
+  box-shadow: inset 0px 3px 5px -3px rgba(0, 0, 0, 0.1);
+  padding-top: 1rem;
+  padding-left: 1rem;
+}
+
+/*# sourceMappingURL=MinhaConta-styles.css.map */

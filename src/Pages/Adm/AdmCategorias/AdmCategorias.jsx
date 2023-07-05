@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import TableCategorias from '../../../components/TableCategorias';
 import { useNavigate } from 'react-router-dom';
-import './AdmCategorias-styles.scss'
+import './AdmCategorias-styles.css';
 
 const AdmCategorias = () => {
   const navigate = useNavigate();
@@ -19,6 +19,6 @@ const AdmCategorias = () => {
       <TableCategorias />
     </article>
   );
-}
+};
 
-export default AdmCategorias
+export default AdmCategorias;

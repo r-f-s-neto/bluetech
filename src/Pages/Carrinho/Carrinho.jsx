@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CartCard from '../../components/CartCard';
-import './Carrinho-styles.scss';
+import './Carrinho-styles.css';
 import { useNavigate } from 'react-router-dom';
 import { addCktValue, addCktList } from '../../redux/checkoutValue';
 import { listProducts } from '../../redux/products';

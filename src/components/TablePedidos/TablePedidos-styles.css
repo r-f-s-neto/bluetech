@@ -1,0 +1,22 @@
+.TableProducts__Buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.TableProducts__Buttons button {
+  background-color: #BDBDBD;
+  color: #FFFFFF;
+  padding: 0rem 1rem;
+}
+
+.tableHead {
+  background-color: #00BCD4;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.tableBody {
+  text-align: center;
+}
+
+/*# sourceMappingURL=TablePedidos-styles.css.map */

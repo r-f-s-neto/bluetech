@@ -1,0 +1,54 @@
+@import url("../../../../styles/global-styles.css");
+.NovoProduto {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5625rem;
+  width: 55.35%;
+  padding: 2.875rem 9.0625rem 3.375rem 9.0625rem;
+  max-width: 80rem;
+}
+.NovoProduto__header a {
+  padding-bottom: 1.5625rem;
+}
+.NovoProduto__header h1 {
+  color: #0288D1;
+}
+.NovoProduto__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.NovoProduto__form button {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: #0288D1;
+  color: #FFFFFF;
+}
+
+.newProductBtn--disable {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+@media (max-width: 70.625rem) {
+  .NovoProduto {
+    padding: 2.875rem 4.5rem 3.375rem 4.5rem;
+  }
+}
+@media (max-width: 59.375rem) {
+  .NovoProduto {
+    padding: 2.875rem 2.25rem 3.375rem 2.25rem;
+  }
+}
+@media (max-width: 56rem) {
+  .NovoProduto {
+    padding: 2.875rem 1rem 3.375rem 1rem;
+  }
+}
+@media (max-width: 52rem) {
+  .NovoProduto {
+    padding: 2.875rem 0.5rem 3.375rem 0.5rem;
+  }
+}
+
+/*# sourceMappingURL=NovoProduto-styles.css.map */

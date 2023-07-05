@@ -1,7 +1,7 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { useNavigate } from 'react-router-dom';
-import './TableProducts-styles.scss';
+import './TableProducts-styles.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../../redux/products';
 import Alert from 'react-bootstrap/Alert';

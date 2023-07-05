@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import './Produto-styles.scss';
+import './Produto-styles.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemDois } from '../../../redux/cart';
 import { listProducts } from '../../../redux/products';

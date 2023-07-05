@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Select from '../../../../components/Select';
-import './AdmProduto-styles.scss';
+import './AdmProduto-styles.css';
 import { useSelector } from 'react-redux';
 import Alert from 'react-bootstrap/Alert';
 import LoadingComp from '../../../../components/LoadingComp';

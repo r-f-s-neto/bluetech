@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 import { useDispatch, useSelector } from 'react-redux';
 import Alert from 'react-bootstrap/Alert';
 import { listProductAdm } from '../../redux/pedidosAdm';
-import './TablePedidos-styles.scss';
+import './TablePedidos-styles.css';
 import LoadingComp from '../../components/LoadingComp';
 import { useNavigate } from 'react-router-dom';
 

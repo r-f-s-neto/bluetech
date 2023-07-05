@@ -1,6 +1,6 @@
 import React from 'react';
 import TableProducts from '../../../components/TableProducts';
-import './AdmProdutos-styles.scss';
+import './AdmProdutos-styles.css';
 import { useNavigate } from 'react-router-dom';
 
 const AdmProdutos = () => {

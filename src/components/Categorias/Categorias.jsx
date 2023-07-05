@@ -1,5 +1,5 @@
 import React from 'react';
-import './Categorias-styles.scss';
+import './Categorias-styles.css';
 
 const Categorias = ({ value, setValue, categorias }) => {
   return (

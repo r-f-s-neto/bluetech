@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './ButtonOne-styles.scss';
+import './ButtonOne-styles.css';
 
 const ButtonOne = ({ to, text }) => {
   return (

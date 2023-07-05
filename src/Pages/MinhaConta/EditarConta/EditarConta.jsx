@@ -1,7 +1,7 @@
 import React from 'react';
 import LoadingComp from '../../../components/LoadingComp';
 import Alert from 'react-bootstrap/Alert';
-import './EditarConta-styles.scss';
+import './EditarConta-styles.css';
 
 const EditarConta = () => {
   const [loadingUpdateUser, setLoadingUpdateUser] = React.useState(false);

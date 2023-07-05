@@ -1,6 +1,6 @@
 import React from 'react';
 import TableUsuarios from '../../../components/TableUsuarios';
-import './AdmUsuarios-styles.scss';
+import './AdmUsuarios-styles.css';
 
 const AdmUsuarios = () => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Adm-styles.scss';
+import './Adm-styles.css';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 

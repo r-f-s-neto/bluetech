@@ -1,0 +1,16 @@
+.PedidosConta {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.PedidosConta__title {
+  padding-top: 2rem;
+  text-align: center;
+  color: #0288D1;
+}
+.PedidosConta__cards {
+  padding: 4rem 3rem;
+}
+
+/*# sourceMappingURL=PedidosConta-styles.css.map */

@@ -1,6 +1,6 @@
 import React from 'react';
 import PurshCard from '../../../components/PurshCard';
-import './PedidosConta-styles.scss';
+import './PedidosConta-styles.css';
 
 const PedidosConta = () => {
   return (

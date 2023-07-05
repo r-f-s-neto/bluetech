@@ -1,5 +1,5 @@
 import React from 'react';
-import './PurshCard-styles.scss';
+import './PurshCard-styles.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../../redux/products';
 import { listClientOrders } from '../../redux/pedidosClient';

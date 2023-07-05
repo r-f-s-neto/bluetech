@@ -1,5 +1,5 @@
 import React from 'react';
-import './FormText-styles.scss';
+import './FormText-styles.css';
 
 const FormText = ({ htmlFor, label, value, setValue, type, ...props }) => {
   return (

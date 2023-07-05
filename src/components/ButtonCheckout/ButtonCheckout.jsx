@@ -1,5 +1,5 @@
 import React from 'react';
-import './ButtonCheckout-styles.scss';
+import './ButtonCheckout-styles.css';
 
 const ButtonCheckout = ({ handleClick, text }) => {
   return (

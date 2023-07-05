@@ -1,0 +1,39 @@
+@import url("../../styles/global-styles.css");
+.formCat {
+  display: flex;
+  gap: 0.5625rem;
+}
+.formCat__item label {
+  font-family: "Public Sans", sans-serif;
+  font-weight: 400;
+  font-size: 0.8125rem;
+  line-height: 2.15;
+  letter-spacing: -0.025rem;
+  width: 5.9375rem;
+  height: 1.9375rem;
+  text-align: center;
+  border: 0.0625rem solid #0288D1;
+  color: #0288D1;
+  cursor: pointer;
+}
+.formCat__item label.active {
+  background-color: #0288D1;
+  color: white;
+}
+.formCat__item label:hover {
+  background-color: #B3E5FC;
+  color: #FFFFFF;
+  border: 0.0625rem solid #B3E5FC;
+}
+.formCat__item input {
+  display: none;
+}
+
+@media (max-width: 33.5rem) {
+  .formCat {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/*# sourceMappingURL=Categorias-styles.css.map */

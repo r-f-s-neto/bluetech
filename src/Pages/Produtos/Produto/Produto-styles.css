@@ -1,0 +1,160 @@
+@import url("../../../styles/global-styles.css");
+.productContainner {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4rem;
+  padding: 5.5rem 9.0625rem 12.75rem 9.0625rem;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.productCarrousel__img {
+  height: 34.25rem;
+  object-fit: cover;
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.information__title {
+  font-family: "Public Sans", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.25rem;
+  line-height: 1.33;
+  letter-spacing: -0.03rem;
+}
+.information__price {
+  font-family: "Public Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  letter-spacing: -0.03rem;
+  padding-bottom: 0.9375rem;
+}
+.information__description {
+  font-family: "Public Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.41;
+  letter-spacing: -0.03rem;
+  padding-bottom: 0.9375rem;
+}
+
+.ProductForm__estoque {
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  opacity: 0.5;
+  letter-spacing: -0.025rem;
+  display: block;
+  padding-bottom: 0.9375rem;
+}
+.ProductForm__button {
+  display: flex;
+  gap: 0.8125rem;
+}
+
+.buttonForm__cart {
+  font-family: "Public Sans", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.375;
+  min-width: max-content;
+  text-align: center;
+  letter-spacing: -0.025rem;
+  color: #FFFFFF;
+  padding: 0.875rem 2.09375rem;
+  height: 3.125rem;
+  background-color: #000000;
+}
+.buttonForm__buy {
+  font-family: "Public Sans", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.375;
+  text-align: center;
+  letter-spacing: -0.025rem;
+  color: #FFFFFF;
+  padding: 0.875rem 2.34375rem;
+  height: 3.125rem;
+  background-color: #0288D1;
+}
+.buttonForm--active {
+  transition: all 0.3s;
+}
+.buttonForm--active:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 70.625rem) {
+  .productContainner {
+    padding: 5.5rem 4.5rem 12.75rem 4.5rem;
+  }
+}
+@media (max-width: 59.375rem) {
+  .productContainner {
+    padding: 5.5rem 2.25rem 12.75rem 2.25rem;
+  }
+  .productCarrousel__img {
+    height: 31.25rem;
+  }
+}
+@media (max-width: 56rem) {
+  .productContainner {
+    padding: 5.5rem 1rem 12.75rem 1rem;
+  }
+  .productCarrousel__img {
+    height: 30.25rem;
+  }
+}
+@media (max-width: 52rem) {
+  .productContainner {
+    padding: 5.5rem 0.5rem 12.75rem 0.5rem;
+  }
+  .productCarrousel__img {
+    height: 28.25rem;
+  }
+}
+@media (max-width: 47rem) {
+  .productContainner {
+    padding: 5.5rem 0.7rem 12.75rem 0.7rem;
+  }
+  .productCarrousel__img {
+    height: 24.25rem;
+  }
+}
+@media (max-width: 45.25rem) {
+  .productContainner {
+    padding: 2.5rem 0.7rem 9.75rem 0.7rem;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  .productCarrousel__img {
+    height: 20.25rem;
+  }
+}
+@media (max-width: 30rem) {
+  .productCarrousel__img {
+    height: 17.25rem;
+  }
+}
+@media (max-width: 21.25rem) {
+  .productCarrousel__img {
+    height: 15.25rem;
+  }
+  .ProductForm__button {
+    flex-wrap: wrap;
+  }
+}
+
+/*# sourceMappingURL=Produto-styles.css.map */

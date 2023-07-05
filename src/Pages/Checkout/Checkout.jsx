@@ -1,6 +1,6 @@
 import React from 'react';
 import CartCard from '../../components/CartCard';
-import './Checkout-styles.scss';
+import './Checkout-styles.css';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 

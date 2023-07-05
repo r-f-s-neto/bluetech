@@ -1,5 +1,5 @@
 import React from 'react';
-import './Frete-styles.scss';
+import './Frete-styles.css';
 import ButtonCheckout from '../../../components/ButtonCheckout';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';

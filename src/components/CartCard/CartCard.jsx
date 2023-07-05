@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItemDois } from '../../redux/cart';
-import './CartCard-styles.scss';
+import './CartCard-styles.css';
 import LoadingComp from '../LoadingComp';
 import Alert from 'react-bootstrap/Alert';
 

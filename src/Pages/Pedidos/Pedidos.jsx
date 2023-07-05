@@ -1,5 +1,5 @@
 import React from 'react';
-import './Pedidos-styles.scss';
+import './Pedidos-styles.css';
 //import { useSelector } from 'react-redux';
 import PurshCard from '../../components/PurshCard';
 import { useDispatch, useSelector } from 'react-redux';

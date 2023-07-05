@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Select from '../../../../components/Select';
 import Alert from 'react-bootstrap/Alert';
-import './NovoProduto-styles.scss';
+import './NovoProduto-styles.css';
 import { useSelector } from 'react-redux';
 import LoadingComp from '../../../../components/LoadingComp';
 

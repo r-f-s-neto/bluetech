@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
-import './MinhaConta-styles.scss';
+import './MinhaConta-styles.css';
 import mainUserImg from '../../assets/MinhaConta-assets/icons8-usuário-100.png';
 import editUserImg from '../../assets/MinhaConta-assets/icons8-usuário-de-gênero-neutro-64.png';
 import truckImg from '../../assets/MinhaConta-assets/icons8-caminhão-100.png';

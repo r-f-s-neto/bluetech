@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
 import { useSelector } from 'react-redux';
-import './Cadastro-styles.scss';
+import './Cadastro-styles.css';
 
 const Cadastro = () => {
   const navigate = useNavigate();

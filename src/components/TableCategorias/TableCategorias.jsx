@@ -4,7 +4,7 @@ import { listCategories } from '../../redux/categories';
 import Alert from 'react-bootstrap/Alert';
 import Table from 'react-bootstrap/Table';
 import { useNavigate } from 'react-router-dom';
-import './TableCategorias-styles.scss';
+import './TableCategorias-styles.css';
 
 const TableCategorias = () => {
   const navigate = useNavigate();

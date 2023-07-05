@@ -2,7 +2,7 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { useDispatch, useSelector } from 'react-redux';
 import { listUsers } from '../../redux/users.js';
-import './TableUsuarios-styles.scss';
+import './TableUsuarios-styles.css';
 
 const TableUsuarios = () => {
   const { data, loading, error } = useSelector((state) => state.users);

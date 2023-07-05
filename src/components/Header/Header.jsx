@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import './Header-styles.scss';
+import './Header-styles.css';
 import { ReactComponent as Lupa } from '../../assets/Header-assets/Search.svg';
 import { ReactComponent as Bag } from '../../assets/Header-assets/Vector.svg';
 import Navbar from 'react-bootstrap/Navbar';

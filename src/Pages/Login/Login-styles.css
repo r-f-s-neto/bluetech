@@ -1,0 +1,61 @@
+@import url("../../styles/global-styles.css");
+.loginBg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6875rem;
+  width: 100%;
+  height: 100vh;
+  padding-top: 6rem;
+}
+
+.loginContainner {
+  padding: 1.875rem 1.875rem 3.25rem 1.875rem;
+  background-color: #03A0F4;
+  color: #FFFFFF;
+  box-shadow: 0rem 0.3125rem 0.8rem -0.125rem rgba(0, 0, 0, 0.53);
+  border-radius: 0.1875rem;
+}
+.loginContainner h1 {
+  padding-bottom: 0.5rem;
+}
+.loginContainner span {
+  padding-bottom: 0.875rem;
+}
+
+.loginForm__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.625rem;
+}
+.loginForm__footer .buttonDisabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.loginForm__footer button {
+  padding: 0.2rem 1rem;
+  background-color: #B3E5FC;
+  color: #757575;
+  border-radius: 0.125rem;
+}
+.loginForm__footer button:hover {
+  opacity: 0.8;
+}
+.loginForm input:first-child {
+  margin-bottom: 0.625rem;
+}
+.loginForm input {
+  width: 100%;
+}
+
+.checkContainner {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+.checkContainner #lembrar {
+  margin-bottom: 0rem;
+}
+
+/*# sourceMappingURL=Login-styles.css.map */
