@@ -9,7 +9,7 @@ import LoadingComp from '../../../../components/LoadingComp';
 const NovoProduto = () => {
   const [name, setName] = React.useState('');
   const [price, setPrice] = React.useState('');
-  const [photo, setPhoto] = React.useState('');
+  const [photo, setPhoto] = React.useState(null);
   const [desc, setDesc] = React.useState('');
   const [categoria, setCategoria] = React.useState('Componentes');
   const [dataCat, setDataCat] = React.useState([]);
