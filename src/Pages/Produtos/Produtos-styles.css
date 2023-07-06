@@ -47,6 +47,10 @@
   letter-spacing: -0.01875rem;
 }
 
+.Produtos__PageButton {
+  width: 100%;
+}
+
 @keyframes fadIn {
   from {
     transform: translateX(-145px);

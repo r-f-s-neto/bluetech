@@ -50,6 +50,10 @@ color: #FFFFFF;
   animation: fadIn 0.5s forwards;
 }
 
+.Produtos__PageButton{
+  width: 100%;
+}
+
 @keyframes fadIn {
   from{
     transform: translateX(-145px);

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Produtos-styles.css';
+import './Produtos-styles.scss';
 import Categorias from '../../components/Categorias';
 import Select from '../../components/Select';
 import { filtroCat, filtroPrecificacao } from '../../helper/filtros';
@@ -8,6 +8,8 @@ import Alert from 'react-bootstrap/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingComp from '../../components/LoadingComp';
 import { listProducts } from '../../redux/products';
+import { paginar, createPag } from '../../helper/paginacao';
+import PageButton from '../../components/PageButton';
 
 const options = ['Mais Relevantes', 'Maior Preço', 'Menor Preço'];
 /** const produtos = [
@@ -71,6 +73,9 @@ const Produtos = () => {
 
   const [dataProd, setDataProd] = React.useState(produtos);
   const [error, setError] = React.useState(null);
+  const [prodPaginados, setProdPaginados] = React.useState(null);
+  const [pagina, setPagina] = React.useState(0);
+  const [arrPags, setArrPags] = React.useState(null);
 
   React.useEffect(() => {
     dispatch(listProducts());
@@ -105,9 +110,22 @@ const Produtos = () => {
     const filterdProd = produtos?.filter((produto) => {
       return filtroCat(produto, categoria);
     });
-
+    setPagina(0);
     setDataProd(filtroPrecificacao(filterdProd, filtroPreco));
   }, [categoria, filtroPreco, produtos]);
+
+  React.useEffect(() => {
+    if (dataProd) {
+      setProdPaginados(paginar(dataProd, 8).arrProds);
+    }
+  }, [dataProd]);
+
+  React.useEffect(() => {
+    if (dataProd) {
+      const qtd = paginar(dataProd, 8).qtdPaginas;
+      setArrPags(createPag(qtd));
+    }
+  }, [dataProd]);
 
   return (
     <main className="produtos">
@@ -141,7 +159,9 @@ const Produtos = () => {
         />
       </div>
       <div className="produtos__card">
-        {dataProd && <Card produtos={JSON.stringify(dataProd)} />}
+        {prodPaginados && (
+          <Card produtos={JSON.stringify(prodPaginados[pagina])} />
+        )}
       </div>
       {loading && <LoadingComp />}
       {errorListProduct && (
@@ -149,7 +169,11 @@ const Produtos = () => {
           Ocorreu um erro ao tentar listar os produtos, tente mais tarde
         </Alert>
       )}
-      {}
+      <div className="Produtos__PageButton">
+        {arrPags && (
+          <PageButton arrPags={arrPags} setPagina={setPagina} pagina={pagina} />
+        )}
+      </div>
     </main>
   );
 };

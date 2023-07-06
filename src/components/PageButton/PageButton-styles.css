@@ -1,0 +1,20 @@
+@import url('../../styles/global-styles.css');
+
+.PageButtonHeader {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+}
+
+.PageButtonHeader__item {
+  background-color: #03A9F4;
+  color: #FFFFFF;
+  padding: 0.5rem 1rem;
+}
+
+.PageButtonHeader__item--active{
+  opacity: 0.5;
+}
