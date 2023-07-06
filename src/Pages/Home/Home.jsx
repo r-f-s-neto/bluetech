@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../../redux/products';
 import LoadingComp from '../../components/LoadingComp';
 import Alert from 'react-bootstrap/Alert';
+import title from '../../helper/title';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -64,7 +65,9 @@ const Home = () => {
     console.log(data);
   }, [data, produtos]);
 
-  console.log(data);
+  React.useEffect(() => {
+    title('BlueTech | Home');
+  }, []);
 
   return (
     <div className="homeContainner">

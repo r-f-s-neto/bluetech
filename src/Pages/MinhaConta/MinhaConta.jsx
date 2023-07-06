@@ -6,6 +6,7 @@ import mainUserImg from '../../assets/MinhaConta-assets/icons8-usuário-100.png'
 import editUserImg from '../../assets/MinhaConta-assets/icons8-usuário-de-gênero-neutro-64.png';
 import truckImg from '../../assets/MinhaConta-assets/icons8-caminhão-100.png';
 import { useSelector } from 'react-redux';
+import title from '../../helper/title';
 
 const MinhaConta = () => {
   const navigate = useNavigate();
@@ -39,6 +40,11 @@ const MinhaConta = () => {
       setError(true);
     }
   }, []);
+
+  React.useEffect(() => {
+    title('BlueTech | Minha-Conta');
+  }, []);
+
   return (
     <div className="MinhaConta">
       <aside className="MinhaConta__aside asideUsersData">

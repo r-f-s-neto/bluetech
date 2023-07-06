@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import Alert from 'react-bootstrap/Alert';
 import './Login-styles.css';
 import LoadingComp from '../../components/LoadingComp';
+import title from '../../helper/title';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -39,6 +40,11 @@ const Login = () => {
       setEmail(savedLogin);
     }
   }, []);
+
+  React.useEffect(() => {
+    title('BlueTech | Login');
+  }, []);
+
   return (
     <section className="loginBg">
       <div className="loginContainner">

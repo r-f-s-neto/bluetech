@@ -3,6 +3,7 @@ import CartCard from '../../components/CartCard';
 import './Checkout-styles.css';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import title from '../../helper/title';
 
 /*const freteOptions = [
   {
@@ -36,6 +37,10 @@ const Checkout = () => {
       navigate('/login');
     }
   }, [logado, navigate]);
+
+  React.useEffect(() => {
+    title('BlueTech | Checkout');
+  }, []);
 
   return (
     <article className="checkoutContainner">

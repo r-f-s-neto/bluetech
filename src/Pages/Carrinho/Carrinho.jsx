@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import CartCard from '../../components/CartCard';
 import './Carrinho-styles.css';
 import { useNavigate } from 'react-router-dom';
-import { addCktValue, addCktList } from '../../redux/checkoutValue';
+import { addCktValue } from '../../redux/checkoutValue';
 import { listProducts } from '../../redux/products';
+import title from '../../helper/title';
 
 /** const produtos = [
   {
@@ -84,6 +85,10 @@ const Carrinho = () => {
       navigate('/login');
     }
   }, [logado, navigate]);
+
+  React.useEffect(() => {
+    title('BlueTech | Carrinho');
+  }, []);
 
   // const [listProd, setListProd] = React.useState(null);
   // const cartProducts = useSelector((state) => state);

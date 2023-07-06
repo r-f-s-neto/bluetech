@@ -4,6 +4,7 @@ import Alert from 'react-bootstrap/Alert';
 import { useSelector } from 'react-redux';
 import './Cadastro-styles.css';
 import LoadingComp from '../../components/LoadingComp';
+import title from '../../helper/title';
 
 const Cadastro = () => {
   const navigate = useNavigate();
@@ -30,6 +31,10 @@ const Cadastro = () => {
       navigate('/');
     }
   }, [logado, navigate]);
+
+  React.useEffect(() => {
+    title('BlueTech | Cadastro');
+  }, []);
 
   return (
     <div className="NovoProduto">

@@ -10,6 +10,7 @@ import LoadingComp from '../../components/LoadingComp';
 import { listProducts } from '../../redux/products';
 import { paginar, createPag } from '../../helper/paginacao';
 import PageButton from '../../components/PageButton';
+import title from '../../helper/title';
 
 const options = ['Mais Relevantes', 'Maior Preço', 'Menor Preço'];
 /** const produtos = [
@@ -126,6 +127,10 @@ const Produtos = () => {
       setArrPags(createPag(qtd));
     }
   }, [dataProd]);
+
+  React.useEffect(() => {
+    title('BlueTech | Produtos');
+  }, []);
 
   return (
     <main className="produtos">

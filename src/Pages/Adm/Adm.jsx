@@ -2,6 +2,7 @@ import React from 'react';
 import './Adm-styles.css';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import title from '../../helper/title';
 
 const Adm = () => {
   const navigate = useNavigate();
@@ -24,6 +25,10 @@ const Adm = () => {
       navigate('/login');
     }
   }, [logadoAsAdm, navigate]);
+
+  React.useEffect(() => {
+    title('BlueTech | Adm');
+  }, []);
 
   return (
     <div className="admContainner">

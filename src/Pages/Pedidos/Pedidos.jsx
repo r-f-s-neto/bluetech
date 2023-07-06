@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listClientOrders } from '../../redux/pedidosClient';
 import LoadingComp from '../../components/LoadingComp';
 import Alert from 'react-bootstrap/Alert';
+import title from '../../helper/title';
 
 /** const produtos = [
   {
@@ -66,6 +67,11 @@ const Pedidos = () => {
   React.useEffect(() => {
     dispatch(listClientOrders(userData.id));
   }, [dispatch, userData]);
+
+  React.useEffect(() => {
+    title('BlueTech | Pedidos');
+  }, []);
+
   return (
     <div className="pedidos">
       <header className="pedidosBackground">
