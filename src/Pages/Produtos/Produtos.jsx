@@ -1,5 +1,5 @@
 import React from 'react';
-import './Produtos-styles.scss';
+import './Produtos-styles.css';
 import Categorias from '../../components/Categorias';
 import Select from '../../components/Select';
 import { filtroCat, filtroPrecificacao } from '../../helper/filtros';
