@@ -67,4 +67,25 @@
   color: #FFFFFF;
 }
 
+@media (max-width: 47rem) {
+  .admContainner__main {
+    padding: 2.9375rem 4.5rem;
+  }
+}
+@media (max-width: 38.38rem) {
+  .admContainner__main {
+    padding: 2.9375rem 2.25rem;
+  }
+}
+@media (max-width: 33.38rem) {
+  .admContainner__main {
+    padding: 2.9375rem 1.125rem;
+  }
+}
+@media (max-width: 31.38rem) {
+  .admContainner__main {
+    padding: 2.9375rem 0rem;
+  }
+}
+
 /*# sourceMappingURL=Adm-styles.css.map */

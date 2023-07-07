@@ -27,6 +27,7 @@
   }
 }
 
+
 .admMenu {
   display: flex;
   gap: 1rem;
@@ -69,5 +70,41 @@
     padding: 0.3rem 2rem;
     background-color: #00BCD4;
     color: #FFFFFF;
+  }
+}
+
+@media(max-width:47rem) {
+  .admContainner {
+    &__main {
+      padding: 2.9375rem 4.5rem;
+
+    }
+  }
+}
+
+@media(max-width:38.38rem) {
+  .admContainner {
+    &__main {
+      padding: 2.9375rem 2.25rem;
+
+    }
+  }
+}
+
+@media(max-width:33.38rem) {
+  .admContainner {
+    &__main {
+      padding: 2.9375rem 1.125rem;
+
+    }
+  }
+}
+
+@media(max-width:31.38rem) {
+  .admContainner {
+    &__main {
+      padding: 2.9375rem 0rem;
+
+    }
   }
 }
