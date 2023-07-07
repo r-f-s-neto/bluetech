@@ -97,11 +97,15 @@ const Produtos = () => {
           dataArray.unshift('Tudo');
           setDataCat(dataArray);
         } else {
-          const data = await response.json();
-          setError(data);
+          //const data = await response.json();
+          setError(
+            'ocorreu um erro ao buscar as categorias no servidor, tente mais tarde',
+          );
         }
       } catch (error) {
-        setError('Ocorreu um erro ao tentar conectar ao servidor, tente mais tarde');
+        setError(
+          'Ocorreu um erro ao tentar conectar ao servidor, tente mais tarde',
+        );
       }
     }
     fetchCat();

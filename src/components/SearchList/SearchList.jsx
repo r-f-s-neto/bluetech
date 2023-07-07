@@ -30,7 +30,9 @@ const SearchList = ({ keyword }) => {
             </Link>
           );
         })}
-      {error && <Alert>{error}</Alert>}
+      {error && (
+        <Alert variant="danger">"Não foi possível conectar ao servidor"</Alert>
+      )}
     </>
   );
 };

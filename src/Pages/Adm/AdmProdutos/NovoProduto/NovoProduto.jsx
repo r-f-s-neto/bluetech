@@ -86,12 +86,16 @@ const NovoProduto = () => {
           });
           setDataCat(dataArray);
         } else {
-          const data = await response.json();
-          setError(data);
+          //const data = await response.json();
+          setError(
+            'ocorreu um erro ao buscar as categorias no servidor, tente mais tarde',
+          );
           setErrorCat(true);
         }
       } catch (error) {
-        setError(error);
+        setError(
+          'ocorreu um erro ao buscar as categorias no servidor, tente mais tarde',
+        );
         setErrorCat(true);
       }
     }
