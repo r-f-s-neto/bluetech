@@ -62,7 +62,6 @@ const Home = () => {
     } else {
       setData(JSON.stringify(produtos));
     }
-    console.log(data);
   }, [data, produtos]);
 
   React.useEffect(() => {

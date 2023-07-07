@@ -56,3 +56,19 @@ button {
   }
 
 }
+
+@media(max-width:63.5rem) {
+  .asideUsersData {
+    &__name {
+      flex-direction: column;
+    }
+  }
+}
+
+@media(max-width:37.5rem) {
+  .MinhaConta {
+    &__aside {
+      flex: 2;
+    }
+  }
+}
