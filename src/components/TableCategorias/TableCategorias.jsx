@@ -34,7 +34,7 @@ const TableCategorias = () => {
     } catch (erro) {
       setErrorDelete(true);
       setSucessDelete(false);
-      setErrorDeleteMensage(erro);
+      setErrorDeleteMensage('Tente novamente mais tarde');
     } finally {
       setLoadingDelete(false);
     }
@@ -99,7 +99,7 @@ const TableCategorias = () => {
         </tbody>
       </Table>
       {loading && <div>Loading...</div>}
-      {error && <Alert variant="danger">{error}</Alert>}
+      {error && <Alert variant="danger">Tente novamente mais tarde</Alert>}
     </>
   );
 };

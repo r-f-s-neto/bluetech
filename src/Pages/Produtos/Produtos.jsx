@@ -149,7 +149,7 @@ const Produtos = () => {
           </div>
         </div>
       </header>
-      {error && <Alert variant="danger">{error}</Alert>}
+      {error && <Alert variant="danger">Tente novamente mais tarde</Alert>}
       <div className="produtos__filtros">
         <div className="filtros__categorias">
           {dataCat && (

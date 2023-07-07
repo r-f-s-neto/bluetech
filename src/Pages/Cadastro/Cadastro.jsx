@@ -100,14 +100,16 @@ const Cadastro = () => {
 
             try {
               const response = await fetch(url, options);
-              const data = await response.json();
+              //const data = await response.json();
 
               if (response.ok) {
                 setErro(false);
                 setSucess(true);
                 navigate('/login');
               } else {
-                setErrorMensage(data);
+                setErrorMensage(
+                  'Não foi possivel efetuar o cadastro, tente mais tarde',
+                );
                 setErro(false);
               }
             } catch (error) {

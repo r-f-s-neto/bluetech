@@ -18,7 +18,7 @@ const TablePedidos = () => {
 
   return (
     <>
-      {error && <Alert variant="danger">{error}</Alert>}
+      {error && <Alert variant="danger">Tente novamente mais tarde</Alert>}
       <Table responsive>
         <thead>
           <tr className="tableHead">

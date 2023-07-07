@@ -136,7 +136,7 @@ const Login = () => {
                     }
                   } else {
                     setErro(true);
-                    setErrorMensage(data);
+                    setErrorMensage('Tente novamente mais tarde');
                   }
                 } catch (error) {
                   setErro(true);

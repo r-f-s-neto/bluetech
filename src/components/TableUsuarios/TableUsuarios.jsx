@@ -24,7 +24,7 @@ const TableUsuarios = () => {
       </thead>
       <tbody>
         {loading && <div>Loading...</div>}
-        {error && <div>{error}</div>}
+        {error && <div>Tente novamente mais tarde</div>}
         {data && data.length
           ? data.map((usuario) => {
               return (

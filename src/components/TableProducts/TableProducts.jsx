@@ -30,7 +30,7 @@ const TableProducts = () => {
     } catch (error) {
       setErrorDelete(true);
       setSucessDelete(false);
-      setErrorDeleteMensage(error);
+      setErrorDeleteMensage('Tente novamente mais tarde');
     }
 
     try {
@@ -50,7 +50,7 @@ const TableProducts = () => {
     } catch (erro) {
       setErrorDelete(true);
       setSucessDelete(false);
-      setErrorDeleteMensage(erro);
+      setErrorDeleteMensage('Tente novamente mais tarde');
     } finally {
       setLoadingDelete(false);
     }
@@ -121,7 +121,7 @@ const TableProducts = () => {
         </tbody>
       </Table>
       {loading && <div>Loading...</div>}
-      {error && <Alert variant="danger">{error}</Alert>}
+      {error && <Alert variant="danger">Tente novamente mais tarde</Alert>}
       {errorDelete && (
         <Alert variant="danger">
           Erro ao tentar excluir o produto, tente mais tarde

@@ -133,7 +133,7 @@ const AdmProduto = () => {
         setErrorPutProduct(null);
       }
     } catch (error) {
-      setErrorPutProduct(error);
+      setErrorPutProduct('Tente novamente mais tarde');
       setSucessPutProduct(false);
     } finally {
       setLoadingPutProduct(false);
@@ -217,7 +217,7 @@ const AdmProduto = () => {
         <Alert variant="success">Produto atualizado com sucesso</Alert>
       )}
       {errorPutProduct && <Alert variant="danger">{errorPutProduct}</Alert>}
-      {errorCat && <Alert variant="danger">{error}</Alert>}
+      {errorCat && <Alert variant="danger">Tente novamente mais tarde</Alert>}
     </div>
   );
 };

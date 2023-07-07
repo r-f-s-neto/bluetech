@@ -153,7 +153,7 @@ const NovoProduto = () => {
             setError(null);
           }
         } catch (error) {
-          setError(error);
+          setError('Tente novamente mais tarde');
           setSucess(null);
         } finally {
           setLoadingProduct(false);
@@ -252,7 +252,7 @@ const NovoProduto = () => {
           Salvar
         </button>
         {loadingPostProduct && <LoadingComp />}
-        {error && <Alert variant="danger">{error}</Alert>}
+        {error && <Alert variant="danger">Tente novamente mais tarde</Alert>}
         {sucess && <Alert variant="success">{sucess}</Alert>}
       </form>
     </div>

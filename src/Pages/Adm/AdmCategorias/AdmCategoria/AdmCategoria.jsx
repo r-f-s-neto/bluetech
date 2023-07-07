@@ -78,7 +78,7 @@ const AdmCategoria = () => {
     } catch (error) {
       setErrorUpdate(true);
       setSucessUpdate(false);
-      setErrorUpdateMensage(error);
+      setErrorUpdateMensage('Tente novamente mais tarde');
     } finally {
       setLoadingUpdate(false);
     }

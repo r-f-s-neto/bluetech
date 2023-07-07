@@ -179,7 +179,7 @@ const Carrinho = () => {
           }}
           onBlur={handleBlur}
         />
-        {error && <p className="cartError">{error}</p>}
+        {error && <p className="cartError">Tente novamente mais tarde</p>}
         <div className="orderInfo__subtotal">
           <p>Subtotal dos produtos</p>
           <p>{subtotal}</p>

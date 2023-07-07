@@ -64,7 +64,7 @@ const NovaCategoria = () => {
     } catch (error) {
       setErrorCreate(true);
       setSucessCreate(false);
-      setErrorCreateMensage(error);
+      setErrorCreateMensage('Tente novamente mais tarde');
     } finally {
       setLoadingCreate(false);
     }

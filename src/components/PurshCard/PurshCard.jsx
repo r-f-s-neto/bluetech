@@ -78,8 +78,12 @@ const PurshCard = () => {
           })
         : null}
       {loadingCompras && loadingProdutos && <LoadingComp />}
-      {errorCompras && <Alert variant="danger">{errorCompras}</Alert>}
-      {errorProdutos && <Alert variant="danger">{errorProdutos}</Alert>}
+      {errorCompras && (
+        <Alert variant="danger">Tente novamente mais tarde</Alert>
+      )}
+      {errorProdutos && (
+        <Alert variant="danger">Tente novamente mais tarde</Alert>
+      )}
       {errorUserData && (
         <Alert variant="danger">
           Não foi possível acessar seus dados, por favor, refaça o login

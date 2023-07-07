@@ -64,7 +64,7 @@ const EditarConta = () => {
       }
     } catch (error) {
       setErrorUpdateUser(true);
-      setErrorUpdateMensage(error);
+      setErrorUpdateMensage('Tente novamente mais tarde');
     } finally {
       setLoadingUpdateUser(false);
     }
