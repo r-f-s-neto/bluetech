@@ -101,7 +101,7 @@ const Produtos = () => {
           setError(data);
         }
       } catch (error) {
-        setError(error);
+        setError('Ocorreu um erro ao tentar conectar ao servidor, tente mais tarde');
       }
     }
     fetchCat();
