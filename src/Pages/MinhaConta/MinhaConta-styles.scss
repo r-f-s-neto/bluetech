@@ -11,10 +11,20 @@ button {
   &__aside {
     flex: 1;
     box-shadow: 6px 0px 15px -3px rgba(0, 0, 0, 0.1);
+    animation: slideMinhaConta ease-out 0.7s forwards;
   }
 
   &__content {
     flex: 5;
+  }
+}
+
+@keyframes slideMinhaConta {
+  from{
+    transform: translateX(-25%);
+  }
+  to{
+    transform: translateX(initial);
   }
 }
 

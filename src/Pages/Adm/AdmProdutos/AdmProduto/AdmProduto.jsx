@@ -200,6 +200,7 @@ const AdmProduto = () => {
           onChange={({ target }) => {
             setInventory(target.value);
           }}
+          type="number"
           name="estoque"
           id="estoque"
           placeholder="estoque"
