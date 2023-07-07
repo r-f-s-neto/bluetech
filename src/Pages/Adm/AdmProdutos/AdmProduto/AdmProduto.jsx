@@ -26,6 +26,9 @@ const AdmProduto = () => {
   const [sucessPutProduct, setSucessPutProduct] = React.useState(false);
   const [errorPutProduct, setErrorPutProduct] = React.useState(null);
 
+  const [errorCat, setErrorCat] = React.useState(false);
+  const [error, setError] = React.useState(null);
+
   React.useEffect(() => {
     try {
       setProduct(JSON.parse(window.localStorage.getItem('admClickedProduct')));
@@ -71,7 +74,28 @@ const AdmProduto = () => {
 
   React.useEffect(() => {
     // Simula o recebimento de dados da categoria pela API
-    setDataCat(['Monitores', 'Cadeiras', 'Componentes', 'Gabinetes']);
+    async function fetchCat() {
+      try {
+        const response = await fetch(
+          'https://e-commerce-api-bluetech-production.up.railway.app/category',
+        );
+        if (response.ok) {
+          const data = await response.json();
+          const dataArray = data.map((e) => {
+            return e.name;
+          });
+          setDataCat(dataArray);
+        } else {
+          const data = await response.json();
+          setError(data);
+          setErrorCat(true);
+        }
+      } catch (error) {
+        setError(error);
+        setErrorCat(true);
+      }
+    }
+    fetchCat();
   }, []);
 
   async function handleSubmit(event) {
@@ -188,6 +212,7 @@ const AdmProduto = () => {
         <Alert variant="success">Produto atualizado com sucesso</Alert>
       )}
       {errorPutProduct && <Alert variant="danger">{errorPutProduct}</Alert>}
+      {errorCat && <Alert variant="danger">{error}</Alert>}
     </div>
   );
 };

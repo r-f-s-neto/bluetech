@@ -238,6 +238,7 @@ const NovoProduto = () => {
           id="productPhoto"
           name="productPhoto"
           accept="image/*"
+          required
         />
         <button
           className={
