@@ -131,7 +131,7 @@ const NovoProduto = () => {
           'https://e-commerce-api-bluetech-production.up.railway.app/products/' +
           idProduct +
           '/images';
-        console.log(urlImage);
+
         const formData = new FormData();
         formData.append('images', photo);
 
@@ -143,7 +143,7 @@ const NovoProduto = () => {
 
         try {
           const responseImg = await fetch(urlImage, optionsImage);
-          console.log(responseImg);
+
           if (responseImg.ok) {
             setSucess('produto e imagem criados com sucesso');
             setError(null);

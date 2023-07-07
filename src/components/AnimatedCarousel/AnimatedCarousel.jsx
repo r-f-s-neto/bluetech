@@ -6,7 +6,6 @@ import './AnimatedCarousel-styles.css';
 const AnimatedCarousel = ({ transitionTime, arrayImages }) => {
   const images = JSON.parse(arrayImages);
 
-  console.log(images);
   return (
     <Carousel>
       {images?.map((image) => {

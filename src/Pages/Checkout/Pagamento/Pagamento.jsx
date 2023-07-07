@@ -6,7 +6,7 @@ import { listProducts } from '../../../redux/products';
 import { createOrder } from '../../../redux/order';
 import Alert from 'react-bootstrap/Alert';
 import LoadingComp from '../../../components/LoadingComp';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 
 /** const produtos = [
   {
@@ -57,7 +57,7 @@ import { useNavigate } from 'react-router-dom';
 ]; */
 
 const Pagamento = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [ativar, setAtivar] = React.useState(true);
   const [subtotal, setSubtotal] = React.useState(0);
   const [total, setTotal] = React.useState(0);
@@ -101,8 +101,6 @@ const Pagamento = () => {
   }, [subtotal, discount, frete]);
   function handleClick() {
     const userEmail = userData.email;
-    console.log('o email é: ', userEmail);
-    console.log('o carrinho é: ', cartList);
     const productsToFetch = cartList.map((prod) => {
       return {
         productId: prod.id,
@@ -114,7 +112,6 @@ const Pagamento = () => {
       products: productsToFetch,
     };
 
-    console.log('este será o objeto enviado', toSend);
     dispatch(createOrder(toSend));
     dispatch(pedidoFinalizado(total));
     setAtivar(false);

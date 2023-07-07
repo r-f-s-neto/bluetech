@@ -51,7 +51,7 @@ const PurshCard = () => {
             return (
               <div key={index + 'PurshCard'} className="PurshCard__item">
                 <h3>{`Pedido ${index + 1}`}</h3>
-                {console.log(compra)}
+
                 <ul className="purshCardList">
                   {compra.products?.map((produto, index) => {
                     return (

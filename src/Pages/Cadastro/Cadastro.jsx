@@ -86,7 +86,7 @@ const Cadastro = () => {
               password: senha,
               role: 'client',
             };
-            console.log(data);
+
             setLoading(true);
             const url =
               'https://e-commerce-api-bluetech-production.up.railway.app/user';
@@ -101,7 +101,7 @@ const Cadastro = () => {
             try {
               const response = await fetch(url, options);
               const data = await response.json();
-              console.log('response.ok', response.ok);
+
               if (response.ok) {
                 setErro(false);
                 setSucess(true);
@@ -111,7 +111,6 @@ const Cadastro = () => {
                 setErro(false);
               }
             } catch (error) {
-              console.log(error);
               setErro(true);
               setSucess(false);
             } finally {

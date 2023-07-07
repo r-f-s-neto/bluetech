@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { addData } from '../../redux/userData';
 import { useDispatch, useSelector } from 'react-redux';
-import Cookies from 'js-cookie';
+//import Cookies from 'js-cookie';
 import Alert from 'react-bootstrap/Alert';
 import './Login-styles.css';
 import LoadingComp from '../../components/LoadingComp';
@@ -118,25 +118,16 @@ const Login = () => {
                 try {
                   const response = await fetch(url, options);
                   const data = await response.json();
-                  console.log('o json é: ', data);
-                  console.log(
-                    'o valor do cookie é: ',
-                    Cookies.get('jsonwebtoken'),
-                  );
+
                   if (response.ok) {
-                    console.log('response.ok', response.ok);
                     setErro(false);
                     window.localStorage.setItem(
                       'blueDataUser',
                       JSON.stringify(data),
                     );
-                    console.log(
-                      'A url é: ',
-                      'https://e-commerce-api-bluetech-production.up.railway.app/user/' +
-                        emailAtClick,
-                    );
-                    const token = data.token;
-                    console.log('o token é: ', token);
+
+                    //const token = data.token;
+
                     dispatch(addData(data));
                     if (data.role === 'admin') {
                       navigate('/adm/produtos');
@@ -148,7 +139,6 @@ const Login = () => {
                     setErrorMensage(data);
                   }
                 } catch (error) {
-                  console.log('erro: ', error);
                   setErro(true);
                 } finally {
                   setLoading(false);
