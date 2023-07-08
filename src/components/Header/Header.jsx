@@ -214,6 +214,8 @@ const Header = () => {
                   if (adm) {
                     navigate('/');
                   }
+
+                  navigate('/');
                 }}
               >
                 Logout
@@ -258,7 +260,53 @@ const Header = () => {
                       Pedidos
                     </NavLink>
                     {logado || adm ? (
-                      <NavLink to="/logout" end>
+                      <NavLink
+                        to="/"
+                        end
+                        onClick={async (event) => {
+                          event.preventDefault();
+                          if (window.localStorage.getItem('blueDataUser')) {
+                            window.localStorage.removeItem('blueDataUser');
+                          }
+                          if (window.localStorage.getItem('admClickedPedido')) {
+                            window.localStorage.removeItem('admClickedPedido');
+                          }
+                          if (
+                            window.localStorage.getItem('admClickedCategorie')
+                          ) {
+                            window.localStorage.removeItem(
+                              'admClickedCategorie',
+                            );
+                          }
+                          if (
+                            window.localStorage.getItem('admClickedProduct')
+                          ) {
+                            window.localStorage.removeItem('admClickedProduct');
+                          }
+
+                          dispatch(addData(null));
+
+                          try {
+                            await fetch(
+                              'https://e-commerce-api-bluetech-production.up.railway.app/user/logout',
+                              {
+                                method: 'GET',
+                                headers: {
+                                  'Content-Type':
+                                    'application/json ; chartset=utf-8',
+                                },
+                                credentials: 'include',
+                              },
+                            );
+                          } catch (error) {}
+
+                          if (adm) {
+                            navigate('/');
+                          }
+
+                          navigate('/');
+                        }}
+                      >
                         Logout
                       </NavLink>
                     ) : (

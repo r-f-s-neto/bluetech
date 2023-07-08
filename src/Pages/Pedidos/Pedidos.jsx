@@ -65,7 +65,10 @@ const Pedidos = () => {
   );
 
   React.useEffect(() => {
-    dispatch(listClientOrders(userData.id));
+    if (userData) {
+      console.log('entrou');
+      dispatch(listClientOrders(userData.id));
+    }
   }, [dispatch, userData]);
 
   React.useEffect(() => {

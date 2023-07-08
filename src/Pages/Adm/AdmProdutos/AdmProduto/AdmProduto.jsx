@@ -218,6 +218,7 @@ const AdmProduto = () => {
       )}
       {errorPutProduct && <Alert variant="danger">{errorPutProduct}</Alert>}
       {errorCat && <Alert variant="danger">Tente novamente mais tarde</Alert>}
+      {error && <Alert variant="danger">Tente novamente mais tarde</Alert>}
     </div>
   );
 };
