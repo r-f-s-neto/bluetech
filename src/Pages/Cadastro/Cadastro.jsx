@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import './Cadastro-styles.css';
 import LoadingComp from '../../components/LoadingComp';
 import title from '../../helper/title';
+import validatePassword from '../../helper/validatePassword';
 
 const Cadastro = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Cadastro = () => {
   const [errorMensage, setErrorMensage] = React.useState(null);
   const userData = useSelector((state) => state.userData.data);
   const [logado, setLogado] = React.useState(false);
+  const [errorPassword, setErrorPassword] = React.useState(false);
 
   React.useEffect(() => {
     if (userData) {
@@ -42,7 +44,56 @@ const Cadastro = () => {
         <Link to="/login">{'< voltar'}</Link>
         <h1>Cadastro do Cliente</h1>
       </div>
-      <form className="NovoProduto__form">
+      <form
+        className="NovoProduto__form"
+        onSubmit={async (event) => {
+          event.preventDefault();
+          const data = {
+            name: name,
+            email: email,
+            password: senha,
+            role: 'client',
+          };
+
+          const url =
+            'https://e-commerce-api-bluetech-production.up.railway.app/user';
+          const options = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          };
+
+          const validation = validatePassword(senha);
+
+          if (!validation) {
+            setErrorPassword(true);
+          } else {
+            setLoading(true);
+            try {
+              const response = await fetch(url, options);
+              //const data = await response.json();
+
+              if (response.ok) {
+                setErro(false);
+                setSucess(true);
+                navigate('/login');
+              } else {
+                setErrorMensage(
+                  'Não foi possivel efetuar o cadastro, tente mais tarde',
+                );
+                setErro(false);
+              }
+            } catch (error) {
+              setErro(true);
+              setSucess(false);
+            } finally {
+              setLoading(false);
+            }
+          }
+        }}
+      >
         <input
           value={name}
           onChange={({ target }) => {
@@ -78,47 +129,6 @@ const Cadastro = () => {
         />
         <button
           className={loading ? 'cadastroButtonDisable' : 'cadastroButton'}
-          onClick={async (event) => {
-            event.preventDefault();
-            const data = {
-              name: name,
-              email: email,
-              password: senha,
-              role: 'client',
-            };
-
-            setLoading(true);
-            const url =
-              'https://e-commerce-api-bluetech-production.up.railway.app/user';
-            const options = {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(data),
-            };
-
-            try {
-              const response = await fetch(url, options);
-              //const data = await response.json();
-
-              if (response.ok) {
-                setErro(false);
-                setSucess(true);
-                navigate('/login');
-              } else {
-                setErrorMensage(
-                  'Não foi possivel efetuar o cadastro, tente mais tarde',
-                );
-                setErro(false);
-              }
-            } catch (error) {
-              setErro(true);
-              setSucess(false);
-            } finally {
-              setLoading(false);
-            }
-          }}
         >
           Salvar
         </button>
@@ -130,6 +140,9 @@ const Cadastro = () => {
       )}
       {errorMensage && <Alert variant="danger">{errorMensage}</Alert>}
       {sucess && <Alert variant="success">Cadastro efetuado com sucesso</Alert>}
+      {errorPassword && (
+        <Alert variant="danger">A senha precisa ter pelo menos 8 digitos</Alert>
+      )}
       {loading && <LoadingComp />}
     </div>
   );
