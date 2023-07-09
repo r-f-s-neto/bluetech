@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Select from '../../../../components/Select';
 import './AdmProduto-styles.css';
 import { useSelector } from 'react-redux';
 import Alert from 'react-bootstrap/Alert';
@@ -11,10 +10,8 @@ const AdmProduto = () => {
   const [price, setPrice] = React.useState('');
   //const [photo, setPhoto] = React.useState('');
   const [desc, setDesc] = React.useState('');
-  const [categoria, setCategoria] = React.useState('Componentes');
-  const [dataCat, setDataCat] = React.useState([]);
 
-  const [product, setProduct] = React.useState(null);
+  const [product, setProduct] = React.useState(undefined);
   //const params = useParams();
   const navigate = useNavigate();
   const userData = useSelector((state) => state.userData.data);
@@ -24,10 +21,7 @@ const AdmProduto = () => {
 
   const [loadingPutProduct, setLoadingPutProduct] = React.useState(false);
   const [sucessPutProduct, setSucessPutProduct] = React.useState(false);
-  const [errorPutProduct, setErrorPutProduct] = React.useState(null);
-
-  const [errorCat, setErrorCat] = React.useState(false);
-  const [error, setError] = React.useState(null);
+  const [errorPutProduct, setErrorPutProduct] = React.useState(false);
 
   React.useEffect(() => {
     try {
@@ -68,11 +62,10 @@ const AdmProduto = () => {
     setPrice(product && product.price);
     //setPhoto(product&&product.images.length && product.images[0]);
     setDesc(product && product.description);
-    setCategoria(product && product.name);
     setInventory(product && product.inventory);
   }, [product]);
 
-  React.useEffect(() => {
+  /** React.useEffect(() => {
     // Simula o recebimento de dados da categoria pela API
     async function fetchCat() {
       try {
@@ -100,7 +93,7 @@ const AdmProduto = () => {
       }
     }
     fetchCat();
-  }, []);
+  }, []); */
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -108,38 +101,40 @@ const AdmProduto = () => {
       name: name,
       description: desc,
       price: price,
-      inventory: inventory,
-      categories: categoria,
+      inventory: +inventory,
     });
+
     const url =
       'https://e-commerce-api-bluetech-production.up.railway.app/products/' +
       product.id;
     const options = {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Type': 'application/json',
       },
       credentials: 'include',
       body: data,
     };
 
     setLoadingPutProduct(true);
-    setErrorPutProduct(null);
+    setErrorPutProduct(false);
     setSucessPutProduct(false);
     try {
       const response = await fetch(url, options);
       if (response.ok) {
         setSucessPutProduct(true);
-        setErrorPutProduct(null);
+        setErrorPutProduct(false);
+      } else {
+        setErrorPutProduct(true);
       }
     } catch (error) {
-      setErrorPutProduct('Tente novamente mais tarde');
+      setErrorPutProduct(true);
       setSucessPutProduct(false);
     } finally {
       setLoadingPutProduct(false);
     }
   }
-
+  console.log(errorPutProduct);
   return (
     <div className="NovoProduto">
       <div className="NovoProduto__header">
@@ -157,6 +152,7 @@ const AdmProduto = () => {
           handleSubmit(event);
         }}
       >
+        <label htmlFor="productName">Nome do produto</label>
         <input
           value={name}
           onChange={({ target }) => {
@@ -168,6 +164,7 @@ const AdmProduto = () => {
           placeholder="Nome do produto"
           required
         />
+        <label htmlFor="productPrice">Preço do produto</label>
         <input
           value={price}
           onChange={({ target }) => {
@@ -179,15 +176,7 @@ const AdmProduto = () => {
           placeholder="Preço"
           required
         />
-
-        {dataCat && (
-          <Select
-            value={categoria}
-            setValue={setCategoria}
-            options={dataCat}
-            text="Categoria"
-          />
-        )}
+        <label htmlFor="descricao">Descrição</label>
         <textarea
           value={desc}
           onChange={({ target }) => {
@@ -199,6 +188,7 @@ const AdmProduto = () => {
           placeholder="Descrição"
           required
         />
+        <label htmlFor="estoque">Estoque</label>
         <input
           value={inventory}
           onChange={({ target }) => {
@@ -216,9 +206,11 @@ const AdmProduto = () => {
       {sucessPutProduct && (
         <Alert variant="success">Produto atualizado com sucesso</Alert>
       )}
-      {errorPutProduct && <Alert variant="danger">{errorPutProduct}</Alert>}
-      {errorCat && <Alert variant="danger">Tente novamente mais tarde</Alert>}
-      {error && <Alert variant="danger">Tente novamente mais tarde</Alert>}
+      {errorPutProduct && (
+        <Alert variant="danger">
+          Ocorreu um erro ao tentar atualizar, tente mais tarde
+        </Alert>
+      )}
     </div>
   );
 };

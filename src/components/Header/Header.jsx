@@ -259,6 +259,9 @@ const Header = () => {
                     <NavLink to="/pedidos" end>
                       Pedidos
                     </NavLink>
+                    <NavLink to="/carrinho" end>
+                      Carrinho
+                    </NavLink>
                     {logado || adm ? (
                       <NavLink
                         to="/"
