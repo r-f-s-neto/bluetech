@@ -10,6 +10,7 @@ const AdmProduto = () => {
   const [price, setPrice] = React.useState('');
   //const [photo, setPhoto] = React.useState('');
   const [desc, setDesc] = React.useState('');
+  const [photo, setPhoto] = React.useState(undefined);
 
   const [product, setProduct] = React.useState(undefined);
   //const params = useParams();
@@ -20,8 +21,12 @@ const AdmProduto = () => {
   const [errorLoadingData, setErrorLoadingData] = React.useState(false);
 
   const [loadingPutProduct, setLoadingPutProduct] = React.useState(false);
+  const [loadingImage, setLoadingImage] = React.useState(false);
   const [sucessPutProduct, setSucessPutProduct] = React.useState(false);
+  const [sucessImg, setSucessImg] = React.useState(false);
   const [errorPutProduct, setErrorPutProduct] = React.useState(false);
+  const [errorDeleteImg, setErrorDeleteImg] = React.useState(false);
+  const [errorImg, setErrorImg] = React.useState(false);
 
   React.useEffect(() => {
     try {
@@ -106,7 +111,7 @@ const AdmProduto = () => {
 
     const url =
       'https://e-commerce-api-bluetech-production.up.railway.app/products/' +
-      product.id;
+      product?.id;
     const options = {
       method: 'PUT',
       headers: {
@@ -115,7 +120,7 @@ const AdmProduto = () => {
       credentials: 'include',
       body: data,
     };
-
+    console.log(data);
     setLoadingPutProduct(true);
     setErrorPutProduct(false);
     setSucessPutProduct(false);
@@ -133,8 +138,59 @@ const AdmProduto = () => {
     } finally {
       setLoadingPutProduct(false);
     }
+
+    if (photo) {
+      setLoadingImage(true);
+      const idImg = product?.images[0].id;
+      try {
+        const responseDeleteImg = await fetch(
+          `https://e-commerce-api-bluetech-production.up.railway.app/products/images/${idImg}`,
+          {
+            method: 'DELETE',
+            credentials: 'include',
+          },
+        );
+        if (responseDeleteImg.ok) {
+          const urlImage =
+            'https://e-commerce-api-bluetech-production.up.railway.app/products/' +
+            product?.id +
+            '/images';
+
+          const formData = new FormData();
+          formData.append('images', photo);
+
+          const optionsImage = {
+            method: 'POST',
+            credentials: 'include',
+            body: formData,
+          };
+
+          try {
+            const responseImg = await fetch(urlImage, optionsImage);
+            if (responseImg.ok) {
+              setSucessImg('produto e imagem criados com sucesso');
+              setErrorImg(null);
+            } else {
+              setErrorImg(
+                'ocorreu um erro ao atualizar a imagem, tente novamente',
+              );
+            }
+          } catch (error) {
+            console.log(error);
+            setErrorImg(
+              'ocorreu um erro ao atualizar a imagem, tente novamente',
+            );
+          }
+        } else {
+          setErrorDeleteImg(true);
+        }
+      } catch (error) {
+        setErrorDeleteImg(true);
+      } finally {
+        setLoadingImage(false);
+      }
+    }
   }
-  console.log(errorPutProduct);
   return (
     <div className="NovoProduto">
       <div className="NovoProduto__header">
@@ -200,15 +256,36 @@ const AdmProduto = () => {
           placeholder="estoque"
           required
         />
+        <label htmlFor="productPhoto">Imagem</label>
+        <input
+          onChange={({ target }) => {
+            setPhoto(target.files[0]);
+          }}
+          type="file"
+          id="productPhoto"
+          name="productPhoto"
+          accept="image/*"
+        />
         <button>Salvar</button>
       </form>
-      {loadingPutProduct && <LoadingComp />}
+      {(loadingPutProduct || loadingImage) && <LoadingComp />}
       {sucessPutProduct && (
-        <Alert variant="success">Produto atualizado com sucesso</Alert>
+        <Alert variant="success">
+          Dados do Produto atualizados com sucesso
+        </Alert>
+      )}
+      {sucessImg && (
+        <Alert variant="success">Imagem alterada com sucesso</Alert>
       )}
       {errorPutProduct && (
         <Alert variant="danger">
           Ocorreu um erro ao tentar atualizar, tente mais tarde
+        </Alert>
+      )}
+      {(errorDeleteImg || errorImg) && (
+        <Alert variant="danger">
+          Ocorreu um erro ao tentar atualizar a imagem do produto, tente mais
+          tarde
         </Alert>
       )}
     </div>
